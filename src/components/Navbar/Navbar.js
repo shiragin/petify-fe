@@ -1,16 +1,19 @@
+import { Outlet } from 'react-router-dom';
+import NavbarUnlogged from './NavbarUnlogged';
+import NavbarLogged from './NavbarUnlogged';
+// import NavbarAdmin from './NavbarUnlogged';
 import { FaPaw } from 'react-icons/fa';
 
 function Navbar() {
+  const loggedIn = false;
   return (
     <div className="navbar">
       <div className="navbar-links">
         <div className="navbar-links-logo">
           <FaPaw /> Petify
         </div>
-        <div className="navbar-links-right">
-          <div>Search</div>
-          <div>Log in</div>
-        </div>
+        {loggedIn ? <NavbarLogged /> : <NavbarUnlogged />}
+        <Outlet />
       </div>
     </div>
   );

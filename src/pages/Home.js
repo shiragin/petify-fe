@@ -2,9 +2,9 @@ import HomeUnlogged from '../components/Homepage/HomeUnlogged';
 
 function Home() {
   return (
-    <>
-      <HomeUnlogged />;
-    </>
+    <div className="main-container">
+      <HomeUnlogged />
+    </div>
   );
 }
 
