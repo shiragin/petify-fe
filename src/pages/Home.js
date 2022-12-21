@@ -1,7 +1,11 @@
 import HomeUnlogged from '../components/Homepage/HomeUnlogged';
 
 function Home() {
-  return <HomeUnlogged />;
+  return (
+    <>
+      <HomeUnlogged />;
+    </>
+  );
 }
 
 export default Home;

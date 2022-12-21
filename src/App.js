@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import './scss/App.scss';
 
@@ -7,7 +8,7 @@ function App() {
     // <UserContextProvider>
     //   <TweetContextProvider>
     <BrowserRouter>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} />
