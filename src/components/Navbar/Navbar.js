@@ -3,6 +3,7 @@ import NavbarUnlogged from './NavbarUnlogged';
 import NavbarLogged from './NavbarUnlogged';
 // import NavbarAdmin from './NavbarUnlogged';
 import { FaPaw } from 'react-icons/fa';
+import '../../scss/Navbar.scss';
 
 function Navbar() {
   const loggedIn = false;

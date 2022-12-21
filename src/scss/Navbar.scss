@@ -1,0 +1,55 @@
+@import 'variables';
+// Navbar
+
+.navbar {
+  color: $dark-color;
+  height: 80px;
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 3rem;
+
+    &-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+
+      svg {
+        margin-right: 1rem;
+        color: $primary-color;
+      }
+
+      span {
+        color: $primary-color;
+      }
+    }
+
+    &-right {
+      display: flex;
+      gap: 3rem;
+
+      a {
+        font-weight: 500;
+        color: $dark-color;
+        text-decoration: none;
+        transition: all 0.1s ease-in;
+
+        &:hover {
+          color: $primary-color;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
