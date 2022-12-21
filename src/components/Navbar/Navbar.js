@@ -10,7 +10,7 @@ function Navbar() {
     <div className="navbar">
       <div className="navbar-links">
         <div className="navbar-links-logo">
-          <FaPaw /> Petify
+          <FaPaw /> <span>Pet</span>ify
         </div>
         {loggedIn ? <NavbarLogged /> : <NavbarUnlogged />}
         <Outlet />
