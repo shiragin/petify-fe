@@ -22,7 +22,7 @@ function HomeUnlogged() {
             variant="success"
             className="skew-left"
             onClick={() => {
-              setLoginShow({ show: true, type: 'login' });
+              setLoginShow({ show: true, type: 'signup' });
             }}
           >
             <span>Create an account</span>
