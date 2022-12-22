@@ -5,11 +5,7 @@ import { useUserContext } from '../../libs/UserContext';
 import hero from './cover.png';
 
 function HomeUnlogged() {
-  const { loginShow, setLoginShow } = useUserContext();
-
-  function clickHandler() {
-    setLoginShow({ show: true, type: 'signup' });
-  }
+  const { setLoginShow } = useUserContext();
 
   return (
     <div className="hero">
@@ -25,7 +21,9 @@ function HomeUnlogged() {
           <Button
             variant="success"
             className="skew-left"
-            onClick={clickHandler}
+            onClick={() => {
+              setLoginShow({ show: true, type: 'login' });
+            }}
           >
             <span>Create an account</span>
           </Button>

@@ -4,15 +4,20 @@ import LoginModal from '../Login/LoginModal';
 function NavbarUnlogged() {
   const { loginShow, setLoginShow } = useUserContext();
 
-  function clickHandler() {
-    setLoginShow({ show: true, type: 'login' });
-  }
-
   return (
     <div className="navbar-links-right">
       <NavLink>Search</NavLink>
-      <NavLink onClick={clickHandler}>Log in</NavLink>
-      <LoginModal show={loginShow} onHide={() => setLoginShow(false)} />
+      <NavLink
+        onClick={() => {
+          setLoginShow({ show: true, type: 'login' });
+        }}
+      >
+        Log in
+      </NavLink>
+      <LoginModal
+        show={loginShow.show}
+        onHide={() => setLoginShow({ ...loginShow, show: false })}
+      />
     </div>
   );
 }

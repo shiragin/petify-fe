@@ -72,8 +72,8 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      <Button className="login-submit-button" type="submit">
-        Sign up
+      <Button className="login-submit-button btn-skew-left" type="submit">
+        <span>Sign up</span>
       </Button>
       <div className="login-footer">
         Already have an account?{' '}

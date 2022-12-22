@@ -1,6 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../libs/UserContext';
 import Cat from './undraw_cat.svg';
+import Dog from './undraw_dog.svg';
 
 function LoginForm() {
   const { setLoginShow } = useUserContext();
@@ -30,12 +31,12 @@ function LoginForm() {
           placeholder="Password"
         />
       </Form.Group>
-      <Button className="login-submit-button" type="submit">
-        Log In
+      <Button className="login-submit-button btn-skew-left" type="submit">
+        <span>Log In</span>
       </Button>
       <div className="login-footer">
         <img src={Cat} />
-        Don't have an account yet?{' '}
+        Haven't got an account yet?{' '}
         <a href="#" onClick={clickHandler}>
           Create an account
         </a>

@@ -22,92 +22,35 @@ body {
   margin: 0 auto;
 }
 
-// // Home unlogged
-// .hero {
-//   height: calc(100vh - 120px);
-//   display: flex;
-//   justify-content: space-between;
+// Button
 
-//   &-img {
-//     width: 50%;
-//     object-fit: contain;
-//   }
+.btn {
+  font-size: 1.1rem;
+  padding: 0.4rem 1.1rem 0.6rem;
+  background-color: $primary-color;
+  border: none;
+  transition: transform 0.2s ease-in-out;
 
-//   &-content {
-//     width: 50%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     margin: 0 3rem;
-//     color: $dark-color;
-//   }
-
-//   &-title {
-//     font-family: 'Unbounded', sans-serif;
-//     line-height: 1.1;
-//     font-size: 4.2rem;
-//     font-weight: 900;
-//     letter-spacing: 0.1rem;
-//     margin-bottom: 2rem;
-//   }
-
-//   &-text {
-//     font-size: 1.4rem;
-//     margin-bottom: 2rem;
-//   }
-
-//   &-buttons {
-//     display: flex;
-//     gap: 2rem;
-//     margin-top: 0.4rem;
-
-//     button {
-//       font-size: 1.1rem;
-//       padding: 0.4rem 1.1rem 0.6rem;
-//       background-color: $primary-color;
-//       border: none;
-//       transition: transform 0.2s ease-in-out;
-
-//       &.skew-left {
-//         transform: skew(-20deg);
-//         span {
-//           display: inline-block;
-//           transform: skew(20deg);
-//         }
-//         &:hover {
-//           background-color: $primary-color;
-//           transform: skew(-20deg) scale(1.05);
-//         }
-//       }
-//       &.skew-right {
-//         transform: skew(20deg);
-//         span {
-//           display: inline-block;
-//           transform: skew(-20deg);
-//         }
-//         &:hover {
-//           background-color: $primary-color;
-//           transform: skew(20deg) scale(1.05);
-//         }
-//       }
-//     }
-//   }
-// }
-
-// // Login Modal
-
-// .modal-content {
-//   min-height: 50vh;
-
-//   .modal-header {
-//     border-bottom: none;
-
-//     button {
-//       background: transparent
-//         url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f9404f'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
-//         center/1em auto no-repeat;
-//       opacity: 1;
-//     }
-//   }
-// }
+  &-skew-left {
+    transform: skew(-20deg);
+    span {
+      display: inline-block;
+      transform: skew(20deg);
+    }
+    &:hover {
+      background-color: $primary-color;
+      transform: skew(-20deg) scale(1.05);
+    }
+  }
+  &-skew-right {
+    transform: skew(20deg);
+    span {
+      display: inline-block;
+      transform: skew(-20deg);
+    }
+    &:hover {
+      background-color: $primary-color;
+      transform: skew(20deg) scale(1.05);
+    }
+  }
+}
