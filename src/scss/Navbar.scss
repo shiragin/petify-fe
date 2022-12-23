@@ -18,7 +18,12 @@
     font-size: 1.2rem;
     gap: 3rem;
 
+    a {
+      text-decoration: none;
+    }
+
     &-logo {
+      color: $dark-color;
       font-family: 'Unbounded', sans-serif;
       font-size: 1.8rem;
       display: flex;

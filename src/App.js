@@ -3,6 +3,7 @@ import UserContextProvider from './libs/UserContext';
 import PetsContextProvider from './libs/PetsContext';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
+import Search from './pages/Search';
 import './scss/App.scss';
 
 function App() {
@@ -13,8 +14,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/search" element={<Search />} />
           </Routes>
         </BrowserRouter>
       </PetsContextProvider>

@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import LoginModal from '../Login/LoginModal';
+// import LoginModal from '../Login/LoginModal';
 import { useUserContext } from '../../libs/UserContext';
 import hero from './cover.png';
 
@@ -27,9 +28,11 @@ function HomeUnlogged() {
           >
             <span>Create an account</span>
           </Button>
-          <Button variant="success" className="skew-left">
-            <span>Browse our pets</span>
-          </Button>
+          <Link to="/search">
+            <Button variant="success" className="skew-left">
+              <span>Browse our pets</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

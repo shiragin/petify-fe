@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import NavbarUnlogged from './NavbarUnlogged';
 import NavbarLogged from './NavbarUnlogged';
 // import NavbarAdmin from './NavbarUnlogged';
@@ -10,9 +10,11 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="navbar-links">
-        <div className="navbar-links-logo">
-          <FaPaw /> <span>Pet</span>ify
-        </div>
+        <NavLink to="/">
+          <div className="navbar-links-logo">
+            <FaPaw /> <span>Pet</span>ify
+          </div>
+        </NavLink>
         {loggedIn ? <NavbarLogged /> : <NavbarUnlogged />}
         <Outlet />
       </div>

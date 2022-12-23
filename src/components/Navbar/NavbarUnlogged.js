@@ -6,7 +6,7 @@ function NavbarUnlogged() {
 
   return (
     <div className="navbar-links-right">
-      <NavLink>Search</NavLink>
+      <NavLink to="/search">Search</NavLink>
       <NavLink
         onClick={() => {
           setLoginShow({ show: true, type: 'login' });
