@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../libs/UserContext';
-import Cat from './undraw_cat.svg';
-import Dog from './undraw_dog.svg';
+import Cat from '../../imgs/undraw_cat.svg';
+import Dog from '../../imgs/undraw_dog.svg';
 
 function LoginForm() {
   const { setLoginShow } = useUserContext();

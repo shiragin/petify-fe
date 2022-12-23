@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 export const PetsContext = createContext();
 
@@ -7,5 +8,21 @@ export function usePetsContext() {
 }
 
 export default function PetsContextProvider({ children }) {
-  return <PetsContext.Provider value={{}}>{children}</PetsContext.Provider>;
+  const [pets, setPets] = useState([]);
+  async function getPets() {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets`);
+      if (!res.statusText === 'ok') throw new Error();
+      const { pets } = await res.data.data;
+      setPets(pets);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  return (
+    <PetsContext.Provider value={{ pets, setPets, getPets }}>
+      {children}
+    </PetsContext.Provider>
+  );
 }

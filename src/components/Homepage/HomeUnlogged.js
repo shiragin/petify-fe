@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 // import LoginModal from '../Login/LoginModal';
 import { useUserContext } from '../../libs/UserContext';
-import hero from './cover.png';
+import hero from '../../imgs/cover.png';
 
 function HomeUnlogged() {
   const { setLoginShow } = useUserContext();

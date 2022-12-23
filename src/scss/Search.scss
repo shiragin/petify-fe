@@ -1,0 +1,58 @@
+@import 'variables';
+
+.search {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  &-results-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-left: 1rem;
+
+    .card {
+      background-color: transparent;
+      width: 21%;
+      margin: 0 1rem 0.5rem;
+      border: none;
+
+      &-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      &-content {
+        position: relative;
+        top: -30px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 0.375rem;
+        border-top-left-radius: 50% 20%;
+        border-top-right-radius: 50% 20%;
+      }
+
+      &-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 1rem 2rem 0;
+        color: $primary-color;
+      }
+
+      &-body {
+        font-size: 0.9rem;
+        padding: 0 2rem 1rem;
+        text-align: center;
+      }
+    }
+  }
+}
