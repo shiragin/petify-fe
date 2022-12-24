@@ -1,6 +1,8 @@
 import { Form, InputGroup } from 'react-bootstrap';
+import SearchSimple from './SearchSimple';
+
 function SearchForm() {
-  return <Form.Control size="lg" type="text" placeholder="Search here..." />;
+  return <SearchSimple />;
 }
 
 export default SearchForm;

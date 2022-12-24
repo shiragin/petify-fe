@@ -22,6 +22,17 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function getPetsByType(type) {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets?type=${type}`);
+      if (!res.statusText === 'ok') throw new Error();
+      const { pets } = await res.data.data;
+      setPets(pets);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   async function getPetPage(id) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
@@ -35,7 +46,15 @@ export default function PetsContextProvider({ children }) {
 
   return (
     <PetsContext.Provider
-      value={{ pets, setPets, petPage, setPetPage, getPets, getPetPage }}
+      value={{
+        pets,
+        setPets,
+        petPage,
+        setPetPage,
+        getPets,
+        getPetPage,
+        getPetsByType,
+      }}
     >
       {children}
     </PetsContext.Provider>
