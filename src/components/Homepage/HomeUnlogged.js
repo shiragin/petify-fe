@@ -17,7 +17,7 @@ function HomeUnlogged() {
       />
       <div className="hero-content">
         <h1 className="hero-title">{`Welcome\nto Petify`}</h1>
-        <p className="hero-text">Meet your new best friend today</p>
+        <p className="hero-text">Meet your new best friend today.</p>
         <div className="hero-buttons">
           <Button
             variant="success"

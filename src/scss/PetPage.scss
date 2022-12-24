@@ -24,7 +24,7 @@
 
   &-img-top {
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
   }
 
@@ -64,7 +64,7 @@
 
   &-image {
     width: 100%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
     border-radius: 50%;
     transform: rotate(-6deg);
@@ -72,14 +72,20 @@
 
   .liked {
     position: absolute;
-    top: 22%;
+    top: 27%;
     right: 4%;
     z-index: 999;
+    cursor: pointer;
 
     svg {
       height: 3rem;
       width: 3rem;
       color: $primary-color;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 
