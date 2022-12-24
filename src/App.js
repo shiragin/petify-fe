@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/pet" element={<Pet />} />
+            <Route path="/pet/:id" element={<Pet />} />
           </Routes>
         </BrowserRouter>
       </PetsContextProvider>

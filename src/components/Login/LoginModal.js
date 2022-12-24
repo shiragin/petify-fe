@@ -9,7 +9,7 @@ import '../../scss/LoginModal.scss';
 function LoginModal(props) {
   const { loginShow } = useUserContext();
 
-  console.log(loginShow);
+  // console.log(loginShow);
 
   return (
     <Modal {...props} size="md" centered>

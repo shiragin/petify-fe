@@ -1,12 +1,13 @@
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PetPage from '../components/Pet/PetPage';
+import '../scss/PetPage.scss';
 
 function Pet() {
-  const searchParams = new URLSearchParams(document.location.search);
+  const { id } = useParams();
 
   return (
     <div>
-      <PetPage id={searchParams.get('id')} />
+      <PetPage id={id} />
     </div>
   );
 }

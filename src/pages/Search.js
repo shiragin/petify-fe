@@ -4,7 +4,7 @@ import '../scss/Search.scss';
 
 function Search() {
   return (
-    <div className="search">
+    <div className="main-container search">
       <SearchForm />
       <SearchResults />
     </div>

@@ -23,11 +23,9 @@ export default function PetsContextProvider({ children }) {
   }
 
   async function getPetPage(id) {
-    console.log('From function', id);
     try {
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
       if (!res.statusText === 'ok') throw new Error();
-      console.log(res);
       const { pet } = await res.data.data;
       setPetPage(pet);
     } catch (err) {

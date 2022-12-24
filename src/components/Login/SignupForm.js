@@ -26,7 +26,7 @@ function SignupForm() {
             className="login-lastname-input"
             type="text"
             required
-            placeholder="First name"
+            placeholder="Last name"
           />
         </div>
       </Form.Group>

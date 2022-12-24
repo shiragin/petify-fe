@@ -5,6 +5,15 @@
   padding: 0;
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 body {
   font-family: $font-stack;
   line-height: 1.5;
@@ -14,7 +23,7 @@ body {
 // Main & utilities
 
 .main-container {
-  width: 80vw;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
