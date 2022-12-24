@@ -10,10 +10,12 @@ function SearchResults() {
     getPets();
   }, []);
 
+  console.log(pets);
+
   return (
     <div className="search-results-list">
       {pets.map(({ _id, name, type, breed }) => (
-        <PetCard key={_id} value={{ name, type, breed }} />
+        <PetCard key={_id} value={{ _id, name, type, breed }} />
       ))}
     </div>
   );

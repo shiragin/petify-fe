@@ -4,6 +4,7 @@ import PetsContextProvider from './libs/PetsContext';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import Search from './pages/Search';
+import Pet from './pages/Pet';
 import './scss/App.scss';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/pet" element={<Pet />} />
           </Routes>
         </BrowserRouter>
       </PetsContextProvider>

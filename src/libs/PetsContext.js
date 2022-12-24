@@ -9,6 +9,8 @@ export function usePetsContext() {
 
 export default function PetsContextProvider({ children }) {
   const [pets, setPets] = useState([]);
+  const [petPage, setPetPage] = useState({});
+
   async function getPets() {
     try {
       const res = await axios.get(`http://localhost:8080/pets`);
@@ -20,8 +22,23 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function getPetPage(id) {
+    console.log('From function', id);
+    try {
+      const res = await axios.get(`http://localhost:8080/pets/${id}`);
+      if (!res.statusText === 'ok') throw new Error();
+      console.log(res);
+      const { pet } = await res.data.data;
+      setPetPage(pet);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
-    <PetsContext.Provider value={{ pets, setPets, getPets }}>
+    <PetsContext.Provider
+      value={{ pets, setPets, petPage, setPetPage, getPets, getPetPage }}
+    >
       {children}
     </PetsContext.Provider>
   );
