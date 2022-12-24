@@ -5,41 +5,34 @@ import { usePetsContext } from '../../libs/PetsContext';
 function SearchSimple() {
   const { getPets, getPetsByType } = usePetsContext();
 
-  const [activeButton, setActiveButton] = useState('all');
+  const [activeButton, setActiveButton] = useState('');
 
-  function searchSimpleHandler(e, type) {
+  function searchSimpleHandler(type) {
+    setActiveButton(type);
     if (!type) getPets();
     getPetsByType(type);
   }
 
   return (
     <div className="search-simple">
-      {/* <h4 className="search-simple-title">Search for</h4> */}
       <div className="search-simple-buttons">
         <Button
-          className={`${activeButton === 'cat' && 'active-btn'}`}
-          onClick={(e) => {
-            setActiveButton('cat');
-            searchSimpleHandler(e, 'Cat');
-          }}
+          className={`${activeButton === 'Cat' && 'active-btn'}`}
+          onClick={() => searchSimpleHandler('Cat')}
         >
           <span>Cats</span>
         </Button>
         <Button
-          className={`${activeButton === 'dog' && 'active-btn'}`}
-          onClick={(e) => {
-            setActiveButton('dog');
-            searchSimpleHandler(e, 'Dog');
+          className={`${activeButton === 'Dog' && 'active-btn'}`}
+          onClick={() => {
+            searchSimpleHandler('Dog');
           }}
         >
           <span>Dogs</span>
         </Button>
         <Button
-          className={`${activeButton === 'all' && 'active-btn'}`}
-          onClick={(e) => {
-            setActiveButton('all');
-            searchSimpleHandler(e, '');
-          }}
+          className={`${activeButton === '' && 'active-btn'}`}
+          onClick={() => searchSimpleHandler('')}
         >
           <span>All</span>
         </Button>
