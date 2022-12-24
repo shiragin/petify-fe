@@ -9,6 +9,8 @@ export function useUserContext() {
 export default function UserContextProvider({ children }) {
   const [loginShow, setLoginShow] = useState({ show: false, type: 'signup' });
 
+  const [user, setUser] = useState({});
+
   return (
     <UserContext.Provider value={{ loginShow, setLoginShow }}>
       {children}
