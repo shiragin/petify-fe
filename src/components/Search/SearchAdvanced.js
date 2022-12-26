@@ -8,7 +8,6 @@ function SearchAdvanced() {
     usePetsContext();
 
   function searchAdvancedHandler(e, query) {
-    // console.log(query);
     const newQuery = {};
     newQuery[query] = e.target.value;
     setSearchAdvanced({ ...searchAdvanced, ...newQuery });
@@ -33,7 +32,7 @@ function SearchAdvanced() {
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={'Available'}
-            value={searchAdvanced.adoptionStatus}
+            value={searchAdvanced?.adoptionStatus}
             onChange={(e) => searchAdvancedHandler(e, 'adoptionStatus')}
           >
             <option value="Adopted">Adopted</option>
@@ -49,7 +48,7 @@ function SearchAdvanced() {
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={'Medium'}
-            value={searchAdvanced.size}
+            value={searchAdvanced?.size}
             onChange={(e) => searchAdvancedHandler(e, 'size')}
           >
             <option value="Small">Small</option>
@@ -66,7 +65,7 @@ function SearchAdvanced() {
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={''}
-            value={searchAdvanced.color}
+            value={searchAdvanced?.color}
             onChange={(e) => searchAdvancedHandler(e, 'color')}
           >
             <option value="">All</option>
@@ -89,7 +88,7 @@ function SearchAdvanced() {
           <Form.Label className="search-advanced-group-label">Name</Form.Label>
           <Form.Control
             className="search-advanced-group-input"
-            value={searchAdvanced.name}
+            value={searchAdvanced?.name}
             onChange={(e) => searchAdvancedHandler(e, 'name')}
           />
         </Form.Group>

@@ -1,15 +1,41 @@
+import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../libs/UserContext';
 
 function SignupForm() {
-  const { setLoginShow } = useUserContext();
+  const { setLoginShow, user, setUser, createNewUser, loggedIn } =
+    useUserContext();
+
+  const navigate = useNavigate();
 
   function clickHandler() {
     setLoginShow({ show: true, type: 'login' });
   }
 
+  function userFormHandler(e, field) {
+    const newField = {};
+    newField[field] = e.target.value;
+    setUser({ ...user, ...newField });
+  }
+
+  async function userSubmitHandler(e) {
+    e.preventDefault();
+    const signup = await createNewUser(user);
+    if (signup || loggedIn) {
+      navigate('/');
+    }
+  }
+
+  useEffect(() => {
+    if (loggedIn) {
+      setLoginShow({ show: false, type: 'login' });
+      navigate('/');
+    }
+  }, [loggedIn]);
+
   return (
-    <Form className="login">
+    <Form className="login" onSubmit={(e) => userSubmitHandler(e)}>
       <Form.Group className="split">
         <div>
           <Form.Label className="login-firstname-label">First name</Form.Label>
@@ -18,6 +44,8 @@ function SignupForm() {
             type="text"
             required
             placeholder="First name"
+            value={user?.firstName}
+            onChange={(e) => userFormHandler(e, 'firstName')}
           />
         </div>
         <div>
@@ -27,6 +55,8 @@ function SignupForm() {
             type="text"
             required
             placeholder="Last name"
+            value={user?.lastName}
+            onChange={(e) => userFormHandler(e, 'lastName')}
           />
         </div>
       </Form.Group>
@@ -37,6 +67,8 @@ function SignupForm() {
           type="email"
           required
           placeholder="Email Address"
+          value={user?.email}
+          onChange={(e) => userFormHandler(e, 'email')}
         />
       </Form.Group>
       <Form.Group>
@@ -46,6 +78,8 @@ function SignupForm() {
           type="phone"
           required
           placeholder="Phone number"
+          value={user?.phoneNumber}
+          onChange={(e) => userFormHandler(e, 'phoneNumber')}
         />
       </Form.Group>
       <Form.Group className="split">
@@ -57,6 +91,8 @@ function SignupForm() {
             label="Create password"
             required
             placeholder="Password"
+            value={user?.password}
+            onChange={(e) => userFormHandler(e, 'password')}
           />
         </div>
         <div>
@@ -69,10 +105,16 @@ function SignupForm() {
             label="Create password"
             required
             placeholder="Password"
+            value={user?.passwordConfirm}
+            onChange={(e) => userFormHandler(e, 'passwordConfirm')}
           />
         </div>
       </Form.Group>
-      <Button className="login-submit-button btn-skew-left" type="submit">
+      <Button
+        className="login-submit-button btn-skew-left"
+        type="submit"
+        value="Submit"
+      >
         <span>Sign up</span>
       </Button>
       <div className="login-footer">

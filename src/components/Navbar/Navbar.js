@@ -1,12 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useUserContext } from '../../libs/UserContext';
 import NavbarUnlogged from './NavbarUnlogged';
-import NavbarLogged from './NavbarUnlogged';
+import NavbarLogged from './NavbarLogged';
 // import NavbarAdmin from './NavbarUnlogged';
 import { FaPaw } from 'react-icons/fa';
 import '../../scss/Navbar.scss';
 
 function Navbar() {
-  const loggedIn = false;
+  const { loggedIn } = useUserContext();
+  // const loggedIn = false;
   return (
     <div className="navbar">
       <div className="navbar-links">
