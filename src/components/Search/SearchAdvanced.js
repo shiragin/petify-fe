@@ -11,11 +11,13 @@ function SearchAdvanced() {
     console.log(query);
     const newQuery = {};
     // if (query === 'name') {
-    //   newQuery[query] = `$regex: /${e.target.value}/i`;
-    // } else {
+    // const reg = `/${e.target.value}/i`;
+    // newQuery[query] = { $regex: reg };
+
     newQuery[query] = e.target.value;
     // }
-    console.log('Query: ', newQuery);
+    // console.log('WTF: ', newQuery);
+    // console.log('Query: ', newQuery);
     setSearchAdvanced({ ...searchAdvanced, ...newQuery });
   }
 
