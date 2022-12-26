@@ -33,6 +33,7 @@ function SearchAdvanced() {
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={'Available'}
+            value={searchAdvanced.adoptionStatus}
             onChange={(e) => searchAdvancedHandler(e, 'adoptionStatus')}
           >
             <option value="Adopted">Adopted</option>
@@ -43,25 +44,52 @@ function SearchAdvanced() {
             <option value="">All</option>
           </Form.Select>
         </Form.Group>
-        {/* <Form.Group>
-          <Form.Label className="search-advanced-group-label">Type</Form.Label>
+        <Form.Group>
+          <Form.Label className="search-advanced-group-label">Size</Form.Label>
+          <Form.Select
+            className="search-advanced-group-input"
+            defaultValue={'Medium'}
+            value={searchAdvanced.size}
+            onChange={(e) => searchAdvancedHandler(e, 'size')}
+          >
+            <option value="Small">Small</option>
+            <option value="Medium" default>
+              Medium
+            </option>
+            <option value="Big">Big</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label className="search-advanced-group-label">
+            Colour
+          </Form.Label>
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={''}
-            onChange={(e) => searchAdvancedHandler(e, 'type')}
+            value={searchAdvanced.color}
+            onChange={(e) => searchAdvancedHandler(e, 'color')}
           >
-            <option value="Cat">Cat</option>
-            <option value="Dog">Dog</option>
-            <option value="" default>
-              All
+            <option value="">All</option>
+            <option value="White">White</option>
+            <option value="Black" default>
+              Black
             </option>
+            <option value="Brown" default>
+              Brown
+            </option>
+            {/* <option value="Brown">Brown</option> */}
+            <option value="Orange">Orange</option>
+            <option value="Blue">Blue</option>
+            {searchAdvanced.type !== 'Dog' && (
+              <option value="Tabby">Tabby</option>
+            )}
           </Form.Select>
-        </Form.Group> */}
+        </Form.Group>
         <Form.Group>
           <Form.Label className="search-advanced-group-label">Name</Form.Label>
           <Form.Control
             className="search-advanced-group-input"
-            defaultValue={''}
+            value={searchAdvanced.name}
             onChange={(e) => searchAdvancedHandler(e, 'name')}
           />
         </Form.Group>

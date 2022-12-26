@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GiLobArrow } from 'react-icons/gi';
 import { usePetsContext } from '../../libs/PetsContext';
 
@@ -9,8 +10,6 @@ function SearchToggle() {
       {
         <GiLobArrow
           className={searchType ? 'search-toggle rotate' : 'search-toggle'}
-          // className="search-toggle"
-
           onClick={() => setSearchType(!searchType)}
         />
       }

@@ -20,14 +20,6 @@ function SearchSimple() {
     const newQuery = {};
     newQuery.type = type;
     setSearchAdvanced({ ...searchAdvanced, ...newQuery });
-    // console.log(searchType);
-    // if (!searchType) {
-    //   if (!type) {
-    //     getPets();
-    //   } else {
-    //     getPetsByType(type);
-    //   }
-    // }
   }
 
   useEffect(() => {
@@ -36,6 +28,18 @@ function SearchSimple() {
       setActiveButton(type);
     }
   }, []);
+
+  useEffect(() => {
+    if (!searchType) {
+      if (activeButton) {
+        getPetsByType(activeButton);
+      } else if (searchAdvanced.type) {
+        searchSimpleHandler(searchAdvanced.type);
+      } else {
+        getPets();
+      }
+    }
+  }, [searchType]);
 
   useEffect(() => {
     console.log('hi');
