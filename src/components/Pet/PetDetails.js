@@ -27,14 +27,14 @@ function PetDetails() {
                 <FaPaw />
                 Height:{' '}
               </span>
-              {height}"
+              {height}cm
             </li>
             <li>
               <span>
                 <FaPaw />
                 Weight:{' '}
               </span>
-              {weight}lbs
+              {weight}kg
             </li>
           </ul>
         </div>

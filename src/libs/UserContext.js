@@ -12,7 +12,7 @@ export default function UserContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={{ loginShow, setLoginShow }}>
+    <UserContext.Provider value={{ loginShow, setLoginShow, user, setUser }}>
       {children}
     </UserContext.Provider>
   );
