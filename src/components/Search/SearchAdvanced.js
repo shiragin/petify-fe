@@ -4,25 +4,18 @@ import { usePetsContext } from '../../libs/PetsContext';
 import SearchToggle from './SearchToggle';
 
 function SearchAdvanced() {
-  const { getPetsAdvanced, searchAdvanced, setSearchAdvanced } =
+  const { getPetsAdvanced, searchAdvanced, setSearchAdvanced, searchType } =
     usePetsContext();
 
   function searchAdvancedHandler(e, query) {
-    console.log(query);
+    // console.log(query);
     const newQuery = {};
-    // if (query === 'name') {
-    // const reg = `/${e.target.value}/i`;
-    // newQuery[query] = { $regex: reg };
-
     newQuery[query] = e.target.value;
-    // }
-    // console.log('WTF: ', newQuery);
-    // console.log('Query: ', newQuery);
     setSearchAdvanced({ ...searchAdvanced, ...newQuery });
   }
 
   useEffect(() => {
-    getPetsAdvanced(searchAdvanced);
+    if (searchType) getPetsAdvanced(searchAdvanced);
   }, [searchAdvanced]);
 
   return (
@@ -45,7 +38,7 @@ function SearchAdvanced() {
             <option value="">All</option>
           </Form.Select>
         </Form.Group>
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label className="search-advanced-group-label">Type</Form.Label>
           <Form.Select
             className="search-advanced-group-input"
@@ -58,7 +51,7 @@ function SearchAdvanced() {
               All
             </option>
           </Form.Select>
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group>
           <Form.Label className="search-advanced-group-label">Name</Form.Label>
           <Form.Control
@@ -68,7 +61,7 @@ function SearchAdvanced() {
           />
         </Form.Group>
       </Form>
-      <SearchToggle />
+      {/* <SearchToggle /> */}
     </div>
   );
 }

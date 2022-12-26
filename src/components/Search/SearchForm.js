@@ -7,7 +7,12 @@ import SearchAdvanced from './SearchAdvanced';
 function SearchForm() {
   const { searchType } = usePetsContext();
 
-  return <div>{searchType ? <SearchAdvanced /> : <SearchSimple />}</div>;
+  return (
+    <div>
+      <SearchSimple />
+      {searchType && <SearchAdvanced />}
+    </div>
+  );
 }
 
 export default SearchForm;
