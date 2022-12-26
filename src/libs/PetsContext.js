@@ -10,6 +10,8 @@ export function usePetsContext() {
 export default function PetsContextProvider({ children }) {
   const [pets, setPets] = useState([]);
   const [petPage, setPetPage] = useState({});
+  const [searchType, setSearchType] = useState(false);
+  const [searchAdvanced, setSearchAdvanced] = useState({});
 
   async function getPets() {
     try {
@@ -27,6 +29,26 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets?type=${type}`);
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
+      setPets(pets);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function getPetsAdvanced(search) {
+    console.log('Search terms: ', search);
+    let query = [];
+    for (const [key, value] of Object.entries(search)) {
+      if (value) query.push(`${key}=${value}`);
+    }
+    console.log('Query terms: ', query);
+    const url = `http://localhost:8080/pets?${query.join('&')}`;
+    console.log(url);
+    try {
+      const res = await axios.get(url);
+      if (!res.statusText === 'ok') throw new Error();
+      const { pets } = await res.data.data;
+      console.log(pets);
       setPets(pets);
     } catch (err) {
       console.error(err);
@@ -54,6 +76,11 @@ export default function PetsContextProvider({ children }) {
         getPets,
         getPetPage,
         getPetsByType,
+        searchType,
+        setSearchType,
+        getPetsAdvanced,
+        searchAdvanced,
+        setSearchAdvanced,
       }}
     >
       {children}

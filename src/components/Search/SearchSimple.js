@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { usePetsContext } from '../../libs/PetsContext';
+import SearchToggle from './SearchToggle';
 
 function SearchSimple() {
   const { getPets, getPetsByType } = usePetsContext();
@@ -36,6 +37,9 @@ function SearchSimple() {
         >
           <span>All</span>
         </Button>
+        <div className="search-simple-buttons-more">
+          <SearchToggle />
+        </div>
       </div>
     </div>
   );

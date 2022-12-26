@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // margin: 0 auto;
 
   input {
     width: 100%;
@@ -22,6 +21,7 @@
 
   .search-simple {
     text-align: center;
+    margin: 3rem 0 2rem;
 
     &-title {
       font-size: 2rem;
@@ -55,6 +55,7 @@
 
         &:active {
           transform: skew(-21deg) rotate(-5deg) scale(1.1);
+          border: 4px dashed $primary-color;
         }
       }
       .active-btn {
@@ -69,6 +70,54 @@
           color: $primary-color;
         }
       }
+
+      // &-more {
+      //   display: flex;
+      //   flex-direction: row;
+      //   font-size: 1.2rem;
+
+      //           div {
+      //     width: 2rem;
+      //   }
+      // }
+    }
+  }
+
+  &-toggle {
+    height: 5rem;
+    width: 5rem;
+    fill: $primary-color;
+    cursor: pointer;
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+
+  .search-advanced {
+    display: flex;
+    gap: 3rem;
+    margin: 3rem 0 2rem;
+
+    form {
+      display: flex;
+      gap: 3rem;
+    }
+
+    &-group-label {
+      font-weight: 600;
+      font-size: 1.2rem;
+      // color: $primary-color;
+      // background-color: $primary-color;
+      // color: #fff;
+      // padding: 0.5rem 1rem;
+      // transform: skew(21deg);
+    }
+
+    select:focus,
+    select:active,
+    select:focus-visible {
+      border-color: #ced4da;
+      box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
     }
   }
 
