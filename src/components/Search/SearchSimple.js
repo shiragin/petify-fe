@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { usePetsContext } from '../../libs/PetsContext';
 import SearchToggle from './SearchToggle';
@@ -20,11 +20,33 @@ function SearchSimple() {
     const newQuery = {};
     newQuery.type = type;
     setSearchAdvanced({ ...searchAdvanced, ...newQuery });
-    if (!searchType) {
-      if (!type) getPets();
-      getPetsByType(type);
-    }
+    // console.log(searchType);
+    // if (!searchType) {
+    //   if (!type) {
+    //     getPets();
+    //   } else {
+    //     getPetsByType(type);
+    //   }
+    // }
   }
+
+  useEffect(() => {
+    if (searchAdvanced.type) {
+      const { type } = searchAdvanced;
+      setActiveButton(type);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('hi');
+    if (!searchType && searchAdvanced.type) {
+      getPetsByType(searchAdvanced.type);
+    } else if (searchType) {
+      getPetsAdvanced(searchAdvanced);
+    } else {
+      getPets();
+    }
+  }, [activeButton]);
 
   return (
     <div className="search-simple">

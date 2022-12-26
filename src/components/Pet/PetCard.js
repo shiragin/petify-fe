@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Cat from '../../imgs/cat-portrait.jpg';
@@ -7,6 +8,8 @@ import LikeButton from './LikeButton';
 function PetCard({ value }) {
   const { _id, name, type, breed } = value;
 
+  const [imgLoading, setImgLoading] = useState(true);
+
   const navigate = useNavigate();
 
   function cardClickHandler(e) {
@@ -15,9 +18,17 @@ function PetCard({ value }) {
   }
 
   return (
-    <Card onClick={cardClickHandler}>
+    <Card onClick={cardClickHandler} className={imgLoading ? 'hide' : ''}>
       <LikeButton />
-      <Card.Img variant="top" src={type === 'Cat' ? Cat : Dog} />
+      <Card.Img
+        variant="top"
+        src={type === 'Cat' ? Cat : Dog}
+        onLoad={() =>
+          setTimeout(() => {
+            setImgLoading(false);
+          }, 500)
+        }
+      />
       <div className="card-content">
         <div>
           <Card.Title>{name}</Card.Title>

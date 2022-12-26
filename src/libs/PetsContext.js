@@ -26,6 +26,7 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetsByType(type) {
     try {
+      console.log('From function:', type);
       const res = await axios.get(`http://localhost:8080/pets?type=${type}`);
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
@@ -37,19 +38,32 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetsAdvanced(search) {
     console.log('Search terms: ', search);
-    let query = [];
-    for (const [key, value] of Object.entries(search)) {
-      if (value) {
-        query.push(`${key}=${value}`);
-      }
-    }
-    const url = `http://localhost:8080/pets?${query.join('&')}`;
-    console.log(url);
+
+    const params = Object.keys(search);
+
+    let filteredParams = {};
+
+    params.map((param) => {
+      if (search[param])
+        filteredParams = { ...filteredParams, [param]: search[param] };
+    });
+
+    console.log('Search terms: ', search);
+
+    // let query = [];
+    // for (const [key, value] of Object.entries(search)) {
+    //   if (value) {
+    //     query.push(`${key}=${value}`);
+    //   }
+    // const url = `http://localhost:8080/pets?${query.join('&')}`;
+    // const url = `http://localhost:8080/pets`;
+    // }
     try {
-      const res = await axios.get(url);
+      const res = await axios.get(`http://localhost:8080/pets`, {
+        params: filteredParams,
+      });
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
-      console.log(pets);
       setPets(pets);
     } catch (err) {
       console.error(err);

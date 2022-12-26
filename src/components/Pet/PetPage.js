@@ -7,7 +7,7 @@ import LikeButton from './LikeButton';
 
 function PetPage({ id }) {
   const { getPetPage, petPage, setPetPage } = usePetsContext();
-
+  console.log(petPage);
   useEffect(() => {
     getPetPage(id);
   }, []);
@@ -15,7 +15,10 @@ function PetPage({ id }) {
   return (
     <div className="main-container petpage">
       <LikeButton />
-      <img src={petPage.type === 'Cat' ? Cat : Dog} className="petpage-image" />
+      <img
+        src={petPage?.type === 'Cat' ? Cat : Dog}
+        className="petpage-image"
+      />
       <PetDetails />
     </div>
   );

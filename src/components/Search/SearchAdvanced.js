@@ -16,6 +16,11 @@ function SearchAdvanced() {
 
   useEffect(() => {
     if (searchType) getPetsAdvanced(searchAdvanced);
+  }, []);
+
+  useEffect(() => {
+    console.log('hayush');
+    if (searchType) getPetsAdvanced(searchAdvanced);
   }, [searchAdvanced]);
 
   return (
