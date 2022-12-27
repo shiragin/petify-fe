@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Button, Overlay, Tooltip } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../libs/UserContext';
+import SubmitButton from './SubmitButton';
 
 function SignupForm() {
-  const { setLoginModalShow, user, setUser, createNewUser, loggedIn } =
-    useUserContext();
+  const {
+    loginModalShow,
+    setLoginModalShow,
+    user,
+    setUser,
+    createNewUser,
+    loggedIn,
+    error,
+    setError,
+  } = useUserContext();
 
   const navigate = useNavigate();
 
@@ -14,6 +23,7 @@ function SignupForm() {
   }
 
   function userFormHandler(e, field) {
+    setError({ show: false });
     const newField = {};
     newField[field] = e.target.value;
     setUser({ ...user, ...newField });
@@ -24,6 +34,8 @@ function SignupForm() {
     const signup = await createNewUser(user);
     if (signup || loggedIn) {
       navigate('/');
+    } else {
+      await setError({ show: true, message: `Error! Couldn't sign up` });
     }
   }
 
@@ -35,7 +47,11 @@ function SignupForm() {
   }, [loggedIn]);
 
   return (
-    <Form className="login" onSubmit={(e) => userSubmitHandler(e)}>
+    <Form
+      className="login"
+      onSubmit={(e) => userSubmitHandler(e)}
+      onFocus={() => setError({ show: false })}
+    >
       <Form.Group className="split">
         <div>
           <Form.Label className="login-firstname-label">First name</Form.Label>
@@ -75,7 +91,7 @@ function SignupForm() {
         <Form.Label className="login-phone-label">Phone number</Form.Label>
         <Form.Control
           className="login-phone-input"
-          type="phone"
+          type="tel"
           required
           placeholder="Phone number"
           value={user?.phoneNumber}
@@ -110,13 +126,22 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      <Button
+      {/* <Button
+        ref={target}
         className="login-submit-button btn-skew-left"
         type="submit"
         value="Submit"
       >
         <span>Sign up</span>
       </Button>
+      <Overlay target={target.current} show={error.show} placement="bottom">
+        {(props) => (
+          <Tooltip id="overlay-example" {...props}>
+            {error.message}
+          </Tooltip>
+        )}
+      </Overlay> */}
+      <SubmitButton type={loginModalShow.type} />
       <div className="login-footer">
         Already have an account?{' '}
         <a href="#" onClick={clickHandler}>

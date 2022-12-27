@@ -23,7 +23,10 @@ export default function UserContextProvider({ children }) {
     password: '',
     passwordConfirm: '',
   });
+
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [error, setError] = useState({ show: false, message: '' });
 
   async function createNewUser(user) {
     try {
@@ -41,7 +44,7 @@ export default function UserContextProvider({ children }) {
         }
       }
     } catch (error) {
-      console.log(error);
+      return false;
     }
   }
 
@@ -62,8 +65,9 @@ export default function UserContextProvider({ children }) {
       } else {
         throw new Error('Passwords do not match!');
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      // setError({ show: true, message: err });
+      return false;
     }
   }
 
@@ -80,6 +84,8 @@ export default function UserContextProvider({ children }) {
         loginForm,
         setLoginForm,
         getUser,
+        error,
+        setError,
       }}
     >
       {children}

@@ -1,12 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../libs/UserContext';
+import SubmitButton from './SubmitButton';
 import Cat from '../../imgs/undraw_cat.svg';
 import Dog from '../../imgs/undraw_dog.svg';
 
 function LoginForm() {
-  const { setLoginModalShow, loginForm, setLoginForm, getUser } =
-    useUserContext();
+  const {
+    loginModalShow,
+    setLoginModalShow,
+    loginForm,
+    setLoginForm,
+    getUser,
+    error,
+    setError,
+    loggedIn,
+  } = useUserContext();
 
   function clickHandler() {
     setLoginModalShow({ show: true, type: 'signup' });
@@ -15,6 +24,7 @@ function LoginForm() {
   const navigate = useNavigate();
 
   function loginChangeHandler(e, field) {
+    setError({ show: false });
     const newField = {};
     newField[field] = e.target.value;
     setLoginForm({ ...loginForm, ...newField });
@@ -22,15 +32,21 @@ function LoginForm() {
 
   async function loginSubmitHandler(e) {
     e.preventDefault();
-    console.log('hi');
     const signup = await getUser(loginForm);
     if (signup || loggedIn) {
       navigate('/');
+    } else {
+      console.log('hi');
+      await setError({ show: true, message: `Error! Couldn't log in` });
     }
   }
 
   return (
-    <Form className="login" onSubmit={loginSubmitHandler}>
+    <Form
+      className="login"
+      onSubmit={loginSubmitHandler}
+      onFocus={() => setError({ show: false })}
+    >
       <Form.Group>
         <Form.Label className="login-email-label">Email Address</Form.Label>
         <Form.Control
@@ -54,9 +70,7 @@ function LoginForm() {
           onChange={(e) => loginChangeHandler(e, 'password')}
         />
       </Form.Group>
-      <Button className="login-submit-button btn-skew-left" type="submit">
-        <span>Log In</span>
-      </Button>
+      <SubmitButton type={loginModalShow.type} />
       <div className="login-footer">
         <img src={Cat} />
         Haven't got an account yet?{' '}
