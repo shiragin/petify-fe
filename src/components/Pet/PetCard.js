@@ -6,7 +6,7 @@ import Dog from '../../imgs/dog-portrait2.jpg';
 import LikeButton from './LikeButton';
 
 function PetCard({ value }) {
-  const { _id, name, type, breed } = value;
+  const { _id, name, type, breed, adoptionStatus } = value;
 
   const [imgLoading, setImgLoading] = useState(true);
 
@@ -19,6 +19,9 @@ function PetCard({ value }) {
 
   return (
     <Card onClick={cardClickHandler} className={imgLoading ? 'hide' : ''}>
+      <div class="corner">
+        <span>{adoptionStatus}</span>
+      </div>
       <LikeButton />
       <Card.Img
         variant="top"

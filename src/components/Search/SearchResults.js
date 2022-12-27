@@ -12,8 +12,8 @@ function SearchResults() {
 
   return (
     <div className="search-results-list">
-      {pets.map(({ _id, name, type, breed }) => (
-        <PetCard key={_id} value={{ _id, name, type, breed }} />
+      {pets.map(({ _id, name, type, breed, adoptionStatus }) => (
+        <PetCard key={_id} value={{ _id, name, type, breed, adoptionStatus }} />
       ))}
     </div>
   );

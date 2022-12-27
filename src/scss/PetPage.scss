@@ -9,13 +9,41 @@
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 
+  .corner {
+    width: 0;
+    height: 0;
+    border-top: 80px solid #fff;
+    border-bottom: 80px solid transparent;
+    border-right: 80px solid transparent;
+    position: absolute;
+    left: -3%;
+    top: -2%;
+  }
+
+  .corner span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $dark-color;
+    position: absolute;
+    top: -60px;
+    width: 5rem;
+    left: -10px;
+    text-align: center;
+    font-size: 16px;
+    font-family: arial;
+    transform: rotate(-45deg);
+    display: block;
+  }
+
   &:hover {
     transform: scale(1.05);
   }
 
+  // background-color: #fff;
+  // border-radius: 50%;
   svg {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
     position: absolute;
     top: 3%;
     right: 4%;
