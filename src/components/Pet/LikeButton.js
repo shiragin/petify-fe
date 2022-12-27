@@ -3,12 +3,12 @@ import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 import { useUserContext } from '../../libs/UserContext';
 
 function LikeButton() {
-  const { user, setLoginShow } = useUserContext();
+  const { user, setLoginModalShow } = useUserContext();
   const [liked, setLiked] = useState(false);
 
   function likeClickHandler() {
-    if (!user) {
-      return setLoginShow({ show: true, type: 'login' });
+    if (!user.email) {
+      return setLoginModalShow({ show: true, type: 'login' });
     }
     setLiked(!liked);
   }

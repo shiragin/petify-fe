@@ -31,7 +31,7 @@ function SearchAdvanced() {
           </Form.Label>
           <Form.Select
             className="search-advanced-group-input"
-            defaultValue={'Available'}
+            defaultValue={''}
             value={searchAdvanced?.adoptionStatus}
             onChange={(e) => searchAdvancedHandler(e, 'adoptionStatus')}
           >
@@ -47,10 +47,13 @@ function SearchAdvanced() {
           <Form.Label className="search-advanced-group-label">Size</Form.Label>
           <Form.Select
             className="search-advanced-group-input"
-            defaultValue={'Medium'}
+            defaultValue={''}
             value={searchAdvanced?.size}
             onChange={(e) => searchAdvancedHandler(e, 'size')}
           >
+            <option value="" default>
+              All
+            </option>
             <option value="Small">Small</option>
             <option value="Medium" default>
               Medium
@@ -68,14 +71,12 @@ function SearchAdvanced() {
             value={searchAdvanced?.color}
             onChange={(e) => searchAdvancedHandler(e, 'color')}
           >
-            <option value="">All</option>
+            <option value="" default>
+              All
+            </option>
             <option value="White">White</option>
-            <option value="Black" default>
-              Black
-            </option>
-            <option value="Brown" default>
-              Brown
-            </option>
+            <option value="Black">Black</option>
+            <option value="Brown">Brown</option>
             {/* <option value="Brown">Brown</option> */}
             <option value="Orange">Orange</option>
             <option value="Blue">Blue</option>

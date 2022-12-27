@@ -23,7 +23,7 @@ function PetPage({ id }) {
     <div className="main-container petpage">
       <LikeButton />
       <img
-        src={petPage?.type === 'Cat' ? Cat : Dog}
+        src={petPage.picture}
         className="petpage-image"
         // onLoad={() => setImgLoading(false)}
       />

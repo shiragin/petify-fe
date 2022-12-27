@@ -4,8 +4,16 @@ import { usePetsContext } from '../../libs/PetsContext';
 function PetDetails() {
   const { petPage } = usePetsContext();
 
-  const { name, breed, color, height, weight, hypoallergnic, adoptionStatus } =
-    petPage;
+  const {
+    name,
+    breed,
+    color,
+    height,
+    weight,
+    hypoallergnic,
+    adoptionStatus,
+    bio,
+  } = petPage;
 
   return (
     <div className="petpage-card">
@@ -64,6 +72,7 @@ function PetDetails() {
           </ul>
         </div>
       </div>
+      <div className="petpage-card-bio">{bio}</div>
     </div>
   );
 }
