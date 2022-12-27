@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useUserContext } from '../../libs/UserContext';
 import LoginForm from './LoginForm';
@@ -7,7 +6,7 @@ import SignupForm from './SignupForm';
 import '../../scss/LoginModal.scss';
 
 function LoginModal(props) {
-  const { loginShow } = useUserContext();
+  const { loginModalShow } = useUserContext();
 
   // console.log(loginShow);
 
@@ -15,13 +14,13 @@ function LoginModal(props) {
     <Modal {...props} size="md" centered>
       <Modal.Header closeButton>
         <Modal.Title>
-          {loginShow.type === 'signup'
+          {loginModalShow.type === 'signup'
             ? 'Create an account'
             : 'Log into your account'}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {loginShow.type === 'signup' ? <SignupForm /> : <LoginForm />}
+        {loginModalShow.type === 'signup' ? <SignupForm /> : <LoginForm />}
       </Modal.Body>
     </Modal>
   );

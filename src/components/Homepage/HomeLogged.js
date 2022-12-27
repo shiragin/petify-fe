@@ -1,5 +1,13 @@
+import { useUserContext } from '../../libs/UserContext';
 function HomeLogged() {
-  return <h1>Honey I'm home!!!</h1>;
+  const { user } = useUserContext();
+
+  console.log(user);
+  return (
+    <h1>
+      Welcome back, {user.firstName} {user.lastName}!
+    </h1>
+  );
 }
 
 export default HomeLogged;

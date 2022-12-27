@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-// import LoginModal from '../Login/LoginModal';
 import { useUserContext } from '../../libs/UserContext';
 import hero from '../../imgs/cover.png';
 
 function HomeUnlogged() {
-  const { setLoginShow } = useUserContext();
+  const { setLoginModalShow } = useUserContext();
 
   return (
     <div className="hero">
@@ -23,7 +22,7 @@ function HomeUnlogged() {
             variant="success"
             className="skew-left"
             onClick={() => {
-              setLoginShow({ show: true, type: 'signup' });
+              setLoginModalShow({ show: true, type: 'signup' });
             }}
           >
             <span>Create an account</span>

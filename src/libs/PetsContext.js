@@ -50,14 +50,6 @@ export default function PetsContextProvider({ children }) {
 
     console.log('Search terms: ', search);
 
-    // let query = [];
-    // for (const [key, value] of Object.entries(search)) {
-    //   if (value) {
-    //     query.push(`${key}=${value}`);
-    //   }
-    // const url = `http://localhost:8080/pets?${query.join('&')}`;
-    // const url = `http://localhost:8080/pets`;
-    // }
     try {
       const res = await axios.get(`http://localhost:8080/pets`, {
         params: filteredParams,

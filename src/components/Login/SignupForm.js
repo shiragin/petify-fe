@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../libs/UserContext';
 
 function SignupForm() {
-  const { setLoginShow, user, setUser, createNewUser, loggedIn } =
+  const { setLoginModalShow, user, setUser, createNewUser, loggedIn } =
     useUserContext();
 
   const navigate = useNavigate();
 
   function clickHandler() {
-    setLoginShow({ show: true, type: 'login' });
+    setLoginModalShow({ show: true, type: 'login' });
   }
 
   function userFormHandler(e, field) {
@@ -29,7 +29,7 @@ function SignupForm() {
 
   useEffect(() => {
     if (loggedIn) {
-      setLoginShow({ show: false, type: 'login' });
+      setLoginModalShow({ show: false, type: 'login' });
       navigate('/');
     }
   }, [loggedIn]);
