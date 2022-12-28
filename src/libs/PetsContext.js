@@ -26,7 +26,6 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetsByType(type) {
     try {
-      console.log('From function:', type);
       const res = await axios.get(`http://localhost:8080/pets?type=${type}`);
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
@@ -37,8 +36,6 @@ export default function PetsContextProvider({ children }) {
   }
 
   async function getPetsAdvanced(search) {
-    console.log('Search terms: ', search);
-
     const params = Object.keys(search);
 
     let filteredParams = {};
@@ -74,10 +71,8 @@ export default function PetsContextProvider({ children }) {
   async function getRandomPets(num) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/random`);
-      console.log(res);
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
-      console.log(pets);
       setPets(pets);
     } catch (err) {
       console.error(err);

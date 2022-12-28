@@ -36,7 +36,6 @@ function LoginForm() {
     if (signup || loggedIn) {
       navigate('/');
     } else {
-      console.log('hi');
       await setError({ show: true, message: `Error! Couldn't log in` });
     }
   }

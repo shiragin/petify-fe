@@ -43,7 +43,6 @@ function SignupForm() {
   }
 
   useEffect(() => {
-    console.log(loginModalShow);
     if (loggedIn && loginModalShow.show) {
       setLoginModalShow({ show: false, type: 'login' });
       navigate('/');

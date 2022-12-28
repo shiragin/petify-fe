@@ -17,7 +17,6 @@ function UserProfile() {
 
   async function updateUserHandler() {
     if (loggedIn) {
-      console.log(user._id);
       const update = await updateUser(user._id);
       if (update) {
         setConfirmSave(true);

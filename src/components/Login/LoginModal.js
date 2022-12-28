@@ -8,8 +8,6 @@ import '../../scss/LoginModal.scss';
 function LoginModal(props) {
   const { loginModalShow } = useUserContext();
 
-  // console.log(loginShow);
-
   return (
     <Modal {...props} size="md" centered>
       <Modal.Header closeButton>

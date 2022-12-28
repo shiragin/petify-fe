@@ -8,7 +8,6 @@ function HomeLogged() {
     getUser(user._id);
   });
 
-  console.log(user);
   return (
     <div className="home-logged">
       <h1 className="home-logged-welcome">

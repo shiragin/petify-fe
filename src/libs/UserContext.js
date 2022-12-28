@@ -36,9 +36,7 @@ export default function UserContextProvider({ children }) {
       if (user.password !== user.passwordConfirm)
         throw new Error('Passwords must match');
       else {
-        const res = await axios.post(`http://localhost:8080/users`, {
-          ...user,
-        });
+        const res = await axios.post(`http://localhost:8080/users`, user);
         if (res.status === 201) {
           setLoggedIn(true);
           getUser(user);
@@ -54,13 +52,11 @@ export default function UserContextProvider({ children }) {
 
   async function getUser(user) {
     try {
-      console.log(user);
       const res = await axios.get(`http://localhost:8080/users`, {
         params: { email: user.email },
       });
       if (!res.statusText === 'ok') throw new Error('No such user!');
       const { users } = await res.data.data;
-      console.log(users[0]);
       if (users[0].password === user.password) {
         console.log('User validated!');
         setUser(users[0]);
@@ -76,19 +72,13 @@ export default function UserContextProvider({ children }) {
 
   async function updateUser(id) {
     try {
-      console.log(id);
-      const res = await axios.patch(`http://localhost:8080/users/${id}`, {
-        ...user,
-      });
-      console.log(res.data.data);
-
+      const res = await axios.patch(`http://localhost:8080/users/${id}`, user);
       const { user: userDetails } = await res.data.data;
-      console.log(userDetails);
       if (userDetails.password !== userDetails.passwordConfirm)
         throw new Error('Passwords must match');
       return res.status === 200 ? true : false;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return false;
     }
   }

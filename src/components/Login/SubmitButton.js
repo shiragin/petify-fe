@@ -3,7 +3,6 @@ import { Button, Overlay, Tooltip } from 'react-bootstrap';
 import { useUserContext } from '../../libs/UserContext';
 
 function SubmitButton(props) {
-  console.log(props);
   const { error } = useUserContext();
   const target = useRef(null);
 

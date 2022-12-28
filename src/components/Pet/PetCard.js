@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import Cat from '../../imgs/cat-portrait.jpg';
-import Dog from '../../imgs/dog-portrait2.jpg';
 import LikeButton from './LikeButton';
 
 function PetCard({ value }) {
@@ -22,7 +20,7 @@ function PetCard({ value }) {
       <div className="corner">
         <span>{adoptionStatus}</span>
       </div>
-      <LikeButton />
+      <LikeButton id={_id} />
       <Card.Img
         variant="top"
         src={picture}
