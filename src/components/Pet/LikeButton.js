@@ -7,7 +7,8 @@ function LikeButton({ id }) {
   const [liked, setLiked] = useState(false);
 
   function likeClickHandler(e) {
-    if (!user.email) {
+    if (!user) return;
+    if (!user?.email) {
       return setLoginModalShow({ show: true, type: 'login' });
     } else {
       setLiked(!liked);
@@ -16,27 +17,25 @@ function LikeButton({ id }) {
   }
 
   useEffect(() => {
-    if (user.savedPets.includes(id)) {
+    if (!user) return;
+    if (user?.savedPets?.includes(id)) {
       setLiked(true);
     } else {
       setLiked(false);
     }
   }, []);
 
-  // useEffect(() => addSavedPet(), [liked]);
-
   function addSavedPet() {
-    // console.log(user);
-    // console.log(liked);
+    if (!user) return;
     if (!liked) {
       console.log(id);
-      if (!user?.savedPets.includes(id)) user.savedPets.push(id);
+      if (!user?.savedPets?.includes(id)) user.savedPets.push(id);
       console.log(user.savedPets);
     } else {
       console.log('GGGGGG');
       console.log(id);
-      console.log(user.savedPets);
-      if (user?.savedPets.includes(id)) {
+      console.log(user?.savedPets);
+      if (user?.savedPets?.includes(id)) {
         user.savedPets = user.savedPets.filter((el) => el !== id);
       }
       console.log(user.savedPets);

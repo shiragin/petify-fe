@@ -79,6 +79,16 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function getSavedPets(id) {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}`);
+      const { pets } = res.data.data;
+      setPets(pets);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <PetsContext.Provider
       value={{
@@ -95,6 +105,7 @@ export default function PetsContextProvider({ children }) {
         searchAdvanced,
         setSearchAdvanced,
         getRandomPets,
+        getSavedPets,
       }}
     >
       {children}

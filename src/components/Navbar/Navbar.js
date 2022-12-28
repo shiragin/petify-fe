@@ -8,6 +8,7 @@ import '../../scss/Navbar.scss';
 
 function Navbar() {
   const { loggedIn } = useUserContext();
+  console.log('Log in state: ', loggedIn);
   // const loggedIn = false;
   return (
     <div className="navbar">

@@ -20,6 +20,8 @@ function SignupForm() {
 
   const navigate = useNavigate();
 
+  console.log(user);
+
   function clickHandler() {
     setLoginModalShow({ show: true, type: 'login' });
   }
@@ -43,6 +45,7 @@ function SignupForm() {
   }
 
   useEffect(() => {
+    if (user) return;
     if (loggedIn && loginModalShow.show) {
       setLoginModalShow({ show: false, type: 'login' });
       navigate('/');
@@ -131,7 +134,7 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      {loginModalShow.show && (
+      {loginModalShow.show && !user && (
         <div className="login-footer">
           <SubmitButton
             type={loginModalShow.show ? loginModalShow.type : 'update'}

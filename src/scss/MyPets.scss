@@ -1,0 +1,61 @@
+@import 'variables';
+
+.mypets {
+  &-title {
+    width: 12rem;
+    text-align: center;
+    margin: 3rem 0;
+    font-size: 2.4rem;
+    font-weight: 600;
+    border-bottom: 10px solid $primary-color;
+    transform: rotate(-4deg);
+  }
+
+  .row {
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .nav-item {
+      font-size: 1.4rem;
+      color: #fff;
+
+      .nav-link {
+        color: $dark-color;
+        border-radius: 0;
+        background-color: transparent;
+        transition: background-color 0s;
+        margin-bottom: 2rem;
+        font-weight: 500;
+      }
+
+      .active,
+      .active:active,
+      .active:focus-visible,
+      .active:visited {
+        background-color: $primary-color;
+        color: #fff;
+        border-radius: 0;
+        transform: skew(20deg);
+        width: fit-content;
+        min-width: 10rem;
+
+        span {
+          font-weight: 600;
+          display: inline-block;
+          transform: skew(-20deg);
+        }
+      }
+    }
+  }
+
+  .saved-pets {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .card {
+      width: 33%;
+    }
+  }
+}

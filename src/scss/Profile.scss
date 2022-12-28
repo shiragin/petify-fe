@@ -4,9 +4,13 @@
   // display: flex;
 
   &-title {
+    width: 22rem;
+    text-align: center;
     margin: 3rem 0;
     font-size: 2.4rem;
     font-weight: 600;
+    border-bottom: 10px solid $primary-color;
+    transform: rotate(-4deg);
   }
 
   &-form {
