@@ -14,6 +14,8 @@ function SignupForm() {
     loggedIn,
     error,
     setError,
+    updateUser,
+    setConfirmSave,
   } = useUserContext();
 
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ function SignupForm() {
 
   function userFormHandler(e, field) {
     setError({ show: false });
+    setConfirmSave(false);
     const newField = {};
     newField[field] = e.target.value;
     setUser({ ...user, ...newField });
@@ -32,7 +35,7 @@ function SignupForm() {
   async function userSubmitHandler(e) {
     e.preventDefault();
     const signup = await createNewUser(user);
-    if (signup || loggedIn) {
+    if (loggedIn || signup) {
       navigate('/');
     } else {
       await setError({ show: true, message: `Error! Couldn't sign up` });
@@ -40,7 +43,8 @@ function SignupForm() {
   }
 
   useEffect(() => {
-    if (loggedIn) {
+    console.log(loginModalShow);
+    if (loggedIn && loginModalShow.show) {
       setLoginModalShow({ show: false, type: 'login' });
       navigate('/');
     }
@@ -49,10 +53,12 @@ function SignupForm() {
   return (
     <Form
       className="login"
-      onSubmit={(e) => userSubmitHandler(e)}
+      onSubmit={(e) => {
+        userSubmitHandler(e);
+      }}
       onFocus={() => setError({ show: false })}
     >
-      <Form.Group className="split">
+      <Form.Group className="form-group split">
         <div>
           <Form.Label className="login-firstname-label">First name</Form.Label>
           <Form.Control
@@ -76,7 +82,7 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      <Form.Group>
+      <Form.Group className="form-group">
         <Form.Label className="login-email-label">Email Address</Form.Label>
         <Form.Control
           className="login-email-input"
@@ -87,7 +93,7 @@ function SignupForm() {
           onChange={(e) => userFormHandler(e, 'email')}
         />
       </Form.Group>
-      <Form.Group>
+      <Form.Group className="form-group">
         <Form.Label className="login-phone-label">Phone number</Form.Label>
         <Form.Control
           className="login-phone-input"
@@ -98,7 +104,7 @@ function SignupForm() {
           onChange={(e) => userFormHandler(e, 'phoneNumber')}
         />
       </Form.Group>
-      <Form.Group className="split">
+      <Form.Group className="form-group split">
         <div>
           <Form.Label className="login-password-label">Password</Form.Label>
           <Form.Control
@@ -126,28 +132,17 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      {/* <Button
-        ref={target}
-        className="login-submit-button btn-skew-left"
-        type="submit"
-        value="Submit"
-      >
-        <span>Sign up</span>
-      </Button>
-      <Overlay target={target.current} show={error.show} placement="bottom">
-        {(props) => (
-          <Tooltip id="overlay-example" {...props}>
-            {error.message}
-          </Tooltip>
-        )}
-      </Overlay> */}
-      <SubmitButton type={loginModalShow.type} />
-      <div className="login-footer">
-        Already have an account?{' '}
-        <a href="#" onClick={clickHandler}>
-          Log in
-        </a>
-      </div>
+      {loginModalShow.show && (
+        <div className="login-footer">
+          <SubmitButton
+            type={loginModalShow.show ? loginModalShow.type : 'update'}
+          />
+          Already have an account?{' '}
+          <a href="#" onClick={clickHandler}>
+            Log in
+          </a>
+        </div>
+      )}
     </Form>
   );
 }

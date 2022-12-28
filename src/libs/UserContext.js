@@ -15,6 +15,8 @@ export default function UserContextProvider({ children }) {
 
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
 
+  const [confirmSave, setConfirmSave] = useState();
+
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -22,6 +24,7 @@ export default function UserContextProvider({ children }) {
     phoneNumber: '',
     password: '',
     passwordConfirm: '',
+    bio: '',
   });
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -38,6 +41,7 @@ export default function UserContextProvider({ children }) {
         });
         if (res.status === 201) {
           setLoggedIn(true);
+          getUser(user);
           return true;
         } else {
           return false;
@@ -66,7 +70,25 @@ export default function UserContextProvider({ children }) {
         throw new Error('Passwords do not match!');
       }
     } catch (err) {
-      // setError({ show: true, message: err });
+      return false;
+    }
+  }
+
+  async function updateUser(id) {
+    try {
+      console.log(id);
+      const res = await axios.patch(`http://localhost:8080/users/${id}`, {
+        ...user,
+      });
+      console.log(res.data.data);
+
+      const { user: userDetails } = await res.data.data;
+      console.log(userDetails);
+      if (userDetails.password !== userDetails.passwordConfirm)
+        throw new Error('Passwords must match');
+      return res.status === 200 ? true : false;
+    } catch (err) {
+      console.log(err);
       return false;
     }
   }
@@ -86,6 +108,10 @@ export default function UserContextProvider({ children }) {
         getUser,
         error,
         setError,
+        updateUser,
+        getUser,
+        confirmSave,
+        setConfirmSave,
       }}
     >
       {children}

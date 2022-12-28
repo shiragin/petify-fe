@@ -40,7 +40,8 @@
     gap: 2rem;
     margin-top: 0.4rem;
 
-    button {
+    Button,
+    .btn {
       font-size: 1.2rem;
       padding: 0.4rem 1.1rem 0.6rem;
       background-color: $primary-color;
@@ -95,12 +96,21 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
-    h4 {
+    &-title {
+      display: inline-block;
+      background-color: $primary-color;
+      color: #fff;
       font-size: 1.8rem;
       font-weight: 600;
-      padding-left: 0.5rem;
+      padding: 0.5rem 1rem;
       margin-bottom: 2rem;
+      transform: skew(-20deg);
+      span {
+        display: inline-block;
+        transform: skew(20deg);
+      }
     }
 
     &-cards {
@@ -108,11 +118,17 @@
       display: flex;
 
       .chevron {
+        margin-left: 1rem;
         text-decoration: none;
         font-size: 3rem;
         font-weight: 900;
         align-self: center;
         color: $primary-color;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }

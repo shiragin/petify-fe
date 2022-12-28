@@ -13,9 +13,30 @@ function NavbarLogged() {
   }
   return (
     <div className="navbar-links-right">
-      <NavLink to="/search">Search</NavLink>
-      <NavLink to="/mypets">My Pets</NavLink>
-      <NavLink to="/profile">Profile</NavLink>
+      <NavLink
+        to="/search"
+        style={({ isActive }) => ({
+          color: isActive ? '#f9404f' : '#003a4d',
+        })}
+      >
+        Search
+      </NavLink>
+      <NavLink
+        to="/mypets"
+        style={({ isActive }) => ({
+          color: isActive ? '#f9404f' : '#003a4d',
+        })}
+      >
+        My Pets
+      </NavLink>
+      <NavLink
+        to="/profile"
+        style={({ isActive }) => ({
+          color: isActive ? '#f9404f' : '#003a4d',
+        })}
+      >
+        Profile
+      </NavLink>
       <NavLink to="/" onClick={signOutHandler}>
         Sign Out
       </NavLink>

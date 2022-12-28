@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import { useUserContext } from '../../libs/UserContext';
 import FeaturedPets from './FeaturedPets';
 function HomeLogged() {
-  const { user } = useUserContext();
+  const { user, setLoggedIn, loggedIn, getUser } = useUserContext();
+
+  useEffect(() => {
+    getUser(user._id);
+  });
 
   console.log(user);
   return (
