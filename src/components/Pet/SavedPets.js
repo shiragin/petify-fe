@@ -5,16 +5,39 @@ import PetCard from './PetCard';
 
 function SavedPets() {
   const { user } = useUserContext();
-  const { getSavedPets, pets } = usePetsContext();
+  const { pets, getPetPage, getSavedPets, setSavedPets, savedPets, liked } =
+    usePetsContext();
+
+  async function updatedSavedPets() {
+    const { _id } = user;
+    const pets = await getSavedPets(_id);
+    setSavedPets(pets);
+  }
 
   useEffect(() => {
-    const { savedPets, _id } = user;
-    getSavedPets(_id);
+    updatedSavedPets();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      if (user.savedPets) {
+        const pets = [];
+        for (const pet of user.savedPets) {
+          const data = await getPetPage(pet);
+          console.log(pet);
+          console.log(data);
+          pets.push(data);
+        }
+        console.log(pets);
+        setSavedPets(pets);
+      }
+    }
+    fetchData();
+  }, [user]);
+
   return (
-    <div className="saved-pets">
-      {pets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
+    <div className="home-logged-featured-pets-cards">
+      {savedPets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
         <PetCard
           key={_id}
           value={{ _id, name, type, breed, adoptionStatus, picture }}

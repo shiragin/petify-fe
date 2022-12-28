@@ -94,13 +94,45 @@
 }
 
 .hide {
-  border: 2px solid orange;
   display: none;
 }
 
 .petpage {
   position: relative;
   padding-top: 1rem;
+
+  &-buttons {
+    display: flex;
+    gap: 3rem;
+  }
+
+  &-button.btn {
+    background-color: transparent;
+    // border: 3px $dark-color dashed;
+    color: $dark-color;
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+      background-color: transparent;
+      // border: 3px $dark-color dashed;
+      color: $dark-color;
+    }
+
+    svg {
+      color: $primary-color;
+      height: 2rem;
+      width: 2rem;
+      margin-right: 1rem;
+      padding-bottom: 0.2rem;
+    }
+  }
 
   &-image {
     width: 100%;

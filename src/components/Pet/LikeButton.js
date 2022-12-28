@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
+import { usePetsContext } from '../../libs/PetsContext';
 import { useUserContext } from '../../libs/UserContext';
 
 function LikeButton({ id }) {
   const { user, setLoginModalShow, updateUser } = useUserContext();
+  const { setSavedPets } = usePetsContext();
   const [liked, setLiked] = useState(false);
 
   function likeClickHandler(e) {

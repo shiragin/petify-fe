@@ -76,6 +76,7 @@ export default function UserContextProvider({ children }) {
       const { user: userDetails } = await res.data.data;
       if (userDetails.password !== userDetails.passwordConfirm)
         throw new Error('Passwords must match');
+      setUser(userDetails);
       return res.status === 200 ? true : false;
     } catch (err) {
       console.error(err);

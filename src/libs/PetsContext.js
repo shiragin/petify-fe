@@ -9,6 +9,8 @@ export function usePetsContext() {
 
 export default function PetsContextProvider({ children }) {
   const [pets, setPets] = useState([]);
+  const [savedPets, setSavedPets] = useState([]);
+  const [featuredPets, setFeaturedPets] = useState([]);
   const [petPage, setPetPage] = useState({});
   const [searchType, setSearchType] = useState(false);
   const [searchAdvanced, setSearchAdvanced] = useState({});
@@ -62,7 +64,7 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
       if (!res.statusText === 'ok') throw new Error();
       const { pet } = await res.data.data;
-      setPetPage(pet);
+      return pet[0];
     } catch (err) {
       console.error(err);
     }
@@ -73,7 +75,7 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/random`);
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
-      setPets(pets);
+      setFeaturedPets(pets);
     } catch (err) {
       console.error(err);
     }
@@ -83,7 +85,26 @@ export default function PetsContextProvider({ children }) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}`);
       const { pets } = res.data.data;
-      setPets(pets);
+      console.log('Ragil: ', pets);
+      console.log('Sorted: ', pets.sort());
+      // setSavedPets(pets);
+      return pets.sort((a, b) =>
+        a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getSavedPetsByID(id) {
+    console.log('hello from functionnn');
+    try {
+      console.log(id);
+      const res = await axios.get(`http://localhost:8080/pets/${id}`);
+      const { pet } = res.data.data;
+      return pet.sort((a, b) =>
+        a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+      );
     } catch (error) {
       console.error(error);
     }
@@ -106,6 +127,11 @@ export default function PetsContextProvider({ children }) {
         setSearchAdvanced,
         getRandomPets,
         getSavedPets,
+        setSavedPets,
+        savedPets,
+        setFeaturedPets,
+        featuredPets,
+        getSavedPetsByID,
       }}
     >
       {children}

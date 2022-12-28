@@ -134,7 +134,7 @@ function SignupForm() {
           />
         </div>
       </Form.Group>
-      {loginModalShow.show && !user && (
+      {loginModalShow.show && !loggedIn && (
         <div className="login-footer">
           <SubmitButton
             type={loginModalShow.show ? loginModalShow.type : 'update'}

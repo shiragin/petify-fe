@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import { FaChevronCircleRight } from 'react-icons/fa';
 import { usePetsContext } from '../../libs/PetsContext';
 import PetCard from '../Pet/PetCard';
-import { Button } from 'react-bootstrap';
 
 function FeaturedPets() {
-  const { pets, getRandomPets } = usePetsContext();
-
-  async function showRandomPets() {
-    getRandomPets(4);
-  }
+  const {
+    pets,
+    setPets,
+    featuredPets,
+    setFeaturedPets,
+    getRandomPets,
+    savedPets,
+  } = usePetsContext();
 
   useEffect(() => {
     getRandomPets();
@@ -21,13 +23,17 @@ function FeaturedPets() {
       <div className="home-logged-featured-pets-title">
         <span>Featured pets</span>
       </div>
-      <div className="home-logged-featured-pets-cards">
-        {pets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
-          <PetCard
-            key={_id}
-            value={{ _id, name, type, breed, adoptionStatus, picture }}
-          />
-        ))}
+      <div className="container">
+        <div className="home-logged-featured-pets-cards">
+          {featuredPets.map(
+            ({ _id, name, type, breed, adoptionStatus, picture }) => (
+              <PetCard
+                key={_id}
+                value={{ _id, name, type, breed, adoptionStatus, picture }}
+              />
+            )
+          )}
+        </div>
         <Link to={'/search'} className="chevron">
           <FaChevronCircleRight />
         </Link>

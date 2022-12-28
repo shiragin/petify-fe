@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useUserContext } from '../../libs/UserContext';
+import HomeSavedPets from './HomeSavedPets';
 import FeaturedPets from './FeaturedPets';
 function HomeLogged() {
   const { user, setLoggedIn, loggedIn, getUser } = useUserContext();
@@ -13,8 +14,8 @@ function HomeLogged() {
       <h1 className="home-logged-welcome">
         {`Welcome back,\n`} {user.firstName} {user.lastName}!
       </h1>
-      {/* <SavedPets /> */}
       <FeaturedPets />
+      <HomeSavedPets />
     </div>
   );
 }
