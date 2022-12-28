@@ -17,8 +17,6 @@ function PetCard({ value }) {
     navigate(`/pet/${_id}`);
   }
 
-  console.log(picture);
-
   return (
     <Card onClick={cardClickHandler} className={imgLoading ? 'hide' : ''}>
       <div className="corner">

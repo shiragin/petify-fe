@@ -48,8 +48,6 @@ export default function PetsContextProvider({ children }) {
         filteredParams = { ...filteredParams, [param]: search[param] };
     });
 
-    console.log('Search terms: ', search);
-
     try {
       const res = await axios.get(`http://localhost:8080/pets`, {
         params: filteredParams,
@@ -73,6 +71,19 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function getRandomPets(num) {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets/random`);
+      console.log(res);
+      if (!res.statusText === 'ok') throw new Error();
+      const { pets } = await res.data.data;
+      console.log(pets);
+      setPets(pets);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <PetsContext.Provider
       value={{
@@ -88,6 +99,7 @@ export default function PetsContextProvider({ children }) {
         getPetsAdvanced,
         searchAdvanced,
         setSearchAdvanced,
+        getRandomPets,
       }}
     >
       {children}

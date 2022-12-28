@@ -72,3 +72,48 @@
     }
   }
 }
+
+// Home logged
+
+.home-logged {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &-welcome {
+    margin: 3rem 0 4rem;
+    font-family: 'Unbounded', sans-serif;
+    line-height: 1.1;
+    font-size: 3.6rem;
+    font-weight: 900;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    white-space: pre-wrap;
+  }
+  &-featured-pets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      padding-left: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    &-cards {
+      width: 100%;
+      display: flex;
+
+      .chevron {
+        text-decoration: none;
+        font-size: 3rem;
+        font-weight: 900;
+        align-self: center;
+        color: $primary-color;
+      }
+    }
+  }
+}
