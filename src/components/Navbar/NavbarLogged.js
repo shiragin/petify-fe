@@ -11,6 +11,7 @@ function NavbarLogged() {
     setUser({});
     setLoginModalShow({});
     setLoggedInForm({});
+    localStorage.clear();
   }
   return (
     <div className="navbar-links-right">

@@ -37,13 +37,37 @@
           flex: 1;
         }
       }
+
+      .profile-label {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      .profile-input {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+      }
     }
+
+    .form-group {
+      .profile-label {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .profile-input {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+
     .submit-button {
-      margin-top: 4rem;
+      margin-top: 3rem;
       width: 100%;
       align-self: center;
 
       .login-submit-button {
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
         width: 100%;
 
         &:active {

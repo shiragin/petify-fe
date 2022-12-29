@@ -1,1 +1,65 @@
 @import 'variables';
+
+.pet-form {
+  width: 70%;
+
+  .form-group {
+    margin-bottom: 2rem;
+
+    input:focus,
+    input:active,
+    input:focus-visible,
+    textarea:focus,
+    textarea:active,
+    textarea:focus-visible,
+    select:focus,
+    select:active,
+    select:focus-visible {
+      border-color: #ced4da;
+      box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
+    }
+    input:checked {
+      background-color: $primary-color;
+    }
+    .pet-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .pet-input {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .pet-check {
+      font-size: 1.2rem;
+
+      .pet-check-row {
+        display: flex;
+        justify-content: flex-start;
+        // width: 100%;
+      }
+      .form-check {
+        min-width: 20%;
+        margin-right: 2rem;
+        input {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.submit-button {
+  margin: 1rem 0 2rem;
+  .login-submit-button {
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    width: 100%;
+
+    &:active {
+      background-color: $primary-color;
+      transform: scale(0.95) skew(-20deg);
+    }
+  }
+}

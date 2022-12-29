@@ -58,9 +58,9 @@ function SignupForm() {
     >
       <Form.Group className="form-group split">
         <div>
-          <Form.Label className="login-firstname-label">First name</Form.Label>
+          <Form.Label className="profile-label">First name</Form.Label>
           <Form.Control
-            className="login-firstname-input"
+            className="profile-input"
             type="text"
             required
             placeholder="First name"
@@ -69,9 +69,9 @@ function SignupForm() {
           />
         </div>
         <div>
-          <Form.Label className="login-lastname-label">Last name</Form.Label>
+          <Form.Label className="profile-label">Last name</Form.Label>
           <Form.Control
-            className="login-lastname-input"
+            className="profile-input"
             type="text"
             required
             placeholder="Last name"
@@ -81,9 +81,9 @@ function SignupForm() {
         </div>
       </Form.Group>
       <Form.Group className="form-group">
-        <Form.Label className="login-email-label">Email Address</Form.Label>
+        <Form.Label className="profile-label">Email Address</Form.Label>
         <Form.Control
-          className="login-email-input"
+          className="profile-input"
           type="email"
           required
           placeholder="Email Address"
@@ -92,9 +92,9 @@ function SignupForm() {
         />
       </Form.Group>
       <Form.Group className="form-group">
-        <Form.Label className="login-phone-label">Phone number</Form.Label>
+        <Form.Label className="profile-label">Phone number</Form.Label>
         <Form.Control
-          className="login-phone-input"
+          className="profile-input"
           type="tel"
           required
           placeholder="Phone number"
@@ -104,9 +104,9 @@ function SignupForm() {
       </Form.Group>
       <Form.Group className="form-group split">
         <div>
-          <Form.Label className="login-password-label">Password</Form.Label>
+          <Form.Label className="profile-label">Password</Form.Label>
           <Form.Control
-            className="login-password-input"
+            className="profile-input"
             type="password"
             label="Create password"
             required
@@ -116,11 +116,9 @@ function SignupForm() {
           />
         </div>
         <div>
-          <Form.Label className="login-confirm-label">
-            Confirm password
-          </Form.Label>
+          <Form.Label className="profile-label">Confirm password</Form.Label>
           <Form.Control
-            className="login-confirm-input"
+            className="profile-input"
             type="password"
             label="Create password"
             required

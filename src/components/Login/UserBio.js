@@ -14,11 +14,11 @@ function UserBio() {
 
   return (
     <Form.Group className="form-group w-100">
-      <Form.Label className="login-bio-label">More about yourself</Form.Label>
+      <Form.Label className="profile-label">More about yourself</Form.Label>
       <Form.Control
         as="textarea"
         rows={6}
-        className="login-bio-input"
+        className="profile-input"
         type="textarea"
         placeholder="Tell us more..."
         value={user?.bio}
