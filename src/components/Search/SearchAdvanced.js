@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
-import { usePetsContext } from '../../libs/PetsContext';
-import SearchToggle from './SearchToggle';
+import { Form } from 'react-bootstrap';
+import { usePetsContext } from '../../context/PetsContext';
 
 function SearchAdvanced() {
   const { getPetsAdvanced, searchAdvanced, setSearchAdvanced, searchType } =

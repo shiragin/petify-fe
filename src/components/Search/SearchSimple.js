@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { usePetsContext } from '../../libs/PetsContext';
+import { usePetsContext } from '../../context/PetsContext';
 import SearchToggle from './SearchToggle';
 
 function SearchSimple() {

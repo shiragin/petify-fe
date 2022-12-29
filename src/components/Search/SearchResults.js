@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { useEffect, useContext, useState } from 'react';
-import { usePetsContext } from '../../libs/PetsContext';
+import { useEffect } from 'react';
+import { usePetsContext } from '../../context/PetsContext';
 import PetCard from '../Pet/PetCard';
 
 function SearchResults() {

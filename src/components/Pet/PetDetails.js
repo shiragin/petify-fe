@@ -1,5 +1,5 @@
 import { FaPaw } from 'react-icons/fa';
-import { usePetsContext } from '../../libs/PetsContext';
+import { usePetsContext } from '../../context/PetsContext';
 
 function PetDetails() {
   const { petPage } = usePetsContext();

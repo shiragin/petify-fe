@@ -51,11 +51,27 @@
 
   .home-logged-featured-pets-cards {
     display: flex;
+    justify-content: flex-start;
     width: 100%;
     flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 1.2rem 2rem;
 
     .card {
-      width: 33%;
+      width: 28%;
+      margin-bottom: 1rem;
     }
+  }
+}
+
+@media (max-width: 1150px) {
+  .mypets .home-logged-featured-pets-cards .card {
+    width: 40%;
+  }
+}
+
+@media (max-width: 900px) {
+  .mypets .home-logged-featured-pets-cards .card {
+    width: 45%;
   }
 }

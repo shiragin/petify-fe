@@ -1,19 +1,11 @@
-import { useState } from 'react';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import SignupForm from '../Login/SignupForm';
 import SubmitButton from '../Login/SubmitButton';
 import UserBio from './UserBio';
 
 function UserProfile() {
-  const {
-    loggedIn,
-    user,
-    updateUser,
-    confirmSave,
-    setConfirmSave,
-    error,
-    setError,
-  } = useUserContext();
+  const { loggedIn, user, updateUser, confirmSave, setConfirmSave, setError } =
+    useUserContext();
 
   async function updateUserHandler() {
     if (loggedIn) {

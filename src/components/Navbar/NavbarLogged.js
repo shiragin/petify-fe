@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
 
 function NavbarLogged() {
   const { setLoggedIn, setUser, setLoginModalShow, setLoggedInForm } =

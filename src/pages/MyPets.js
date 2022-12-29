@@ -1,4 +1,4 @@
-import { Tab, Tabs, Col, Row, Nav } from 'react-bootstrap';
+import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import OwnedPets from '../components/Pet/OwnedPets';
 import SavedPets from '../components/Pet/SavedPets';
 import '../scss/MyPets.scss';

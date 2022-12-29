@@ -1,18 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronCircleRight } from 'react-icons/fa';
-import { usePetsContext } from '../../libs/PetsContext';
+import { usePetsContext } from '../../context/PetsContext';
 import PetCard from '../Pet/PetCard';
 
 function FeaturedPets() {
-  const {
-    pets,
-    setPets,
-    featuredPets,
-    setFeaturedPets,
-    getRandomPets,
-    savedPets,
-  } = usePetsContext();
+  const { featuredPets, getRandomPets } = usePetsContext();
 
   useEffect(() => {
     getRandomPets();

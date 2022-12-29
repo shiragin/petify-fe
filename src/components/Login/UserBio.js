@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
 
 function UserBio() {
   const { user, setUser, setError, setConfirmSave } = useUserContext();

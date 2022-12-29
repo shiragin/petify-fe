@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
-import { useUserContext } from '../../libs/UserContext';
-import { usePetsContext } from '../../libs/PetsContext';
+import { useUserContext } from '../../context/UserContext';
+import { usePetsContext } from '../../context/PetsContext';
 import PetCard from './PetCard';
 
 function SavedPets() {
   const { user } = useUserContext();
-  const { pets, getPetPage, getSavedPets, setSavedPets, savedPets, liked } =
+  const { getPetPage, getSavedPets, setSavedPets, savedPets } =
     usePetsContext();
 
-  async function updatedSavedPets() {
+  async function updateSavedPets() {
+    if (!user) return;
     const { _id } = user;
     const pets = await getSavedPets(_id);
     setSavedPets(pets);
   }
 
   useEffect(() => {
-    updatedSavedPets();
+    updateSavedPets();
   }, []);
 
   useEffect(() => {
@@ -24,14 +25,12 @@ function SavedPets() {
         const pets = [];
         for (const pet of user.savedPets) {
           const data = await getPetPage(pet);
-          console.log(pet);
-          console.log(data);
           pets.push(data);
         }
-        console.log(pets);
         setSavedPets(pets);
       }
     }
+    if (!user) return;
     fetchData();
   }, [user]);
 

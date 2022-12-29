@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import '../../scss/LoginModal.scss';

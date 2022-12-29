@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import UserContextProvider from './libs/UserContext';
-import PetsContextProvider from './libs/PetsContext';
+import UserContextProvider from './context/UserContext';
+import PetsContextProvider from './context/PetsContext';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import Search from './pages/Search';

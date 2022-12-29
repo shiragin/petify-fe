@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
-import { usePetsContext } from '../../libs/PetsContext';
+import React from 'react';
+import { usePetsContext } from '../../context/PetsContext';
 import SearchSimple from './SearchSimple';
 import SearchAdvanced from './SearchAdvanced';
 

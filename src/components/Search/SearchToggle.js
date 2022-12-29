@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { GiLobArrow } from 'react-icons/gi';
-import { usePetsContext } from '../../libs/PetsContext';
+import { usePetsContext } from '../../context/PetsContext';
 
 function SearchToggle() {
   const { searchType, setSearchType } = usePetsContext();

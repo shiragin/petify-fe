@@ -11,9 +11,11 @@ export default function PetsContextProvider({ children }) {
   const [pets, setPets] = useState([]);
   const [savedPets, setSavedPets] = useState([]);
   const [featuredPets, setFeaturedPets] = useState([]);
+  const [ownedPets, setOwnedPets] = useState([]);
   const [petPage, setPetPage] = useState({});
   const [searchType, setSearchType] = useState(false);
   const [searchAdvanced, setSearchAdvanced] = useState({});
+  const [petModalShow, setPetModalShow] = useState(false);
 
   async function getPets() {
     try {
@@ -83,14 +85,25 @@ export default function PetsContextProvider({ children }) {
 
   async function getSavedPets(id) {
     try {
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}/`);
+      const { savedPets } = res.data.data;
+      // return pets.sort((a, b) =>
+      //   a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+      // );
+      return savedPets;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getOwnedPets(id) {
+    try {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}`);
-      const { pets } = res.data.data;
-      console.log('Ragil: ', pets);
-      console.log('Sorted: ', pets.sort());
-      // setSavedPets(pets);
-      return pets.sort((a, b) =>
-        a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-      );
+      const { ownedPets } = res.data.data;
+      // return pets.sort((a, b) =>
+      //   a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+      // );
+      return ownedPets;
     } catch (error) {
       console.error(error);
     }
@@ -99,7 +112,6 @@ export default function PetsContextProvider({ children }) {
   async function getSavedPetsByID(id) {
     console.log('hello from functionnn');
     try {
-      console.log(id);
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
       const { pet } = res.data.data;
       return pet.sort((a, b) =>
@@ -107,6 +119,17 @@ export default function PetsContextProvider({ children }) {
       );
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async function updatePet(id, pet) {
+    try {
+      const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet);
+      const { pet: petDetails } = await res.data.data;
+      return res.status === 200 ? true : false;
+    } catch (err) {
+      console.error(err);
+      return false;
     }
   }
 
@@ -132,6 +155,12 @@ export default function PetsContextProvider({ children }) {
         setFeaturedPets,
         featuredPets,
         getSavedPetsByID,
+        updatePet,
+        petModalShow,
+        setPetModalShow,
+        ownedPets,
+        setOwnedPets,
+        getOwnedPets,
       }}
     >
       {children}

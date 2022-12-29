@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import SubmitButton from './SubmitButton';
 import Cat from '../../imgs/undraw_cat.svg';
 import Dog from '../../imgs/undraw_dog.svg';

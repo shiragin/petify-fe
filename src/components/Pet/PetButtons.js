@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { TbArrowBigRight } from 'react-icons/tb';
-import { useUserContext } from '../../libs/UserContext';
+import { useUserContext } from '../../context/UserContext';
+import { usePetsContext } from '../../context/PetsContext';
 
-function PetButtons({ type }) {
-  const { user, loggedIn, setLoginModalShow } = useUserContext();
+function PetButtons({ type, id }) {
+  const { user, setUser, setLoginModalShow, updateUser } = useUserContext();
+  const { getPetPage, updatePet, petModalShow, setPetModalShow, setPetPage } =
+    usePetsContext();
   const [buttonType, setButtonType] = useState({});
 
   useEffect(() => {
@@ -12,48 +15,89 @@ function PetButtons({ type }) {
       setButtonType({
         type: 'adopt',
         text: 'Adopt Pet',
-        handler: adoptPetHandler,
       });
     } else if (type === 'foster') {
       setButtonType({
         type: 'foster',
         text: 'Foster Pet',
-        handler: fosterPetHandler,
       });
     } else {
       setButtonType({
         type: 'return',
         text: 'Return Pet',
-        handler: returnPetHandler,
       });
     }
   }, []);
 
-  function checkLogIn() {
+  function petActionHandler(type) {
     if (!user) return;
     if (!user?.email) {
-      setLoginModalShow({ show: true, type: 'login' });
-      return false;
+      return setLoginModalShow({ show: true, type: 'login' });
     } else {
-      return true;
+      switch (type) {
+        case 'adopt':
+          adoptPet();
+          break;
+        case 'foster':
+          fosterPet();
+          break;
+        case 'return':
+          returnPet();
+      }
     }
   }
 
-  function adoptPetHandler() {
-    if (!checkLogIn()) return;
-    console.log('adopt');
+  async function adoptPet() {
+    if (!user) return;
+    if (!user?.adoptedPets.includes(id)) {
+      user.adoptedPets.push(id);
+    }
+    const update = updateUser(user._id);
+    const pet = await getPetPage(id);
+    pet.adoptionStatus = 'Adopted';
+    updatePet(id, pet);
+    update && console.log(`Pet adopted by ${user.firstName}`);
+    // setPetPage(pet);
+    setPetModalShow(true);
   }
-  function fosterPetHandler() {
-    if (!checkLogIn()) return;
-    console.log('foster');
+
+  async function fosterPet() {
+    if (!user) return;
+    if (!user?.fosteredPets.includes(id)) {
+      user.fosteredPets.push(id);
+    }
+    const update = updateUser(user._id);
+    const pet = await getPetPage(id);
+    pet.adoptionStatus = 'Fostered';
+    updatePet(id, pet);
+    update && console.log(`Pet fostered by ${user.firstName}`);
+    // setPetPage(pet);
+    setPetModalShow(true);
   }
-  function returnPetHandler() {
-    if (!checkLogIn()) return;
-    console.log('return');
+
+  async function returnPet() {
+    if (!user) return;
+    if (user?.fosteredPets.includes(id)) {
+      user.fosteredPets = user.fosteredPets.filter((pet) => pet !== id);
+    }
+    if (user?.adoptedPets.includes(id)) {
+      user.adoptedPets = user.adoptedPets.filter((pet) => pet !== id);
+    }
+    const update = await updateUser(user._id);
+    const pet = await getPetPage(id);
+    pet.adoptionStatus = 'Available';
+    updatePet(id, pet);
+    update && console.log(`Pet returned by evil nasty ${user.firstName}`);
+    setUser(user);
+    // setPetPage(pet);
+    setPetModalShow(true);
   }
 
   return (
-    <Button className="petpage-button" onClick={buttonType.handler}>
+    <Button
+      className="petpage-button"
+      onClick={() => petActionHandler(buttonType.type)}
+    >
       <TbArrowBigRight />
       {buttonType.text}
     </Button>

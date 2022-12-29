@@ -25,6 +25,9 @@ export default function UserContextProvider({ children }) {
     password: '',
     passwordConfirm: '',
     bio: '',
+    savedPets: [],
+    adoptedPets: [],
+    fostedPets: [],
   });
 
   const [loggedIn, setLoggedIn] = useState(false);
