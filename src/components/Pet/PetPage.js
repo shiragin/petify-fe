@@ -11,6 +11,18 @@ function PetPage({ id }) {
     usePetsContext();
   const { user } = useUserContext();
 
+  const [myPet, setMyPet] = useState(false);
+
+  useEffect(
+    () => {
+      if (user.fosteredPets.includes(id) || user.adoptedPets.includes(id)) {
+        setMyPet(true);
+      }
+    },
+    [],
+    [user]
+  );
+
   async function getPetData() {
     const pet = await getPetPage(id);
     setPetPage(pet);
@@ -33,15 +45,19 @@ function PetPage({ id }) {
       <PetDetails />
       <div className="petpage-buttons">
         {(petPage.adoptionStatus === 'Available' ||
-          petPage.adoptionStatus === 'Fostered') && (
+          (myPet && petPage.adoptionStatus === 'Fostered')) && (
           <PetButtons type={'adopt'} id={id} />
         )}
         {petPage.adoptionStatus === 'Available' && (
           <PetButtons type={'foster'} id={id} />
         )}
-        {(petPage.adoptionStatus === 'Adopted' ||
-          petPage.adoptionStatus === 'Fostered') && (
-          <PetButtons type={'return'} id={id} />
+        {myPet &&
+          (petPage.adoptionStatus === 'Adopted' ||
+            petPage.adoptionStatus === 'Fostered') && (
+            <PetButtons type={'return'} id={id} />
+          )}
+        {!myPet && petPage.adoptionStatus !== 'Available' && (
+          <div className="unavailable">This pet has been adopted</div>
         )}
       </div>
       <PetModal

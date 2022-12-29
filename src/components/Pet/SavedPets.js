@@ -9,7 +9,7 @@ function SavedPets() {
     usePetsContext();
 
   async function updateSavedPets() {
-    if (!user) return;
+    if (!user.SavedPets) return;
     const { _id } = user;
     const pets = await getSavedPets(_id);
     setSavedPets(pets);

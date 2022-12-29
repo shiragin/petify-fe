@@ -6,25 +6,21 @@ function PetModal(props) {
   return (
     <Modal
       {...props}
-      size="sm"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        {/* <Modal.Title id="contained-modal-title-vcenter">
-          Congratulations!
-        </Modal.Title> */}
-      </Modal.Header>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <h2>
           {status === 'Adopted' || status === 'Fostered'
             ? `Congratulations!`
-            : `Shame on you`}
+            : `Shame on you!`}
         </h2>
         <p>
           {status === 'Adopted' || status === 'Fostered'
-            ? `You ${status.toLowerCase()} ${pet}!`
-            : `You abandoned ${pet}, you evil person of evilness!`}
+            ? `You ${status.toLowerCase()} ${pet}.\n You're going to be so happy together.`
+            : `You abandoned ${pet},\n you evil person of evilness.`}
         </p>
       </Modal.Body>
       <Modal.Footer>
