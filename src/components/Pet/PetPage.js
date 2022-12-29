@@ -27,14 +27,12 @@ function PetPage({ id }) {
     const pet = await getPetPage(id);
     setPetPage(pet);
   }
-  console.log(petPage.adoptionStatus);
 
   useEffect(() => {
     getPetData();
   }, []);
 
   useEffect(() => {
-    console.log('EFRAIIIM');
     getPetData();
   }, [petModalShow]);
 

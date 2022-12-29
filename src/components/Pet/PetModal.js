@@ -2,7 +2,6 @@ import { Button, Modal } from 'react-bootstrap';
 
 function PetModal(props) {
   const { pet, status } = props;
-  console.log(pet, status);
   return (
     <Modal
       {...props}

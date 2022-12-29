@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
+import NavbarAdmin from './NavbarAdmin';
 
 function NavbarLogged() {
-  const { setLoggedIn, setUser, setLoginModalShow, setLoggedInForm } =
+  const { setLoggedIn, setUser, user, setLoginModalShow, setLoggedInForm } =
     useUserContext();
 
   function signOutHandler() {
@@ -37,6 +38,7 @@ function NavbarLogged() {
       >
         Profile
       </NavLink>
+      {user.isAdmin && <NavbarAdmin />}
       <NavLink to="/" onClick={signOutHandler}>
         Sign Out
       </NavLink>

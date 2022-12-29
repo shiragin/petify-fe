@@ -110,7 +110,6 @@ export default function PetsContextProvider({ children }) {
   }
 
   async function getSavedPetsByID(id) {
-    console.log('hello from functionnn');
     try {
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
       const { pet } = res.data.data;

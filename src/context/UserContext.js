@@ -63,6 +63,9 @@ export default function UserContextProvider({ children }) {
       if (users[0].password === user.password) {
         console.log('User validated!');
         setUser(users[0]);
+        localStorage.setItem('user', JSON.stringify(users[0]));
+        console.log(users[0]);
+        console.log(localStorage.getItem('user'));
         setLoggedIn(true);
         return true;
       } else {

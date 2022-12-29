@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, Overlay, Tooltip } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import SubmitButton from './SubmitButton';
@@ -12,15 +12,11 @@ function SignupForm() {
     setUser,
     createNewUser,
     loggedIn,
-    error,
     setError,
-    updateUser,
     setConfirmSave,
   } = useUserContext();
 
   const navigate = useNavigate();
-
-  console.log(user);
 
   function clickHandler() {
     setLoginModalShow({ show: true, type: 'login' });

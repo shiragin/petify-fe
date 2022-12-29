@@ -42,7 +42,6 @@ function SearchSimple() {
   }, [searchType]);
 
   useEffect(() => {
-    console.log('hi');
     if (!searchType && searchAdvanced.type) {
       getPetsByType(searchAdvanced.type);
     } else if (searchType) {

@@ -55,6 +55,12 @@
           transform: scale(1.05);
         }
       }
+
+      .dropdown {
+        &-item:hover {
+          background-color: transparent;
+        }
+      }
     }
   }
 }

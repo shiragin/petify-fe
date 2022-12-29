@@ -17,7 +17,6 @@ function SearchAdvanced() {
   }, []);
 
   useEffect(() => {
-    console.log('hayush');
     if (searchType) getPetsAdvanced(searchAdvanced);
   }, [searchAdvanced]);
 
