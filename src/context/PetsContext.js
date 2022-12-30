@@ -121,6 +121,25 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function addNewPet(pet) {
+    try {
+      if (!pet.picture)
+        pet.picture = `https://source.unsplash.com/random/?${pet.type.toLowerCase()},${pet.colour
+          .join(',')
+          .toLowerCase()}`;
+      console.log('hi from function');
+      console.log(pet);
+      const res = await axios.post(`http://localhost:8080/pets/`, pet);
+      console.log(res);
+      const { pet: petDetails } = await res.data.data;
+      console.log(petDetails);
+      return res.status === 201 ? petDetails : '';
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
+
   async function updatePet(id, pet) {
     try {
       const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet);
@@ -160,6 +179,7 @@ export default function PetsContextProvider({ children }) {
         ownedPets,
         setOwnedPets,
         getOwnedPets,
+        addNewPet,
       }}
     >
       {children}

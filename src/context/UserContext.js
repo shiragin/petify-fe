@@ -76,6 +76,21 @@ export default function UserContextProvider({ children }) {
     }
   }
 
+  async function getUserById(id) {
+    try {
+      console.log('CONTEXT', id);
+      const res = await axios.get(`http://localhost:8080/users/${id}`);
+      if (!res.statusText === 'ok') throw new Error('No such user!');
+      const { user } = await res.data.data;
+      console.log(user);
+      setUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   async function updateUser(id) {
     try {
       const res = await axios.patch(`http://localhost:8080/users/${id}`, user);
@@ -109,6 +124,7 @@ export default function UserContextProvider({ children }) {
         getUser,
         confirmSave,
         setConfirmSave,
+        getUserById,
       }}
     >
       {children}

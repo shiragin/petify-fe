@@ -1,11 +1,32 @@
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-function PetForm() {
+
+function PetForm({ newPet, setNewPet }) {
+  const [newColour, setNewColour] = useState([]);
+
+  function newPetChangeHandler(e, field) {
+    const newField = {};
+    newField[field] = e.target.value;
+    setNewPet({ ...newPet, ...newField });
+  }
+
+  function newPetColourHandler({ target: { checked, value } }) {
+    if (checked) {
+      setNewColour([...newColour, value]);
+    } else {
+      const colours = newColour.filter((col) => col !== value);
+      setNewColour([...colours]);
+    }
+  }
+
+  useEffect(
+    () => setNewPet({ ...newPet, colour: newColour }, [newPet]),
+    [newColour]
+  );
+
   return (
     <Form
       className="pet-form"
-      // onSubmit={(e) => {
-      //   userSubmitHandler(e);
-      // }}
       // onFocus={() => setError({ show: false })}
     >
       <Form.Group className="form-group">
@@ -14,16 +35,14 @@ function PetForm() {
           className="pet-input"
           type="text"
           required
-          // placeholder="First name"
-          // value={user?.firstName}
-          // onChange={(e) => userFormHandler(e, 'firstName')}
+          value={newPet?.type}
+          onChange={(e) => newPetChangeHandler(e, 'type')}
         >
           <option value="Cat">Cat</option>
           <option value="Dog">Dog</option>
         </Form.Select>
-        {/* </div> */}
-        {/* <div> */}
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Pet name</Form.Label>
         <Form.Control
@@ -31,25 +50,25 @@ function PetForm() {
           type="text"
           required
           placeholder="Enter pet name"
-          // value={user?.lastName}
-          // onChange={(e) => userFormHandler(e, 'lastName')}
+          value={newPet?.name}
+          onChange={(e) => newPetChangeHandler(e, 'name')}
         />
-        {/* </div> */}
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Adoption Status</Form.Label>
         <Form.Select
           className="pet-input"
           required
-          // placeholder="Email Address"
-          // value={user?.email}
-          // onChange={(e) => userFormHandler(e, 'email')}
+          value={newPet?.adoptionStatus}
+          onChange={(e) => newPetChangeHandler(e, 'adoptionStatus')}
         >
           <option value="Adopted">Adopted</option>
           <option value="Fostered">Fostered</option>
           <option value="Available">Available</option>
         </Form.Select>
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Height </Form.Label>
         <Form.Control
@@ -57,55 +76,53 @@ function PetForm() {
           type="number"
           required
           placeholder="Enter pet height in cm"
-          // value={user?.phoneNumber}
-          // onChange={(e) => userFormHandler(e, 'phoneNumber')}
+          value={newPet?.height}
+          onChange={(e) => newPetChangeHandler(e, 'height')}
         />
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Weight </Form.Label>
         <Form.Control
           className="pet-input"
           type="number"
           placeholder="Enter pet weight in kg"
-          // value={user?.password}
-          // onChange={(e) => userFormHandler(e, 'password')}
+          value={newPet?.weight}
+          onChange={(e) => newPetChangeHandler(e, 'weight')}
         />
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Colour</Form.Label>
-        {/* <Form.Control
-          as="select"
-          multiple
-          className="pet-input"
-          type="text"
-          // value={user?.passwordConfirm}
-          onChange={(e) => console.log(e.target.value)}
+        <div
+          key={'colour'}
+          className="pet-check"
+          onChange={(e) => newPetColourHandler(e)}
         >
-          <option value="White">White</option>
-          <option value="Black">Black</option>
-          <option value="Orange">Orange</option> */}
-        <div key="colour" className="pet-check">
           <div className="pet-check-row">
             <Form.Check
               inline
               label="White"
-              // name="group1"
+              name="colour"
               type={'checkbox'}
               id={`colour`}
+              value="White"
             />
             <Form.Check
               inline
               label="Orange"
               type={'checkbox'}
-              // name="group1"
+              name="colour"
               id={`colour`}
+              value="Orange"
             />
             <Form.Check
               inline
               label="Brown"
               type={'checkbox'}
-              // name="group1"
+              name="colour"
               id={`colour`}
+              value="Brown"
             />
           </div>
           <div className="pet-check-row">
@@ -113,9 +130,8 @@ function PetForm() {
               inline
               label="Grey"
               type={'checkbox'}
-              // name="group1"
-              // type={}
               id={`colour`}
+              value="Grey"
             />
             <Form.Check
               inline
@@ -124,18 +140,19 @@ function PetForm() {
               // name="group1"
               // type={}
               id={`colour`}
+              value="Golden"
             />
             <Form.Check
               inline
               label="Black"
               type={'checkbox'}
-              // name="group1"
-              // type={}
               id={`colour`}
+              value="Black"
             />
           </div>
         </div>
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Bio</Form.Label>
         <Form.Control
@@ -145,8 +162,8 @@ function PetForm() {
           type="number"
           required
           placeholder="Enter more information about the pet"
-          // value={user?.phoneNumber}
-          // onChange={(e) => userFormHandler(e, 'phoneNumber')}
+          value={newPet?.bio}
+          onChange={(e) => newPetChangeHandler(e, 'bio')}
         />
       </Form.Group>
       <Form.Group className="form-group">
@@ -154,41 +171,24 @@ function PetForm() {
         <Form.Select
           className="pet-input"
           required
-          // placeholder="First name"
-          // value={user?.firstName}
-          // onChange={(e) => userFormHandler(e, 'firstName')}
+          value={newPet?.hypoallergenic}
+          onChange={(e) => newPetChangeHandler(e, 'hypoallergenic')}
         >
           <option value={true}>Yes</option>
           <option value={false}>No</option>
         </Form.Select>
-        {/* <div key="hypo" className="pet-check pet-check-row">
-          <Form.Check
-            inline
-            label="Yes"
-            // name="group1"
-            type={'radio'}
-            id={`hypo`}
-          />
-          <Form.Check
-            inline
-            label="No"
-            // name="group1"
-            type={'radio'}
-            id={`hypo`}
-          />
-        </div> */}
       </Form.Group>
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Dietary restrictions</Form.Label>
         <Form.Control
           className="pet-input"
           type="text"
-          required
           placeholder="Enter the pet's dietary information"
-          // value={user?.phoneNumber}
-          // onChange={(e) => userFormHandler(e, 'phoneNumber')}
+          value={newPet?.dietry}
+          onChange={(e) => newPetChangeHandler(e, 'dietry')}
         />
       </Form.Group>
+
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Breed</Form.Label>
         <Form.Control
@@ -196,8 +196,8 @@ function PetForm() {
           type="text"
           required
           placeholder="Enter the pet's breed"
-          // value={user?.phoneNumber}
-          // onChange={(e) => userFormHandler(e, 'phoneNumber')}
+          value={newPet?.breed}
+          onChange={(e) => newPetChangeHandler(e, 'breed')}
         />
       </Form.Group>
     </Form>

@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 
 function PetModal(props) {
-  const { pet, status } = props;
+  const { pet, status, action, type, name } = props;
   return (
     <Modal
       {...props}
@@ -11,16 +11,26 @@ function PetModal(props) {
     >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        <h2>
-          {status === 'Adopted' || status === 'Fostered'
-            ? `Congratulations!`
-            : `Shame on you!`}
-        </h2>
-        <p>
-          {status === 'Adopted' || status === 'Fostered'
-            ? `You ${status.toLowerCase()} ${pet}.\n You're going to be so happy together.`
-            : `You abandoned ${pet},\n you evil person of evilness.`}
-        </p>
+        {status && (
+          <h2>
+            {status === 'Adopted' || status === 'Fostered'
+              ? `Congratulations!`
+              : `Shame on you!`}
+          </h2>
+        )}
+        {action && <h2>New pet added</h2>}
+        {status && (
+          <p>
+            {status === 'Adopted' || status === 'Fostered'
+              ? `You ${status.toLowerCase()} ${pet}.\n You're going to be so happy together.`
+              : `You abandoned ${pet},\n you evil person. Have you no heart?`}
+          </p>
+        )}
+        {action && (
+          <p>
+            The {type.toLowerCase()} {name} was successfully added to Petify
+          </p>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

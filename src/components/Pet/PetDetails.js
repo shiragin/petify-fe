@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FaPaw } from 'react-icons/fa';
 import { usePetsContext } from '../../context/PetsContext';
 
@@ -7,10 +8,10 @@ function PetDetails() {
   const {
     name,
     breed,
-    color,
+    colour,
     height,
     weight,
-    hypoallergnic,
+    hypoallergenic,
     adoptionStatus,
     bio,
   } = petPage;
@@ -53,14 +54,14 @@ function PetDetails() {
                 <FaPaw />
                 Colour:{' '}
               </span>
-              {color}{' '}
+              {colour && `${colour.join(', ')}`}
             </li>
             <li>
               <span>
                 <FaPaw />
                 Hypoallergenic:{' '}
               </span>{' '}
-              {hypoallergnic ? 'Yes' : 'No'}
+              {hypoallergenic ? 'Yes' : 'No'}
             </li>
             <li>
               <span>

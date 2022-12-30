@@ -8,7 +8,7 @@ function NavbarAdmin() {
         Add Pet
       </NavDropdown.Item>
       <NavDropdown.Divider />
-      <NavDropdown.Item as={NavLink} vLink to="/admin/show-users">
+      <NavDropdown.Item as={NavLink} to="/admin/show-users">
         Show All Users
       </NavDropdown.Item>
       <NavDropdown.Item as={NavLink} to="/admin/show-pets">

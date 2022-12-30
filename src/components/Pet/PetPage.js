@@ -5,23 +5,25 @@ import PetDetails from './PetDetails';
 import LikeButton from './LikeButton';
 import PetButtons from './PetButtons';
 import PetModal from './PetModal';
+import OwnedPets from './OwnedPets';
 
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =
     usePetsContext();
-  const { user } = useUserContext();
+  const { getUserById, user } = useUserContext();
 
   const [myPet, setMyPet] = useState(false);
 
-  useEffect(
-    () => {
-      if (user.fosteredPets.includes(id) || user.adoptedPets.includes(id)) {
-        setMyPet(true);
-      }
-    },
-    [],
-    [user]
-  );
+  function verifyPet() {
+    console.log('ID', id);
+    console.log('PETS', user.adoptedPets, user.fosteredPets);
+    if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
+      console.log('my pet');
+      setMyPet(true);
+    }
+  }
+
+  useEffect(() => verifyPet()), [];
 
   async function getPetData() {
     const pet = await getPetPage(id);
@@ -29,6 +31,7 @@ function PetPage({ id }) {
   }
 
   useEffect(() => {
+    getUserById(user._id);
     getPetData();
   }, []);
 
@@ -39,10 +42,16 @@ function PetPage({ id }) {
   return (
     <div className="main-container petpage">
       <LikeButton id={id} />
-      <img src={petPage.picture} className="petpage-image" />
-      <PetDetails />
+      {petPage && <img src={petPage.picture} className="petpage-image" />}
+      {petPage && <PetDetails petPage={petPage} />}
+      {petPage?.adoptionStatus !== 'Available' && (
+        <div className="unavailable">
+          This pet has already been {petPage?.adoptionStatus?.toLowerCase()}{' '}
+          {myPet && 'by you'}{' '}
+        </div>
+      )}
       <div className="petpage-buttons">
-        {(petPage.adoptionStatus === 'Available' ||
+        {(petPage?.adoptionStatus === 'Available' ||
           (myPet && petPage.adoptionStatus === 'Fostered')) && (
           <PetButtons type={'adopt'} id={id} />
         )}
@@ -54,9 +63,6 @@ function PetPage({ id }) {
             petPage.adoptionStatus === 'Fostered') && (
             <PetButtons type={'return'} id={id} />
           )}
-        {!myPet && petPage.adoptionStatus !== 'Available' && (
-          <div className="unavailable">This pet has been adopted</div>
-        )}
       </div>
       <PetModal
         show={petModalShow}

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Button, Overlay, Tooltip } from 'react-bootstrap';
 // import { useUserContext } from '../../context/UserContext';
 
-function PetSubmit() {
+function PetSubmit(props) {
   // const { error } = useUserContext();
   const target = useRef(null);
   return (
@@ -10,9 +10,7 @@ function PetSubmit() {
       <Button
         ref={target}
         className="login-submit-button btn-skew-left"
-        type="submit"
-        value="Submit"
-        // onClick={props.onProfileEdit}
+        onClick={props.onPetAdd}
       >
         <span>Add This Pet</span>
       </Button>

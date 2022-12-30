@@ -66,8 +66,8 @@ function SearchAdvanced() {
           <Form.Select
             className="search-advanced-group-input"
             defaultValue={''}
-            value={searchAdvanced?.color}
-            onChange={(e) => searchAdvancedHandler(e, 'color')}
+            value={searchAdvanced?.colour}
+            onChange={(e) => searchAdvancedHandler(e, 'colour')}
           >
             <option value="" default>
               All
@@ -75,12 +75,9 @@ function SearchAdvanced() {
             <option value="White">White</option>
             <option value="Black">Black</option>
             <option value="Brown">Brown</option>
-            {/* <option value="Brown">Brown</option> */}
             <option value="Orange">Orange</option>
-            <option value="Blue">Blue</option>
-            {searchAdvanced.type !== 'Dog' && (
-              <option value="Tabby">Tabby</option>
-            )}
+            <option value="Golden">Golden</option>
+            <option value="Grey">Grey</option>
           </Form.Select>
         </Form.Group>
         <Form.Group>
