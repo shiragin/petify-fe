@@ -124,6 +124,8 @@
   }
 
   &-results-list {
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;

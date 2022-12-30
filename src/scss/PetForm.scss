@@ -1,10 +1,18 @@
 @import 'variables';
 
 .pet-form {
+  color: $dark-color;
   &-container {
     width: 70%;
     .form-group {
       margin-bottom: 2rem;
+
+      input,
+      textarea,
+      select {
+        background-color: $light-color;
+        border: 0.1rem solid $dark-color;
+      }
 
       input:focus,
       input:active,
@@ -15,7 +23,8 @@
       select:focus,
       select:active,
       select:focus-visible {
-        border-color: #ced4da;
+        background-color: $light-color;
+        border: 0.1rem solid rgba(249, 64, 79, 0.45);
         box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
       }
       input:checked {
