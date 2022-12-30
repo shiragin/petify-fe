@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { FaPaw } from 'react-icons/fa';
 import { usePetsContext } from '../../context/PetsContext';
 

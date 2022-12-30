@@ -6,8 +6,7 @@ import { usePetsContext } from '../../context/PetsContext';
 
 function PetButtons({ type, id }) {
   const { user, setUser, setLoginModalShow, updateUser } = useUserContext();
-  const { getPetPage, updatePet, petModalShow, setPetModalShow, setPetPage } =
-    usePetsContext();
+  const { getPetPage, updatePet, setPetModalShow } = usePetsContext();
   const [buttonType, setButtonType] = useState({});
 
   useEffect(() => {
@@ -57,7 +56,6 @@ function PetButtons({ type, id }) {
     pet.adoptionStatus = 'Adopted';
     updatePet(id, pet);
     update && console.log(`Pet adopted by ${user.firstName}`);
-    // setPetPage(pet);
     setPetModalShow(true);
   }
 
@@ -71,7 +69,6 @@ function PetButtons({ type, id }) {
     pet.adoptionStatus = 'Fostered';
     updatePet(id, pet);
     update && console.log(`Pet fostered by ${user.firstName}`);
-    // setPetPage(pet);
     setPetModalShow(true);
   }
 
@@ -89,7 +86,6 @@ function PetButtons({ type, id }) {
     updatePet(id, pet);
     update && console.log(`Pet returned by evil nasty ${user.firstName}`);
     setUser(user);
-    // setPetPage(pet);
     setPetModalShow(true);
   }
 

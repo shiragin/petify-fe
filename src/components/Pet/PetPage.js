@@ -43,26 +43,28 @@ function PetPage({ id }) {
     <div className="main-container petpage">
       <LikeButton id={id} />
       {petPage && <img src={petPage.picture} className="petpage-image" />}
-      {petPage && <PetDetails petPage={petPage} />}
-      {petPage?.adoptionStatus !== 'Available' && (
-        <div className="unavailable">
-          This pet has already been {petPage?.adoptionStatus?.toLowerCase()}{' '}
-          {myPet && 'by you'}{' '}
-        </div>
-      )}
-      <div className="petpage-buttons">
-        {(petPage?.adoptionStatus === 'Available' ||
-          (myPet && petPage.adoptionStatus === 'Fostered')) && (
-          <PetButtons type={'adopt'} id={id} />
+      <div className="petpage-main-card">
+        {petPage && <PetDetails petPage={petPage} />}
+        {petPage?.adoptionStatus !== 'Available' && (
+          <div className="unavailable">
+            This pet has already been {petPage?.adoptionStatus?.toLowerCase()}{' '}
+            {myPet && 'by you'}{' '}
+          </div>
         )}
-        {petPage.adoptionStatus === 'Available' && (
-          <PetButtons type={'foster'} id={id} />
-        )}
-        {myPet &&
-          (petPage.adoptionStatus === 'Adopted' ||
-            petPage.adoptionStatus === 'Fostered') && (
-            <PetButtons type={'return'} id={id} />
+        <div className="petpage-buttons">
+          {(petPage?.adoptionStatus === 'Available' ||
+            (myPet && petPage.adoptionStatus === 'Fostered')) && (
+            <PetButtons type={'adopt'} id={id} />
           )}
+          {petPage.adoptionStatus === 'Available' && (
+            <PetButtons type={'foster'} id={id} />
+          )}
+          {myPet &&
+            (petPage.adoptionStatus === 'Adopted' ||
+              petPage.adoptionStatus === 'Fostered') && (
+              <PetButtons type={'return'} id={id} />
+            )}
+        </div>
       </div>
       <PetModal
         show={petModalShow}
