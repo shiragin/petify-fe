@@ -50,25 +50,6 @@
         box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
       }
 
-      // &-email-input,
-      // &-password-input {
-      //   background-color: #fff !important;
-
-      //   &:focus {
-      //     border-color: $dark-color;
-      //   }
-      // }
-
-      // input:-webkit-autofill,
-      // input:-webkit-autofill:hover,
-      // input:-webkit-autofill:focus,
-      // input:-webkit-autofill:active {
-      //   // box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-      //   box-shadow: 0 0 0 30px #fff inset;
-      //   // -webkit-box-shadow: 0 0 0 10px #fff inset !important;
-      //   -webkit-text-fill-color: var(--white) !important;
-      // }
-
       &-submit-button {
         width: 100%;
         background-color: $primary-color;

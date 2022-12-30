@@ -78,3 +78,26 @@
     }
   }
 }
+
+.form-group {
+  input,
+  textarea,
+  select {
+    background-color: transparent;
+    border: 0.1rem solid $dark-color;
+  }
+
+  input:focus,
+  input:active,
+  input:focus-visible,
+  textarea:focus,
+  textarea:active,
+  textarea:focus-visible,
+  select:focus,
+  select:active,
+  select:focus-visible {
+    background-color: transparent;
+    border: 0.1rem solid rgba(249, 64, 79, 0.45);
+    box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
+  }
+}
