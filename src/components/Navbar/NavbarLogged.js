@@ -7,13 +7,13 @@ function NavbarLogged() {
     useUserContext();
 
   function signOutHandler() {
-    setLoggedIn(false);
-    setError({ show: false, message: '' });
-    setUser({});
     setLoginModalShow({});
-    setLoggedInForm({});
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.clear();
+    setLoggedIn(false);
+    setError({ show: false, message: '' });
+    setLoggedInForm({});
+    setUser({});
   }
   return (
     <div className="navbar-links-right">
