@@ -9,7 +9,7 @@ function OwnedPets() {
     usePetsContext();
 
   async function updateOwnedPets() {
-    if (!user) return;
+    if (!user.fosteredPets.length || !user.adoptedPets.length) return;
     const { _id } = user;
     const pets = await getOwnedPets(_id);
     setOwnedPets(pets);
@@ -19,14 +19,19 @@ function OwnedPets() {
     updateOwnedPets();
   }, []);
 
+  useEffect(() => {
+    updateOwnedPets();
+  }, [user]);
+
   return (
     <div className="home-logged-featured-pets-cards">
-      {ownedPets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
-        <PetCard
-          key={_id}
-          value={{ _id, name, type, breed, adoptionStatus, picture }}
-        />
-      ))}
+      {ownedPets &&
+        ownedPets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
+          <PetCard
+            key={_id}
+            value={{ _id, name, type, breed, adoptionStatus, picture }}
+          />
+        ))}
     </div>
   );
 }

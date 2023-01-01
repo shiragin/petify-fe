@@ -28,6 +28,8 @@ function SavedPets() {
           pets.push(data);
         }
         setSavedPets(pets);
+      } else {
+        updateSavedPets();
       }
     }
     if (!user) return;
