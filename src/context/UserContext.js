@@ -36,43 +36,34 @@ export default function UserContextProvider({ children }) {
 
   async function createNewUser(user) {
     try {
-      if (user.password !== user.passwordConfirm)
-        throw new Error('Passwords must match');
-      else {
-        const res = await axios.post(`http://localhost:8080/users`, user);
-        if (res.status === 201) {
-          setLoggedIn(true);
-          getUser(user);
-          return true;
-        } else {
-          return false;
-        }
+      const res = await axios.post(`http://localhost:8080/users/signup`, user);
+      if (res.status === 201) {
+        setLoggedIn(true);
+        getUser(user);
+        return true;
+      } else {
+        return false;
       }
     } catch (error) {
-      return false;
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
   async function getUser(user) {
     try {
-      const res = await axios.get(`http://localhost:8080/users`, {
-        params: { email: user.email },
+      const res = await axios.post(`http://localhost:8080/users/login`, {
+        email: user.email,
+        password: user.password,
       });
       if (!res.statusText === 'ok') throw new Error('No such user!');
-      const { users } = await res.data.data;
-      if (users[0].password === user.password) {
-        console.log('User validated!');
-        setUser(users[0]);
-        localStorage.setItem('user', JSON.stringify(users[0]));
-        console.log(users[0]);
-        console.log(localStorage.getItem('user'));
-        setLoggedIn(true);
-        return true;
-      } else {
-        throw new Error('Passwords do not match!');
-      }
-    } catch (err) {
-      return false;
+      const { user: userData } = await res.data.data;
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      setLoggedIn(true);
+      return true;
+    } catch (error) {
+      return error.response.data;
     }
   }
 

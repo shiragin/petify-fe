@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useUserContext } from '../../context/UserContext';
 import SignupForm from '../Login/SignupForm';
 import SubmitButton from '../Login/SubmitButton';
@@ -8,6 +9,7 @@ function UserProfile() {
     useUserContext();
 
   async function updateUserHandler() {
+    console.log('hi');
     if (loggedIn) {
       const update = await updateUser(user._id);
       if (update) {
@@ -20,6 +22,10 @@ function UserProfile() {
       }
     }
   }
+
+  useEffect(() => {
+    setError({ show: false, message: '' });
+  }, []);
 
   return (
     <div className="profile-form">

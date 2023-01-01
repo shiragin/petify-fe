@@ -47,8 +47,8 @@ function PetPage({ id }) {
         {petPage && <PetDetails petPage={petPage} />}
         {petPage?.adoptionStatus !== 'Available' && (
           <div className="unavailable">
-            This pet has already been {petPage?.adoptionStatus?.toLowerCase()}{' '}
-            {myPet && 'by you'}{' '}
+            This {petPage?.type?.toLowerCase()} has already been{' '}
+            {petPage?.adoptionStatus?.toLowerCase()} {myPet && 'by you'}{' '}
           </div>
         )}
         <div className="petpage-buttons">

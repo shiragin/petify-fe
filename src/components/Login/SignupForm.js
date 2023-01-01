@@ -33,10 +33,10 @@ function SignupForm() {
   async function userSubmitHandler(e) {
     e.preventDefault();
     const signup = await createNewUser(user);
-    if (loggedIn || signup) {
+    if (loggedIn || signup === true) {
       navigate('/');
     } else {
-      await setError({ show: true, message: `Error! Couldn't sign up` });
+      await setError({ show: true, message: signup });
     }
   }
 

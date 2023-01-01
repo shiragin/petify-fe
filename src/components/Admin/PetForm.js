@@ -44,7 +44,7 @@ function PetForm({ newPet, setNewPet }) {
       </Form.Group>
 
       <Form.Group className="form-group">
-        <Form.Label className="pet-label">Pet name</Form.Label>
+        <Form.Label className="pet-label">Pet Name</Form.Label>
         <Form.Control
           className="pet-input"
           type="text"
@@ -179,7 +179,7 @@ function PetForm({ newPet, setNewPet }) {
         </Form.Select>
       </Form.Group>
       <Form.Group className="form-group">
-        <Form.Label className="pet-label">Dietary restrictions</Form.Label>
+        <Form.Label className="pet-label">Dietary Restrictions</Form.Label>
         <Form.Control
           className="pet-input"
           type="text"

@@ -6,9 +6,10 @@ import FeaturedPets from './FeaturedPets';
 function HomeLogged() {
   const { user, getUser } = useUserContext();
 
-  useEffect(() => {
-    getUser(user._id);
-  });
+  // useEffect(() => {
+  //   console.log(user);
+  //   // getUser(user._id);
+  // });
 
   return (
     <div className="home-logged">

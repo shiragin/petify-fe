@@ -33,10 +33,10 @@ function LoginForm() {
   async function loginSubmitHandler(e) {
     e.preventDefault();
     const signup = await getUser(loginForm);
-    if (signup || loggedIn) {
+    if (loggedIn) {
       navigate('/');
     } else {
-      await setError({ show: true, message: `Error! Couldn't log in` });
+      await setError({ show: true, message: signup });
     }
   }
 

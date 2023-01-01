@@ -4,7 +4,8 @@
 
 .modal-content {
   width: 100%;
-  min-height: 640px;
+  min-height: 660px;
+  height: 660px;
   padding: 2rem 3rem;
   border: none;
 
@@ -43,6 +44,16 @@
         gap: 1rem;
       }
 
+      .profile-label.form-label {
+        font-size: 1.2rem;
+      }
+
+      input {
+        font-size: 1.2rem;
+        background-color: #fff;
+        padding: 0.5rem 1rem;
+      }
+
       input:focus,
       input:active,
       input:focus-visible {
@@ -70,5 +81,13 @@
         }
       }
     }
+  }
+}
+
+.tooltip {
+  &-inner {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    white-space: pre-wrap;
   }
 }
