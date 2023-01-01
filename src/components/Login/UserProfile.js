@@ -5,8 +5,15 @@ import SubmitButton from '../Login/SubmitButton';
 import UserBio from './UserBio';
 
 function UserProfile() {
-  const { loggedIn, user, updateUser, confirmSave, setConfirmSave, setError } =
-    useUserContext();
+  const {
+    loggedIn,
+    user,
+    setUser,
+    updateUser,
+    confirmSave,
+    setConfirmSave,
+    setError,
+  } = useUserContext();
 
   async function updateUserHandler() {
     console.log('hi');
@@ -14,6 +21,7 @@ function UserProfile() {
       const update = await updateUser(user._id);
       if (update) {
         setConfirmSave(true);
+        setUser({ ...user }, { password: '', passwordConfirm: '' });
       } else {
         await setError({
           show: true,

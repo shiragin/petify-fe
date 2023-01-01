@@ -17,6 +17,8 @@ export default function UserContextProvider({ children }) {
 
   const [confirmSave, setConfirmSave] = useState();
 
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -45,7 +47,7 @@ export default function UserContextProvider({ children }) {
         return false;
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.error(error.response.data);
       return error.response.data;
     }
   }
@@ -57,9 +59,11 @@ export default function UserContextProvider({ children }) {
         password: user.password,
       });
       if (!res.statusText === 'ok') throw new Error('No such user!');
-      const { user: userData } = await res.data.data;
+      const { user: userData, token } = await res.data.data;
+      setToken(token);
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', token);
       setLoggedIn(true);
       return true;
     } catch (error) {
@@ -69,11 +73,9 @@ export default function UserContextProvider({ children }) {
 
   async function getUserById(id) {
     try {
-      console.log('CONTEXT', id);
       const res = await axios.get(`http://localhost:8080/users/${id}`);
       if (!res.statusText === 'ok') throw new Error('No such user!');
       const { user } = await res.data.data;
-      console.log(user);
       setUser(user);
       localStorage.setItem('user', JSON.stringify(user));
       return true;
@@ -84,14 +86,14 @@ export default function UserContextProvider({ children }) {
 
   async function updateUser(id) {
     try {
-      const res = await axios.patch(`http://localhost:8080/users/${id}`, user);
+      const res = await axios.patch(`http://localhost:8080/users/${id}`, user, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { user: userDetails } = await res.data.data;
-      if (userDetails.password !== userDetails.passwordConfirm)
-        throw new Error('Passwords must match');
       setUser(userDetails);
-      return res.status === 200 ? true : false;
+      return res.data.ok;
     } catch (err) {
-      console.error(err);
+      console.error(err.response.data);
       return false;
     }
   }
@@ -105,6 +107,8 @@ export default function UserContextProvider({ children }) {
         setLoggedIn,
         user,
         setUser,
+        token,
+        setToken,
         createNewUser,
         loginForm,
         setLoginForm,

@@ -50,6 +50,7 @@ function PetButtons({ type, id }) {
     if (!user) return;
     if (!user?.adoptedPets.includes(id)) {
       user.adoptedPets.push(id);
+      console.log('pet added');
     }
     const update = updateUser(user._id);
     const pet = await getPetPage(id);

@@ -70,8 +70,10 @@
         font-size: 1.4rem;
         width: 100%;
 
-        &:active {
+        &:active,
+        &:focus-visible {
           background-color: $primary-color;
+          box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
           transform: scale(0.95) skew(-20deg);
         }
       }

@@ -12,6 +12,7 @@ import './scss/App.scss';
 
 function App() {
   // const { setUser, setLoggedIn } = useUserContext();
+  // localStorage.clear();
 
   return (
     <UserContextProvider>

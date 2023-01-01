@@ -15,8 +15,6 @@ function PetPage({ id }) {
   const [myPet, setMyPet] = useState(false);
 
   function verifyPet() {
-    console.log('ID', id);
-    console.log('PETS', user.adoptedPets, user.fosteredPets);
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
       console.log('my pet');
       setMyPet(true);

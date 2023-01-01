@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { useUserContext } from './UserContext';
 
 export const PetsContext = createContext();
 
@@ -16,6 +17,8 @@ export default function PetsContextProvider({ children }) {
   const [searchType, setSearchType] = useState(false);
   const [searchAdvanced, setSearchAdvanced] = useState({});
   const [petModalShow, setPetModalShow] = useState(false);
+
+  const { token } = useUserContext();
 
   async function getPets() {
     try {
@@ -74,7 +77,9 @@ export default function PetsContextProvider({ children }) {
 
   async function getRandomPets(num) {
     try {
-      const res = await axios.get(`http://localhost:8080/pets/random`);
+      const res = await axios.get(`http://localhost:8080/pets/random`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       if (!res.statusText === 'ok') throw new Error();
       const { pets } = await res.data.data;
       setFeaturedPets(pets);
@@ -85,11 +90,10 @@ export default function PetsContextProvider({ children }) {
 
   async function getSavedPets(id) {
     try {
-      const res = await axios.get(`http://localhost:8080/pets/user/${id}/`);
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}/`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { savedPets } = res.data.data;
-      // return pets.sort((a, b) =>
-      //   a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-      // );
       return savedPets;
     } catch (error) {
       console.error(error);
@@ -98,11 +102,10 @@ export default function PetsContextProvider({ children }) {
 
   async function getOwnedPets(id) {
     try {
-      const res = await axios.get(`http://localhost:8080/pets/user/${id}`);
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { ownedPets } = res.data.data;
-      // return pets.sort((a, b) =>
-      //   a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-      // );
       return ownedPets;
     } catch (error) {
       console.error(error);
@@ -111,7 +114,9 @@ export default function PetsContextProvider({ children }) {
 
   async function getSavedPetsByID(id) {
     try {
-      const res = await axios.get(`http://localhost:8080/pets/${id}`);
+      const res = await axios.get(`http://localhost:8080/pets/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { pet } = res.data.data;
       return pet.sort((a, b) =>
         a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
@@ -127,12 +132,10 @@ export default function PetsContextProvider({ children }) {
         pet.picture = `https://source.unsplash.com/random/?${pet.type.toLowerCase()},${pet.colour
           .join(',')
           .toLowerCase()}`;
-      console.log('hi from function');
-      console.log(pet);
-      const res = await axios.post(`http://localhost:8080/pets/`, pet);
-      console.log(res);
+      const res = await axios.post(`http://localhost:8080/pets/`, pet, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { pet: petDetails } = await res.data.data;
-      console.log(petDetails);
       return res.status === 201 ? petDetails : '';
     } catch (err) {
       console.error(err);
@@ -142,7 +145,9 @@ export default function PetsContextProvider({ children }) {
 
   async function updatePet(id, pet) {
     try {
-      const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet);
+      const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const { pet: petDetails } = await res.data.data;
       return res.status === 200 ? true : false;
     } catch (err) {

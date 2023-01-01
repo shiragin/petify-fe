@@ -122,7 +122,7 @@ function SignupForm() {
             type="password"
             label="Create password"
             required
-            placeholder="Password"
+            placeholder="Confirm Password"
             value={user?.passwordConfirm}
             onChange={(e) => userFormHandler(e, 'passwordConfirm')}
           />

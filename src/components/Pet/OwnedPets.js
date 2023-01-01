@@ -9,7 +9,7 @@ function OwnedPets() {
     usePetsContext();
 
   async function updateOwnedPets() {
-    if (!user.fosteredPets.length || !user.adoptedPets.length) return;
+    if (!user.fosteredPets.length && !user.adoptedPets.length) return;
     const { _id } = user;
     const pets = await getOwnedPets(_id);
     setOwnedPets(pets);
