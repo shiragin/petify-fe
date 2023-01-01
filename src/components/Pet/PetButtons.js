@@ -4,26 +4,28 @@ import { TbArrowBigRight } from 'react-icons/tb';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 
-function PetButtons({ type, id }) {
+function PetButtons({ type, id, pet }) {
   const { user, setUser, setLoginModalShow, updateUser } = useUserContext();
   const { getPetPage, updatePet, setPetModalShow } = usePetsContext();
   const [buttonType, setButtonType] = useState({});
+
+  console.log(pet);
 
   useEffect(() => {
     if (type === 'adopt') {
       setButtonType({
         type: 'adopt',
-        text: 'Adopt Pet',
+        text: `Adopt this ${pet}`,
       });
     } else if (type === 'foster') {
       setButtonType({
         type: 'foster',
-        text: 'Foster Pet',
+        text: `Foster this ${pet}`,
       });
     } else {
       setButtonType({
         type: 'return',
-        text: 'Return Pet',
+        text: `Return this ${pet}`,
       });
     }
   }, []);

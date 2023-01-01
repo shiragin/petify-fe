@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 import { useUserContext } from '../../context/UserContext';
 import PetDetails from './PetDetails';
@@ -13,6 +14,7 @@ function PetPage({ id }) {
   const { getUserById, user } = useUserContext();
 
   const [myPet, setMyPet] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
 
   function verifyPet() {
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
@@ -29,6 +31,7 @@ function PetPage({ id }) {
   }
 
   useEffect(() => {
+    setPetPage({});
     getUserById(user._id);
     getPetData();
   }, []);
@@ -39,8 +42,19 @@ function PetPage({ id }) {
 
   return (
     <div className="main-container petpage">
-      <LikeButton id={id} />
-      {petPage && <img src={petPage.picture} className="petpage-image" />}
+      {imgLoading || <LikeButton id={id} />}
+      <div className="petpage-image-container">
+        {imgLoading && <Spinner />}
+        <img
+          src={petPage.picture}
+          className={imgLoading ? 'petpage-image hide' : 'petpage-image'}
+          onLoad={() =>
+            setTimeout(() => {
+              setImgLoading(false);
+            }, 500)
+          }
+        />
+      </div>
       <div className="petpage-main-card">
         {petPage && <PetDetails petPage={petPage} />}
         {petPage?.adoptionStatus !== 'Available' && (
@@ -52,15 +66,27 @@ function PetPage({ id }) {
         <div className="petpage-buttons">
           {(petPage?.adoptionStatus === 'Available' ||
             (myPet && petPage.adoptionStatus === 'Fostered')) && (
-            <PetButtons type={'adopt'} id={id} />
+            <PetButtons
+              type={'adopt'}
+              id={id}
+              pet={petPage?.type.toLowerCase()}
+            />
           )}
           {petPage.adoptionStatus === 'Available' && (
-            <PetButtons type={'foster'} id={id} />
+            <PetButtons
+              type={'foster'}
+              id={id}
+              pet={petPage?.type.toLowerCase()}
+            />
           )}
           {myPet &&
             (petPage.adoptionStatus === 'Adopted' ||
               petPage.adoptionStatus === 'Fostered') && (
-              <PetButtons type={'return'} id={id} />
+              <PetButtons
+                type={'return'}
+                id={id}
+                pet={petPage?.type.toLowerCase()}
+              />
             )}
         </div>
       </div>
