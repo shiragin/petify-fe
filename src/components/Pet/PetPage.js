@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 import { useUserContext } from '../../context/UserContext';
@@ -6,7 +7,8 @@ import PetDetails from './PetDetails';
 import LikeButton from './LikeButton';
 import PetButtons from './PetButtons';
 import PetModal from './PetModal';
-import OwnedPets from './OwnedPets';
+import { FaChevronCircleLeft } from 'react-icons/fa';
+import { Navigate } from 'react-router-dom';
 
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =
@@ -15,6 +17,8 @@ function PetPage({ id }) {
 
   const [myPet, setMyPet] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   function verifyPet() {
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
@@ -33,7 +37,6 @@ function PetPage({ id }) {
   useEffect(
     () => {
       setPetPage({});
-      // getUserById(user._id);
       getPetData();
     },
     [],
@@ -46,6 +49,10 @@ function PetPage({ id }) {
 
   return (
     <div className="main-container petpage">
+      <FaChevronCircleLeft
+        className="petpage-back"
+        onClick={() => navigate('/search')}
+      />
       {imgLoading || <LikeButton id={id} />}
       <div className="petpage-image-container">
         {imgLoading && <Spinner />}

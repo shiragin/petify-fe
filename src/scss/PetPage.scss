@@ -100,8 +100,6 @@
     border-top-right-radius: 50% 20%;
 
     div {
-      // position: relative;
-      // top: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -129,19 +127,39 @@
   display: none;
 }
 
+// Petpage
+
 .petpage {
   position: relative;
-  padding-top: 1rem;
+  padding: 1rem 0;
+
+  &-back {
+    position: absolute;
+    color: $dark-color;
+    height: 2.5rem;
+    width: 2.5rem;
+    top: 2%;
+    left: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: $primary-color;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      color: $primary-color;
+      transform: scale(0.9);
+    }
+  }
 
   &-main-card {
-    // background-color: #fff;
-    // height: 58vh;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    // margin: -10rem 0 2rem;
-    // padding: 10rem 1rem;
     border-radius: 0.375rem;
     width: 80%;
   }
@@ -152,13 +170,9 @@
     font-size: 1.4rem;
     font-weight: 200;
     margin: 1rem 0 0.2rem;
-    // border-bottom: 0.1rem solid $primary-color;
-    // padding-bottom: 0.5rem;
-    // outline-offset: 0.4rem;
   }
 
   &-buttons {
-    // width: 75%;
     display: flex;
     justify-content: center;
     gap: 3rem;
