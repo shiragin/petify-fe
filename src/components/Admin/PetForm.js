@@ -19,6 +19,11 @@ function PetForm({ newPet, setNewPet }) {
     }
   }
 
+  function newPetImageHandler(e) {
+    console.dir(e.target.files[0]);
+    setNewPet({ ...newPet, picture: e.target.files[0] });
+  }
+
   useEffect(
     () => setNewPet({ ...newPet, colour: newColour }, [newPet]),
     [newColour]
@@ -198,6 +203,15 @@ function PetForm({ newPet, setNewPet }) {
           placeholder="Enter the pet's breed"
           value={newPet?.breed}
           onChange={(e) => newPetChangeHandler(e, 'breed')}
+        />
+      </Form.Group>
+      <Form.Group className="form-group">
+        <Form.Label className="pet-label">Pet Image</Form.Label>
+        <Form.Control
+          className="pet-input"
+          type="file"
+          required
+          onChange={(e) => newPetImageHandler(e)}
         />
       </Form.Group>
     </Form>

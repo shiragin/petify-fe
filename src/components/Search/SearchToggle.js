@@ -1,3 +1,4 @@
+import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
 import { GiLobArrow } from 'react-icons/gi';
 import { usePetsContext } from '../../context/PetsContext';
 
@@ -7,7 +8,7 @@ function SearchToggle() {
   return (
     <div>
       {
-        <GiLobArrow
+        <FaChevronCircleUp
           className={searchType ? 'search-toggle rotate' : 'search-toggle'}
           onClick={() => setSearchType(!searchType)}
         />

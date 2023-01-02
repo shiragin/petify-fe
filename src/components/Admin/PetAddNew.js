@@ -25,6 +25,7 @@ function PetAddNew() {
   const navigate = useNavigate();
 
   async function addPetHandler() {
+    console.log(newPet);
     const res = await addNewPet(newPet);
     console.log('RES:', res);
     setPetPage(res);

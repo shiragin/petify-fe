@@ -57,6 +57,7 @@ function PetButtons({ type, id, pet }) {
     const update = updateUser(user._id);
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Adopted';
+    pet.owner = user._id;
     updatePet(id, pet);
     update && console.log(`Pet adopted by ${user.firstName}`);
     setPetModalShow(true);
@@ -70,6 +71,7 @@ function PetButtons({ type, id, pet }) {
     const update = updateUser(user._id);
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Fostered';
+    pet.owner = user._id;
     updatePet(id, pet);
     update && console.log(`Pet fostered by ${user.firstName}`);
     setPetModalShow(true);
@@ -86,6 +88,7 @@ function PetButtons({ type, id, pet }) {
     const update = await updateUser(user._id);
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Available';
+    pet.owner = '';
     updatePet(id, pet);
     update && console.log(`Pet returned by evil nasty ${user.firstName}`);
     setUser(user);

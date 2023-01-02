@@ -127,11 +127,13 @@
   display: none;
 }
 
-// Petpage
+// Petpage ////
+/////
+/// ////
 
 .petpage {
   position: relative;
-  padding: 1rem 0;
+  padding: 2rem 0 1rem;
 
   &-back {
     position: absolute;
@@ -208,7 +210,6 @@
     width: 100%;
     position: relative;
     min-height: 500px;
-    // background-color: #fff;
     border-radius: 50%;
     transform: rotate(-6deg);
 
