@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import SubmitButton from './SubmitButton';
+import UserBio from './UserBio';
 
 function SignupForm() {
   const {
@@ -102,6 +103,7 @@ function SignupForm() {
           onChange={(e) => userFormHandler(e, 'phoneNumber')}
         />
       </Form.Group>
+      {!loginModalShow || <UserBio />}
       <Form.Group className="form-group split">
         <div>
           <Form.Label className="profile-label">Password</Form.Label>
@@ -111,7 +113,7 @@ function SignupForm() {
             label="Create password"
             required
             placeholder="Password"
-            value={user?.password}
+            // value={user?.password}
             onChange={(e) => userFormHandler(e, 'password')}
           />
         </div>
@@ -123,7 +125,7 @@ function SignupForm() {
             label="Create password"
             required
             placeholder="Confirm Password"
-            value={user?.passwordConfirm}
+            // value={user?.passwordConfirm}
             onChange={(e) => userFormHandler(e, 'passwordConfirm')}
           />
         </div>

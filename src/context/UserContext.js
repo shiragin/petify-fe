@@ -59,11 +59,13 @@ export default function UserContextProvider({ children }) {
         password: user.password,
       });
       if (!res.statusText === 'ok') throw new Error('No such user!');
-      const { user: userData, token } = await res.data.data;
+      const { user: userData, token, exp } = await res.data.data;
       setToken(token);
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
       localStorage.setItem('token', token);
+      localStorage.setItem('exp', exp);
+      console.log('HELLO', userData, token, exp);
       setLoggedIn(true);
       return true;
     } catch (error) {

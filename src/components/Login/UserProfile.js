@@ -16,12 +16,12 @@ function UserProfile() {
   } = useUserContext();
 
   async function updateUserHandler() {
-    console.log('hi');
     if (loggedIn) {
       const update = await updateUser(user._id);
       if (update) {
         setConfirmSave(true);
-        setUser({ ...user }, { password: '', passwordConfirm: '' });
+        setUser({ ...user });
+        // setUser({ ...user }, { password: '', passwordConfirm: '' });
       } else {
         await setError({
           show: true,
@@ -38,7 +38,7 @@ function UserProfile() {
   return (
     <div className="profile-form">
       <SignupForm />
-      <UserBio />
+      {/* <UserBio /> */}
       <SubmitButton
         type={'update'}
         confirm={confirmSave}

@@ -128,10 +128,10 @@ export default function PetsContextProvider({ children }) {
 
   async function addNewPet(pet) {
     try {
-      // if (!pet.picture)
-      //   pet.picture = `https://source.unsplash.com/random/?${pet.type.toLowerCase()},${pet.colour
-      //     .join(',')
-      //     .toLowerCase()}`
+      if (!pet.picture)
+        pet.picture = `https://source.unsplash.com/random/?${pet.type.toLowerCase()},${pet.colour
+          .join(',')
+          .toLowerCase()}`;
       const newPetForm = new FormData();
       for (const key in pet) {
         newPetForm.append(key, pet[key]);

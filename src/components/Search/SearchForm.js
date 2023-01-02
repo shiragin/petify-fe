@@ -7,7 +7,7 @@ function SearchForm() {
   const { searchType } = usePetsContext();
 
   return (
-    <div>
+    <div className="search-container">
       <SearchSimple />
       {searchType && <SearchAdvanced />}
     </div>
