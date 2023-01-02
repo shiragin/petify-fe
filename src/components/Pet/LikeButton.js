@@ -18,13 +18,14 @@ function LikeButton({ id }) {
   }, [savedPets]);
 
   useEffect(() => {
+    console.log(user);
     if (!user) return;
     if (user?.savedPets?.includes(id)) {
       setLiked(true);
     } else {
       setLiked(false);
     }
-  }, []);
+  }, [user]);
 
   function likeClickHandler(e) {
     if (!user) return;

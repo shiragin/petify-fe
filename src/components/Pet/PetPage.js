@@ -30,11 +30,15 @@ function PetPage({ id }) {
     setPetPage(pet);
   }
 
-  useEffect(() => {
-    setPetPage({});
-    // getUserById(user._id);
-    getPetData();
-  }, []);
+  useEffect(
+    () => {
+      setPetPage({});
+      // getUserById(user._id);
+      getPetData();
+    },
+    [],
+    [user]
+  );
 
   useEffect(() => {
     getPetData();
