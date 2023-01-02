@@ -27,7 +27,7 @@ function Navbar() {
       if (!token) setLoggedIn(false);
       else {
         setLoggedIn(true);
-        // setUser(localStorage.getItem('user'));
+        setUser(JSON.parse(localStorage.getItem('user')));
       }
     },
     [],

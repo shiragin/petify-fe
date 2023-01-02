@@ -32,7 +32,7 @@ function PetPage({ id }) {
 
   useEffect(() => {
     setPetPage({});
-    getUserById(user._id);
+    // getUserById(user._id);
     getPetData();
   }, []);
 
