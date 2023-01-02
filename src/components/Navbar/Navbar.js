@@ -8,7 +8,7 @@ import { FaPaw } from 'react-icons/fa';
 import '../../scss/Navbar.scss';
 
 function Navbar() {
-  const { token, loggedIn, setLoggedIn, setUser } = useUserContext();
+  const { token, loggedIn, setLoggedIn, setUser, user } = useUserContext();
   const { pets } = usePetsContext();
 
   // useEffect(() => {
@@ -22,10 +22,17 @@ function Navbar() {
 
   useEffect(
     () => {
+      console.log(token);
+      console.log('USER', user);
       if (!token) setLoggedIn(false);
+      else {
+        setLoggedIn(true);
+        // setUser(localStorage.getItem('user'));
+      }
     },
     [],
-    [token]
+    [token],
+    [user]
   );
 
   return (

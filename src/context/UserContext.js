@@ -20,7 +20,7 @@ export default function UserContextProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
 
   const [user, setUser] = useState(
-    localStorage.getItem('user') || {
+    JSON.parse(localStorage.getItem('user')) || {
       firstName: '',
       lastName: '',
       email: '',

@@ -7,9 +7,9 @@ function HomeLogged() {
   const { user, getUser } = useUserContext();
 
   // useEffect(() => {
-  //   console.log(user);
+  //   // console.log(user);
   //   // getUser(user._id);
-  // });
+  // }, []);
 
   return (
     <div className="home-logged">
