@@ -11,14 +11,14 @@ function Navbar() {
   const { token, loggedIn, setLoggedIn, setUser } = useUserContext();
   const { pets } = usePetsContext();
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('user');
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-      setLoggedIn(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem('user');
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //     setLoggedIn(true);
+  //   }
+  // }, []);
 
   useEffect(
     () => {

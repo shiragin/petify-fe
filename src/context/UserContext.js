@@ -19,18 +19,20 @@ export default function UserContextProvider({ children }) {
 
   const [token, setToken] = useState(localStorage.getItem('token') || '');
 
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    password: '',
-    passwordConfirm: '',
-    bio: '',
-    savedPets: [],
-    adoptedPets: [],
-    fosteredPets: [],
-  });
+  const [user, setUser] = useState(
+    localStorage.getItem('user') || {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      passwordConfirm: '',
+      bio: '',
+      savedPets: [],
+      adoptedPets: [],
+      fosteredPets: [],
+    }
+  );
 
   const [loggedIn, setLoggedIn] = useState(false);
 
