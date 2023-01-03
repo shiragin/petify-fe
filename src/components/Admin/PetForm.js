@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { usePetsContext } from '../../context/PetsContext';
 
-function PetForm({ newPet, setNewPet }) {
+function PetForm({ id, newPet, setNewPet, action }) {
+  // console.log(action);
+  // console.log(newPet);
+
+  const { getPetPage } = usePetsContext();
+
   const [newColour, setNewColour] = useState([]);
 
   function newPetChangeHandler(e, field) {
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });
+    console.log(newPet);
   }
 
   function newPetColourHandler({ target: { checked, value } }) {
+    console.log(newColour);
     if (checked) {
       setNewColour([...newColour, value]);
     } else {
@@ -24,8 +32,38 @@ function PetForm({ newPet, setNewPet }) {
     setNewPet({ ...newPet, picture: e.target.files[0] });
   }
 
+  async function getPetDetails(id) {
+    console.log('getting pet');
+    const pet = await getPetPage(id);
+    pet && setNewPet(pet);
+    pet && setNewColour(pet.colour);
+  }
+
+  useEffect(() => {
+    setNewPet({
+      type: 'Cat',
+      name: '',
+      adoptionStatus: 'Available',
+      height: '',
+      weight: '',
+      colour: [],
+      bio: '',
+      hypoallergenic: false,
+      dietary: [],
+      breed: '',
+    });
+    if (action === 'edit') {
+      getPetDetails(id);
+    }
+  }, [action]);
+
   useEffect(
-    () => setNewPet({ ...newPet, colour: newColour }, [newPet]),
+    () => {
+      setNewPet({ ...newPet, colour: newColour });
+      console.log(newPet);
+      // setNewColour(newPet.colour);
+    },
+    // [newPet],
     [newColour]
   );
 
@@ -106,6 +144,7 @@ function PetForm({ newPet, setNewPet }) {
         >
           <div className="pet-check-row">
             <Form.Check
+              checked={newPet?.colour.includes('White')}
               inline
               label="White"
               name="colour"
@@ -115,6 +154,7 @@ function PetForm({ newPet, setNewPet }) {
             />
             <Form.Check
               inline
+              checked={newPet?.colour.includes('Orange')}
               label="Orange"
               type={'checkbox'}
               name="colour"
@@ -123,6 +163,7 @@ function PetForm({ newPet, setNewPet }) {
             />
             <Form.Check
               inline
+              checked={newPet?.colour.includes('Brown')}
               label="Brown"
               type={'checkbox'}
               name="colour"
@@ -133,6 +174,7 @@ function PetForm({ newPet, setNewPet }) {
           <div className="pet-check-row">
             <Form.Check
               inline
+              checked={newPet?.colour.includes('Grey')}
               label="Grey"
               type={'checkbox'}
               id={`colour`}
@@ -140,6 +182,7 @@ function PetForm({ newPet, setNewPet }) {
             />
             <Form.Check
               inline
+              checked={newPet?.colour.includes('Golden')}
               label="Golden"
               type={'checkbox'}
               // name="group1"
@@ -149,6 +192,7 @@ function PetForm({ newPet, setNewPet }) {
             />
             <Form.Check
               inline
+              checked={newPet?.colour.includes('Black')}
               label="Black"
               type={'checkbox'}
               id={`colour`}

@@ -17,6 +17,7 @@ export default function PetsContextProvider({ children }) {
   const [searchType, setSearchType] = useState(false);
   const [searchAdvanced, setSearchAdvanced] = useState({});
   const [petModalShow, setPetModalShow] = useState(false);
+  // const [petEditModalShow, setPetEditModalShow] = useState(false);
 
   const { token } = useUserContext();
 
@@ -136,10 +137,6 @@ export default function PetsContextProvider({ children }) {
       for (const key in pet) {
         newPetForm.append(key, pet[key]);
       }
-      // console.log(newPetForm);
-      for (const value of newPetForm.values()) {
-        console.log(value);
-      }
       const res = await axios.post(`http://localhost:8080/pets/`, newPetForm, {
         headers: { authorization: `Bearer ${token}` },
       });
@@ -153,11 +150,30 @@ export default function PetsContextProvider({ children }) {
 
   async function updatePet(id, pet) {
     try {
-      const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      // const res = await axios.patch(`http://localhost:8080/pets/${id}`, pet, {
+      //   headers: { authorization: `Bearer ${token}` },
+      // });
+      // const { pet: petDetails } = await res.data.data;
+      // return res.status === 200 ? true : false;
+      console.log(id, pet);
+      const newPetForm = new FormData();
+      for (const key in pet) {
+        newPetForm.append(key, pet[key]);
+      }
+
+      // for (const value of newPetForm.values()) {
+      //   console.log(value);
+      // } //
+      const res = await axios.patch(
+        `http://localhost:8080/pets/${id}`,
+        newPetForm,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(res.data);
       const { pet: petDetails } = await res.data.data;
-      return res.status === 200 ? true : false;
+      return res.data.ok ? petDetails : '';
     } catch (err) {
       console.error(err);
       return false;

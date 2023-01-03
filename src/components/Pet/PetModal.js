@@ -18,7 +18,7 @@ function PetModal(props) {
               : `Shame on you!`}
           </h2>
         )}
-        {action && <h2>New pet added</h2>}
+        {action && <h2>Pet {action.split(' ')[0]}</h2>}
         {status && (
           <p>
             {status === 'Adopted' || status === 'Fostered'
@@ -28,7 +28,7 @@ function PetModal(props) {
         )}
         {action && (
           <p>
-            The {type.toLowerCase()} {name} was successfully added to Petify
+            The {type.toLowerCase()} {name} was successfully {action} Petify
           </p>
         )}
       </Modal.Body>

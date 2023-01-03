@@ -51,7 +51,7 @@ function PetPage({ id }) {
     <div className="main-container petpage">
       <FaChevronCircleLeft
         className="petpage-back"
-        onClick={() => navigate('/search')}
+        onClick={() => navigate(-1)}
       />
       {imgLoading || <LikeButton id={id} />}
       <div className="petpage-image-container">

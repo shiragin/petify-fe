@@ -9,8 +9,6 @@ function PetButtons({ type, id, pet }) {
   const { getPetPage, updatePet, setPetModalShow } = usePetsContext();
   const [buttonType, setButtonType] = useState({});
 
-  console.log(pet);
-
   useEffect(() => {
     if (type === 'adopt') {
       setButtonType({

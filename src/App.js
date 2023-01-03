@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import MyPets from './pages/MyPets';
 import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
+import ShowPets from './pages/ShowPets';
+// import EditPet from './pages/EditPet';
 import './scss/App.scss';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path="/mypets" element={<MyPets />} />
             <Route path="/pet/:id" element={<Pet />} />
             <Route path="/admin/add-pet" element={<AddPet />} />
+            <Route path="/admin/show-pets" element={<ShowPets />} />
+            <Route path="/admin/edit-pet/:id" element={<AddPet />} />
           </Routes>
         </BrowserRouter>
       </PetsContextProvider>

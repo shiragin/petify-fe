@@ -20,13 +20,11 @@ function NavbarLogged() {
     if (tokenExpirationTime) {
       const timeoutId = setInterval(() => {
         if (Date.now() > tokenExpirationTime) {
-          // setIsExpired(true);
           console.log('EXPIRED!');
           clearInterval(timeoutId);
           signOutHandler();
         }
-        console.log('NOT EXPIRED!');
-      }, 1000);
+      }, 10000);
     }
   }, []);
 
