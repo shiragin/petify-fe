@@ -100,6 +100,21 @@ export default function UserContextProvider({ children }) {
     }
   }
 
+  async function getAllUsers() {
+    try {
+      const res = await axios.get(`http://localhost:8080/users`);
+      if (!res.statusText === 'ok') throw new Error('No such user!');
+      const { users } = await res.data.data;
+      console.log(res.data);
+      console.log(res.data.ok);
+      console.log(users);
+      if (res.data.ok) return users;
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -122,6 +137,7 @@ export default function UserContextProvider({ children }) {
         confirmSave,
         setConfirmSave,
         getUserById,
+        getAllUsers,
       }}
     >
       {children}

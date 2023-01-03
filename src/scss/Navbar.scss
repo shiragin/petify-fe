@@ -51,7 +51,7 @@
         transition: all 0.1s ease-in;
 
         &:hover {
-          color: $primary-color !important;
+          color: $primary-color;
           transform: scale(1.05);
         }
       }
@@ -59,6 +59,14 @@
       .dropdown {
         &-item:hover {
           background-color: transparent;
+        }
+
+        &-item.active {
+          background-color: $primary-color;
+
+          &:hover {
+            color: #fff;
+          }
         }
       }
     }
