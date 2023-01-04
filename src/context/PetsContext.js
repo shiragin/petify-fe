@@ -170,13 +170,11 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
-  async function addSavedPet(petId, userId, user) {
-    console.log('USER', user);
+  async function addSavedPet(userId, savedPets) {
     try {
-      console.log(petId, userId);
       const res = await axios.post(
         `http://localhost:8080/pets/${userId}/save`,
-        { user },
+        { savedPets },
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -193,10 +191,8 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
-  async function deleteSavedPet(petId, userId, user) {
+  async function deleteSavedPet(userId, savedPets) {
     try {
-      console.log('USER', user);
-
       const res = await axios.delete(
         `http://localhost:8080/pets/${userId}/save`,
         {
@@ -205,11 +201,10 @@ export default function PetsContextProvider({ children }) {
           },
 
           data: {
-            user,
+            savedPets,
           },
         }
       );
-      console.log('RES', res);
       if (res?.data?.ok) {
         const { user: userData } = res?.data?.data;
         setUser(userData);

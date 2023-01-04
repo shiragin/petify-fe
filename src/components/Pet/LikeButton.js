@@ -10,7 +10,6 @@ function LikeButton({ id }) {
 
   useEffect(() => {
     if (!user) return;
-    console.log('HII', user);
     if (user?.savedPets?.includes(id)) {
       setLiked(true);
     } else {
@@ -30,21 +29,17 @@ function LikeButton({ id }) {
 
   async function handleSavedPet() {
     if (!user) return;
-    console.log(liked);
     if (!liked) {
       if (!user?.savedPets?.includes(id)) {
         user.savedPets.push(id);
-        const update = await addSavedPet(id, user._id, user);
+        const update = await addSavedPet(user._id, user.savedPets);
         update && console.log('pet added to saved');
-        console.log('UPDATE', update);
       }
     } else {
       if (user?.savedPets?.includes(id)) {
         user.savedPets = user.savedPets.filter((el) => el !== id);
-        console.log(user.savedPets);
-        const update = await deleteSavedPet(id, user._id, user);
-        // update && console.log('pet deleted from saved');
-        // console.log('UPDATE', update);
+        const update = await deleteSavedPet(user._id, user.savedPets);
+        update && console.log('pet deleted from saved');
       }
     }
   }
