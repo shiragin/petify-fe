@@ -1,0 +1,123 @@
+@import 'variables';
+
+.show-pets {
+  &-list {
+    margin-top: 1rem;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1.4rem;
+    font-size: 1.1rem;
+    // border-color: $dark-color;
+
+    &-line {
+      // display: flex;
+      // gap: 3rem;
+      // padding: 2rem 2rem;
+      // border-bottom: 0.1rem solid $dark-color !important;
+      // background-color: $dark-color;
+      transition: transform 0.25s ease-in-out;
+
+      &-heading {
+        background-color: $primary-color;
+        color: #fff;
+      }
+
+      // &:nth-child(even) {
+      //   // background-color: $light-color;
+      // }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+      td {
+        list-style-type: none;
+        font-weight: 300;
+        position: relative;
+
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+          position: absolute;
+          top: 0.6rem;
+          left: 1rem;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            // transform: scale(1.05);
+            color: $primary-color;
+          }
+        }
+        // min-width: 4rem;
+      }
+    }
+  }
+}
+
+.modal-content {
+  height: auto;
+  // min-height: 500px;
+  .modal-body {
+    h2 {
+      font-size: 2.6rem;
+      width: 90%;
+      margin: 0 0 1rem;
+      padding: 0;
+    }
+
+    .user-details {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      span {
+        font-weight: 600;
+        color: $primary-color;
+        display: inline-block;
+        // border: 0.07rem solid $primary-color;
+        // padding: 0.2rem 0.5rem;
+        border-radius: 0.375rem;
+        margin-right: 0.5rem;
+        min-width: 4rem;
+        // text-align: center;
+        // background-color: $primary-color;
+      }
+
+      .pet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .pet-items {
+          display: flex;
+          gap: 1rem;
+          justify-content: start;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        .pet-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-bottom: 0.5rem;
+          cursor: pointer;
+          img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          div {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}

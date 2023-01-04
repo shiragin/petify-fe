@@ -105,8 +105,8 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { ownedPets } = res.data.data;
-      return ownedPets;
+      const { fosteredPets, adoptedPets } = res.data.data;
+      return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
     } catch (error) {
       console.error(error);
     }

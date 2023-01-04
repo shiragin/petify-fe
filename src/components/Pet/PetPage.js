@@ -13,7 +13,7 @@ import { Navigate } from 'react-router-dom';
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =
     usePetsContext();
-  const { getUserById, user } = useUserContext();
+  const { user } = useUserContext();
 
   const [myPet, setMyPet] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);

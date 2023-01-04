@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import DahsboardList from '../components/Admin/DahsboardList';
-import '../scss/ShowPets.scss';
+import '../scss/Dashboard.scss';
 
 function ShowPets() {
   const [activeKey, setActiveKey] = useState('first');

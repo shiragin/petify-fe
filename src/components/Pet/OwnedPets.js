@@ -11,8 +11,8 @@ function OwnedPets() {
   async function updateOwnedPets() {
     if (!user.fosteredPets.length && !user.adoptedPets.length) return;
     const { _id } = user;
-    const pets = await getOwnedPets(_id);
-    setOwnedPets(pets);
+    const { fosteredPets, adoptedPets } = await getOwnedPets(_id);
+    setOwnedPets([...adoptedPets, ...fosteredPets]);
   }
 
   useEffect(() => {

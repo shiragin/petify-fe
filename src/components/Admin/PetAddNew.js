@@ -36,9 +36,7 @@ function PetAddNew({ id }) {
 
   async function petAddHandler() {
     setIsLoading(true);
-    console.log(newPet);
     const res = await addNewPet(newPet);
-    console.log('RES:', res);
     setPetPage(res);
     setPetModalShow(true);
     setIsLoading(false);
@@ -46,9 +44,7 @@ function PetAddNew({ id }) {
 
   async function petEditHandler() {
     setIsLoading(true);
-    console.log(newPet);
     const res = await updatePet(newPet._id, newPet);
-    console.log('RES:', res);
     setPetPage(res);
     setPetModalShow(true);
     setIsLoading(false);

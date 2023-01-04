@@ -3,9 +3,6 @@ import { Form } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 
 function PetForm({ id, newPet, setNewPet, action }) {
-  // console.log(action);
-  // console.log(newPet);
-
   const { getPetPage } = usePetsContext();
 
   const [newColour, setNewColour] = useState([]);
@@ -14,11 +11,9 @@ function PetForm({ id, newPet, setNewPet, action }) {
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });
-    console.log(newPet);
   }
 
   function newPetColourHandler({ target: { checked, value } }) {
-    console.log(newColour);
     if (checked) {
       setNewColour([...newColour, value]);
     } else {
@@ -33,7 +28,6 @@ function PetForm({ id, newPet, setNewPet, action }) {
   }
 
   async function getPetDetails(id) {
-    console.log('getting pet');
     const pet = await getPetPage(id);
     pet && setNewPet(pet);
     pet && setNewColour(pet.colour);
@@ -57,15 +51,9 @@ function PetForm({ id, newPet, setNewPet, action }) {
     }
   }, [action]);
 
-  useEffect(
-    () => {
-      setNewPet({ ...newPet, colour: newColour });
-      console.log(newPet);
-      // setNewColour(newPet.colour);
-    },
-    // [newPet],
-    [newColour]
-  );
+  useEffect(() => {
+    setNewPet({ ...newPet, colour: newColour });
+  }, [newColour]);
 
   return (
     <Form

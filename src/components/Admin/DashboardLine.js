@@ -1,12 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { BsEyeFill } from 'react-icons/bs';
-import { usePetsContext } from '../../context/PetsContext';
 
-function DashboardLine({ value, id, list }) {
-  const { getPets, pets, petEditModalShow, setPetEditModalShow } =
-    usePetsContext();
-
+function DashboardLine({ value, id, list, onModalShow }) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +16,10 @@ function DashboardLine({ value, id, list }) {
         </td>
       )}
       {list === 'users' && (
-        <td onClick={() => navigate(`../admin/profile/${id}`)}>
+        <td
+          onClick={() => onModalShow(true, id)}
+          // onClick={() => navigate(`../admin/profile/${id}`)
+        >
           <BsEyeFill />
         </td>
       )}

@@ -73,18 +73,18 @@ export default function UserContextProvider({ children }) {
     }
   }
 
-  async function getUserById(id) {
-    try {
-      const res = await axios.get(`http://localhost:8080/users/${id}`);
-      if (!res.statusText === 'ok') throw new Error('No such user!');
-      const { user } = await res.data.data;
-      setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
-      return true;
-    } catch (err) {
-      return false;
-    }
-  }
+  // async function getCurrentUserById(id) {
+  //   try {
+  //     const res = await axios.get(`http://localhost:8080/users/${id}`);
+  //     if (!res.statusText === 'ok') throw new Error('No such user!');
+  //     const { user } = await res.data.data;
+  //     setUser(user);
+  //     localStorage.setItem('user', JSON.stringify(user));
+  //     return true;
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // }
 
   async function getUserProfile(id) {
     try {
@@ -118,9 +118,6 @@ export default function UserContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/users`);
       if (!res.statusText === 'ok') throw new Error('No such user!');
       const { users } = await res.data.data;
-      console.log(res.data);
-      console.log(res.data.ok);
-      console.log(users);
       if (res.data.ok) return users;
       return true;
     } catch (err) {
@@ -149,7 +146,7 @@ export default function UserContextProvider({ children }) {
         getUser,
         confirmSave,
         setConfirmSave,
-        getUserById,
+        // getUserById,
         getAllUsers,
         getUserProfile,
       }}
