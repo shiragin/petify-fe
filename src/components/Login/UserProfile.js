@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useUserContext } from '../../context/UserContext';
 import SignupForm from '../Login/SignupForm';
 import SubmitButton from '../Login/SubmitButton';
-import UserBio from './UserBio';
 
 function UserProfile() {
   const {
@@ -38,7 +37,6 @@ function UserProfile() {
   return (
     <div className="profile-form">
       <SignupForm />
-      {/* <UserBio /> */}
       <SubmitButton
         type={'update'}
         confirm={confirmSave}

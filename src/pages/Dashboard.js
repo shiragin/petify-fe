@@ -24,7 +24,7 @@ function ShowPets() {
       <h4 className="profile-title">Dashboard</h4>
       <Tab.Container
         id="left-tabs-example"
-        defaultActiveKey={activeKey}
+        // defaultActiveKey={activeKey}
         activeKey={activeKey}
       >
         <Row>

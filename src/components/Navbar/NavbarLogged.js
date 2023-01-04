@@ -11,9 +11,9 @@ function NavbarLogged() {
     setError,
     setLoginModalShow,
     setLoginForm,
+    setSearchType,
+    setSearchAdvanced,
   } = useUserContext();
-
-  // const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
     const tokenExpirationTime = getTokenExpirationTime();
@@ -44,6 +44,8 @@ function NavbarLogged() {
     setError({ show: false, message: '' });
     setLoginForm({});
     setUser({});
+    setSearchType(false);
+    setSearchAdvanced({});
   }
 
   return (

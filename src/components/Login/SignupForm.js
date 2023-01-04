@@ -103,7 +103,7 @@ function SignupForm() {
           onChange={(e) => userFormHandler(e, 'phoneNumber')}
         />
       </Form.Group>
-      {!loginModalShow || <UserBio />}
+      {loginModalShow.show || <UserBio />}
       <Form.Group className="form-group split">
         <div>
           <Form.Label className="profile-label">Password</Form.Label>
