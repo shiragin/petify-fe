@@ -216,6 +216,52 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function updateOwnedPet(user, pet, petId) {
+    console.log(user, petId);
+    const res = await axios.post(
+      `http://localhost:8080/pets/${user._id}/adopt`,
+      {
+        adoptedPets: user.adoptedPets,
+        fosteredPets: user.fosteredPets,
+        petId,
+        pet,
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    console.log(res);
+    if (res?.data?.ok) {
+      const { user: userData } = res?.data?.data;
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return true;
+    }
+  }
+
+  async function returnOwnedPet(user, pet, petId) {
+    console.log(user, petId);
+    const res = await axios.post(
+      `http://localhost:8080/pets/${user._id}/adopt`,
+      {
+        adoptedPets: user.adoptedPets,
+        fosteredPets: user.fosteredPets,
+        petId,
+        pet,
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    console.log(res);
+    if (res?.data?.ok) {
+      const { user: userData } = res?.data?.data;
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return true;
+    }
+  }
+
   return (
     <PetsContext.Provider
       value={{
@@ -247,6 +293,7 @@ export default function PetsContextProvider({ children }) {
         addNewPet,
         addSavedPet,
         deleteSavedPet,
+        updateOwnedPet,
       }}
     >
       {children}

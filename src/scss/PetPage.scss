@@ -212,6 +212,8 @@
     min-height: 500px;
     border-radius: 50%;
     transform: rotate(-6deg);
+    display: flex;
+    justify-content: center;
 
     .spinner-border {
       color: $primary-color;
@@ -224,7 +226,7 @@
     }
   }
   &-image {
-    width: 100%;
+    width: 90%;
     height: 500px;
     object-fit: cover;
     object-position: center center;
@@ -332,6 +334,7 @@
     h2 {
       margin-top: 1rem;
       font-size: 3rem;
+      text-align: center;
     }
     p {
       white-space: pre-wrap;

@@ -54,6 +54,7 @@ function PetPage({ id }) {
         onClick={() => navigate(-1)}
       />
       {imgLoading || <LikeButton id={id} />}
+      {/* {imgLoading || <LikeButton id={id} />} */}
       <div className="petpage-image-container">
         {imgLoading && <Spinner />}
         <img

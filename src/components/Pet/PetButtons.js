@@ -5,8 +5,8 @@ import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 
 function PetButtons({ type, id, pet }) {
-  const { user, setUser, setLoginModalShow, updateUser } = useUserContext();
-  const { getPetPage, updatePet, setPetModalShow } = usePetsContext();
+  const { user, setLoginModalShow } = useUserContext();
+  const { getPetPage, setPetModalShow, updateOwnedPet } = usePetsContext();
   const [buttonType, setButtonType] = useState({});
 
   useEffect(() => {
@@ -52,11 +52,13 @@ function PetButtons({ type, id, pet }) {
       user.adoptedPets.push(id);
       console.log('pet added');
     }
-    const update = updateUser(user._id);
+    if (user?.fosteredPets.includes(id)) {
+      user.fosteredPets = user.fosteredPets.filter((pet) => pet !== id);
+    }
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Adopted';
     pet.owner = user._id;
-    updatePet(id, pet);
+    const update = await updateOwnedPet(user, pet, id);
     update && console.log(`Pet adopted by ${user.firstName}`);
     setPetModalShow(true);
   }
@@ -66,11 +68,10 @@ function PetButtons({ type, id, pet }) {
     if (!user?.fosteredPets.includes(id)) {
       user.fosteredPets.push(id);
     }
-    const update = updateUser(user._id);
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Fostered';
     pet.owner = user._id;
-    updatePet(id, pet);
+    const update = await updateOwnedPet(user, pet, id);
     update && console.log(`Pet fostered by ${user.firstName}`);
     setPetModalShow(true);
   }
@@ -83,13 +84,11 @@ function PetButtons({ type, id, pet }) {
     if (user?.adoptedPets.includes(id)) {
       user.adoptedPets = user.adoptedPets.filter((pet) => pet !== id);
     }
-    const update = await updateUser(user._id);
     const pet = await getPetPage(id);
     pet.adoptionStatus = 'Available';
     pet.owner = '';
-    updatePet(id, pet);
+    const update = await updateOwnedPet(user, pet, id);
     update && console.log(`Pet returned by evil nasty ${user.firstName}`);
-    setUser(user);
     setPetModalShow(true);
   }
 
