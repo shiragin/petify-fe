@@ -16,12 +16,10 @@ function DashboardModal(props) {
 
   async function getUserData() {
     const user = await getUserProfile(props.id);
-    console.log(user);
     setViewedUser(user);
   }
 
   async function getPetsData() {
-    console.log(props.id);
     const { adoptedPets, fosteredPets } = await getOwnedPets(props.id);
     setAdoptedPets(adoptedPets);
     setFosteredPets(fosteredPets);

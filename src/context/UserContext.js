@@ -92,12 +92,12 @@ export default function UserContextProvider({ children }) {
   async function getUserProfile(id) {
     try {
       const res = await axios.get(`http://localhost:8080/users/${id}`);
-      if (res?.data?.ok) throw new Error('No such user!');
-      const { user: userDetails } = await res.data.data;
-      // setUser(user);
-      // localStorage.setItem('user', JSON.stringify(user));
-      return userDetails;
+      if (res?.data?.ok) {
+        const { user: userDetails } = await res.data.data;
+        return userDetails;
+      }
     } catch (err) {
+      console.log(error);
       return false;
     }
   }

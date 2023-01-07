@@ -15,7 +15,6 @@ function DahsboardList({ list }) {
 
   async function getUsersData() {
     const usersList = await getAllUsers();
-    console.log(usersList);
     setUsers(usersList);
   }
 
