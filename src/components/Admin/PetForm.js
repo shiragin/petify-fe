@@ -2,18 +2,20 @@ import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 
-function PetForm({ id, newPet, setNewPet, action }) {
+function PetForm({ id, newPet, setNewPet, action, setPetError }) {
   const { getPetPage } = usePetsContext();
 
   const [newColour, setNewColour] = useState([]);
 
   function newPetChangeHandler(e, field) {
+    // setPetError({ show: false, message: '' });
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });
   }
 
   function newPetColourHandler({ target: { checked, value } }) {
+    // setPetError({ show: false, message: '' });
     if (checked) {
       setNewColour([...newColour, value]);
     } else {
@@ -58,7 +60,7 @@ function PetForm({ id, newPet, setNewPet, action }) {
   return (
     <Form
       className="pet-form"
-      // onFocus={() => setError({ show: false })}
+      onFocus={() => setPetError({ show: false, message: '' })}
     >
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Pet Type</Form.Label>

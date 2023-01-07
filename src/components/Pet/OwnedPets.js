@@ -32,6 +32,13 @@ function OwnedPets() {
             value={{ _id, name, type, breed, adoptionStatus, picture }}
           />
         ))}
+      {!ownedPets.length && (
+        <h4>
+          {`You currently have no pets.\nBrowse our `}
+          <a href="/search">search page</a>
+          {` to find a fluffy friend today!`}
+        </h4>
+      )}
     </div>
   );
 }

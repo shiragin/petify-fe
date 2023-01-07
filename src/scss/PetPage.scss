@@ -201,7 +201,7 @@
       color: $primary-color;
       height: 2rem;
       width: 2rem;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       padding-bottom: 0.2rem;
     }
   }
@@ -234,7 +234,8 @@
     // transform: rotate(-6deg);
   }
 
-  .liked {
+  .liked,
+  .edit {
     opacity: 0.9;
     background-color: #fff;
     width: 4rem;
@@ -259,6 +260,17 @@
       &:hover {
         transform: scale(1.1);
       }
+    }
+  }
+  .edit {
+    top: 30%;
+    left: 3%;
+
+    svg {
+      height: 2.7rem;
+      width: 2.7rem;
+      top: 18%;
+      left: 20%;
     }
   }
 

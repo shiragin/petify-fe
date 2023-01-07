@@ -31,22 +31,33 @@ function PetAddNew({ id }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [petError, setPetError] = useState({ show: false, message: '' });
 
   const navigate = useNavigate();
 
   async function petAddHandler() {
     setIsLoading(true);
     const res = await addNewPet(newPet);
-    setPetPage(res);
-    setPetModalShow(true);
+    if (res.ok === true) {
+      setPetPage(res.petDetails);
+      setPetModalShow(true);
+    } else {
+      console.log(res);
+      setPetError({ show: true, message: res.message });
+    }
     setIsLoading(false);
   }
 
   async function petEditHandler() {
     setIsLoading(true);
     const res = await updatePet(newPet._id, newPet);
-    setPetPage(res);
-    setPetModalShow(true);
+    if (res.ok === true) {
+      setPetPage(res.petDetails);
+      setPetModalShow(true);
+    } else {
+      console.log(res);
+      setPetError({ show: true, message: res.message });
+    }
     setIsLoading(false);
   }
 
@@ -57,12 +68,14 @@ function PetAddNew({ id }) {
         newPet={newPet}
         setNewPet={setNewPet}
         action={id ? 'edit' : 'create'}
+        setPetError={setPetError}
       />
       <PetSubmit
         isLoading={isLoading}
         onPetAdd={petAddHandler}
         onPetEdit={petEditHandler}
         action={id ? 'edit' : 'create'}
+        petError={petError}
       />
       <PetModal
         show={petModalShow}

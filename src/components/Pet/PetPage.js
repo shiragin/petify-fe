@@ -7,7 +7,11 @@ import PetDetails from './PetDetails';
 import LikeButton from './LikeButton';
 import PetButtons from './PetButtons';
 import PetModal from './PetModal';
-import { FaChevronCircleLeft } from 'react-icons/fa';
+import {
+  FaChevronCircleLeft,
+  FaChevronCircleRight,
+  FaEdit,
+} from 'react-icons/fa';
 import { Navigate } from 'react-router-dom';
 
 function PetPage({ id }) {
@@ -54,7 +58,12 @@ function PetPage({ id }) {
         onClick={() => navigate(-1)}
       />
       {imgLoading || <LikeButton id={id} />}
-      {/* {imgLoading || <LikeButton id={id} />} */}
+      {imgLoading ||
+        (user.isAdmin && (
+          <div className="edit">
+            <FaEdit onClick={() => navigate(`../admin/edit-pet/${id}`)} />
+          </div>
+        ))}
       <div className="petpage-image-container">
         {imgLoading && <Spinner />}
         <img

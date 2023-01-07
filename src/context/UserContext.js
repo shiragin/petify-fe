@@ -39,7 +39,7 @@ export default function UserContextProvider({ children }) {
   async function createNewUser(user) {
     try {
       const res = await axios.post(`http://localhost:8080/users/signup`, user);
-      if (res.status === 201) {
+      if (res?.data?.ok) {
         setLoggedIn(true);
         getUser(user);
         return true;
@@ -47,8 +47,8 @@ export default function UserContextProvider({ children }) {
         return false;
       }
     } catch (error) {
-      console.error(error.response.data);
-      return error.response.data;
+      const { message } = error.response.data;
+      return message;
     }
   }
 
@@ -58,18 +58,21 @@ export default function UserContextProvider({ children }) {
         email: user.email,
         password: user.password,
       });
-      if (!res.statusText === 'ok') throw new Error('No such user!');
-      const { user: userData, token, exp } = await res.data.data;
-      setToken(token);
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('token', token);
-      localStorage.setItem('exp', exp);
-      console.log('HELLO', userData, token, exp);
-      setLoggedIn(true);
-      return true;
+      console.log(res);
+      if (res?.data?.ok) {
+        const { user: userData, token, exp } = await res.data.data;
+        setToken(token);
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', token);
+        localStorage.setItem('exp', exp);
+        console.log('HELLO', userData, token, exp);
+        setLoggedIn(true);
+        return true;
+      }
     } catch (error) {
-      return error.response.data;
+      const { message } = error.response.data;
+      return message;
     }
   }
 
@@ -89,7 +92,7 @@ export default function UserContextProvider({ children }) {
   async function getUserProfile(id) {
     try {
       const res = await axios.get(`http://localhost:8080/users/${id}`);
-      if (!res.statusText === 'ok') throw new Error('No such user!');
+      if (res?.data?.ok) throw new Error('No such user!');
       const { user: userDetails } = await res.data.data;
       // setUser(user);
       // localStorage.setItem('user', JSON.stringify(user));
@@ -104,9 +107,11 @@ export default function UserContextProvider({ children }) {
       const res = await axios.patch(`http://localhost:8080/users/${id}`, user, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { user: userDetails } = await res.data.data;
-      setUser(userDetails);
-      return res.data.ok;
+      if (res?.data?.ok) {
+        const { user: userDetails } = await res.data.data;
+        setUser(userDetails);
+        return res.data.ok;
+      }
     } catch (err) {
       console.error(err.response.data);
       return false;
@@ -116,7 +121,7 @@ export default function UserContextProvider({ children }) {
   async function getAllUsers() {
     try {
       const res = await axios.get(`http://localhost:8080/users`);
-      if (!res.statusText === 'ok') throw new Error('No such user!');
+      if (!res?.data?.ok) throw new Error('No such user!');
       const { users } = await res.data.data;
       if (res.data.ok) return users;
       return true;

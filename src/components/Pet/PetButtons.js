@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { TbArrowBigRight } from 'react-icons/tb';
+import { FaChevronCircleRight } from 'react-icons/fa';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 
@@ -97,7 +98,7 @@ function PetButtons({ type, id, pet }) {
       className="petpage-button"
       onClick={() => petActionHandler(buttonType.type)}
     >
-      <TbArrowBigRight />
+      <FaChevronCircleRight />
       {buttonType.text}
     </Button>
   );

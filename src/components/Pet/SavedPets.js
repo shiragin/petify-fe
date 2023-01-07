@@ -44,6 +44,13 @@ function SavedPets() {
           value={{ _id, name, type, breed, adoptionStatus, picture }}
         />
       ))}
+      {!savedPets.length && (
+        <h4>
+          {`You currently have no saved pets.\nBrowse our `}
+          <a href="/search">search page</a>
+          {` to find a fluffy friend today!`}
+        </h4>
+      )}
     </div>
   );
 }

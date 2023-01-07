@@ -23,9 +23,10 @@ export default function PetsContextProvider({ children }) {
   async function getPets() {
     try {
       const res = await axios.get(`http://localhost:8080/pets`);
-      if (!res.statusText === 'ok') throw new Error();
-      const { pets } = await res.data.data;
-      setPets(pets);
+      if (res?.data?.ok) {
+        const { pets } = await res.data.data;
+        setPets(pets);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -34,9 +35,10 @@ export default function PetsContextProvider({ children }) {
   async function getPetsByType(type) {
     try {
       const res = await axios.get(`http://localhost:8080/pets?type=${type}`);
-      if (!res.statusText === 'ok') throw new Error();
-      const { pets } = await res.data.data;
-      setPets(pets);
+      if (res?.data?.ok) {
+        const { pets } = await res.data.data;
+        setPets(pets);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -56,9 +58,10 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets`, {
         params: filteredParams,
       });
-      if (!res.statusText === 'ok') throw new Error();
-      const { pets } = await res.data.data;
-      setPets(pets);
+      if (res?.data?.ok) {
+        const { pets } = await res.data.data;
+        setPets(pets);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -67,9 +70,10 @@ export default function PetsContextProvider({ children }) {
   async function getPetPage(id) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/${id}`);
-      if (!res.statusText === 'ok') throw new Error();
-      const { pet } = await res.data.data;
-      return pet[0];
+      if (res?.data?.ok) {
+        const { pet } = await res.data.data;
+        return pet[0];
+      }
     } catch (err) {
       console.error(err);
     }
@@ -80,9 +84,10 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/random`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      if (!res.statusText === 'ok') throw new Error();
-      const { pets } = await res.data.data;
-      setFeaturedPets(pets);
+      if (res?.data?.ok) {
+        const { pets } = await res.data.data;
+        setFeaturedPets(pets);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -93,8 +98,10 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}/`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { savedPets } = res.data.data;
-      return savedPets;
+      if (res?.data?.ok) {
+        const { savedPets } = await res.data.data;
+        return savedPets;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -105,8 +112,10 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { fosteredPets, adoptedPets } = res.data.data;
-      return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
+      if (res?.data?.ok) {
+        const { fosteredPets, adoptedPets } = await res.data.data;
+        return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
+      }
     } catch (error) {
       console.error(error);
     }
@@ -117,10 +126,12 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/pets/${id}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { pet } = res.data.data;
-      return pet.sort((a, b) =>
-        a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-      );
+      if (res?.data?.ok) {
+        const { pet } = await res.data.data;
+        return pet.sort((a, b) =>
+          a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+        );
+      }
     } catch (error) {
       console.error(error);
     }
@@ -139,17 +150,18 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.post(`http://localhost:8080/pets/`, newPetForm, {
         headers: { authorization: `Bearer ${token}` },
       });
-      const { pet: petDetails } = await res.data.data;
-      return res.status === 201 ? petDetails : '';
+      if (res?.data?.ok) {
+        const { pet: petDetails } = await res.data.data;
+        return { ok: true, petDetails };
+      }
     } catch (err) {
-      console.error(err);
-      return false;
+      const { message } = err.response.data;
+      return { ok: false, message };
     }
   }
 
   async function updatePet(id, pet) {
     try {
-      console.log(id, pet);
       const newPetForm = new FormData();
       for (const key in pet) {
         newPetForm.append(key, pet[key]);
@@ -161,12 +173,13 @@ export default function PetsContextProvider({ children }) {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      console.log(res.data);
-      const { pet: petDetails } = await res.data.data;
-      return res.data.ok ? petDetails : '';
+      if (res?.data?.ok) {
+        const { pet: petDetails } = await res.data.data;
+        return { ok: true, petDetails };
+      }
     } catch (err) {
-      console.error(err);
-      return false;
+      const { message } = err.response.data;
+      return { ok: false, message };
     }
   }
 
@@ -230,7 +243,6 @@ export default function PetsContextProvider({ children }) {
         headers: { authorization: `Bearer ${token}` },
       }
     );
-    console.log(res);
     if (res?.data?.ok) {
       const { user: userData } = res?.data?.data;
       setUser(userData);
@@ -239,28 +251,28 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
-  async function returnOwnedPet(user, pet, petId) {
-    console.log(user, petId);
-    const res = await axios.post(
-      `http://localhost:8080/pets/${user._id}/adopt`,
-      {
-        adoptedPets: user.adoptedPets,
-        fosteredPets: user.fosteredPets,
-        petId,
-        pet,
-      },
-      {
-        headers: { authorization: `Bearer ${token}` },
-      }
-    );
-    console.log(res);
-    if (res?.data?.ok) {
-      const { user: userData } = res?.data?.data;
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return true;
-    }
-  }
+  // async function returnOwnedPet(user, pet, petId) {
+  //   console.log(user, petId);
+  //   const res = await axios.post(
+  //     `http://localhost:8080/pets/${user._id}/adopt`,
+  //     {
+  //       adoptedPets: user.adoptedPets,
+  //       fosteredPets: user.fosteredPets,
+  //       petId,
+  //       pet,
+  //     },
+  //     {
+  //       headers: { authorization: `Bearer ${token}` },
+  //     }
+  //   );
+  //   console.log(res);
+  //   if (res?.data?.ok) {
+  //     const { user: userData } = res?.data?.data;
+  //     setUser(userData);
+  //     localStorage.setItem('user', JSON.stringify(userData));
+  //     return true;
+  //   }
+  // }
 
   return (
     <PetsContext.Provider
@@ -294,6 +306,7 @@ export default function PetsContextProvider({ children }) {
         addSavedPet,
         deleteSavedPet,
         updateOwnedPet,
+        // returnOwnedPet,
       }}
     >
       {children}

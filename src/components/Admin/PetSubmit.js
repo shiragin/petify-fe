@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { Button, Overlay, Spinner, Tooltip } from 'react-bootstrap';
-// import { useUserContext } from '../../context/UserContext';
 
 function PetSubmit(props) {
-  // const { error } = useUserContext();
   const target = useRef(null);
+
+  const { show, message } = props.petError;
 
   function petClickHandler() {
     if (props.action === 'create') {
@@ -25,14 +25,10 @@ function PetSubmit(props) {
         <span>{props.isLoading && <Spinner className="mx-3" />}</span>
       </Button>
       {/* {props.confirm && 'Profile saved'} */}
-      <Overlay
-        target={target.current}
-        // show={error.show}
-        placement="bottom"
-      >
+      <Overlay target={target.current} show={show} placement="top">
         {(props) => (
           <Tooltip id="overlay-example" {...props}>
-            {/* {error.message} */}
+            {message}
           </Tooltip>
         )}
       </Overlay>
