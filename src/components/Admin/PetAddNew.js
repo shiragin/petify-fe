@@ -42,7 +42,6 @@ function PetAddNew({ id }) {
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
-      console.log(res);
       setPetError({ show: true, message: res.message });
     }
     setIsLoading(false);
@@ -55,7 +54,6 @@ function PetAddNew({ id }) {
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
-      console.log(res);
       setPetError({ show: true, message: res.message });
     }
     setIsLoading(false);

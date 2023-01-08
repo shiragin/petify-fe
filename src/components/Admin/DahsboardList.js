@@ -5,7 +5,7 @@ import { useUserContext } from '../../context/UserContext';
 import DashboardLine from './DashboardLine';
 import DashboardModal from './DashboardModal';
 
-function DahsboardList({ list }) {
+function DahsboardList({ list, setShowUser }) {
   const { getPets, pets } = usePetsContext();
   const { getAllUsers } = useUserContext();
 
@@ -32,11 +32,11 @@ function DahsboardList({ list }) {
 
   return (
     <Table borderless hover className="show-pets-list">
-      <DashboardModal
+      {/* <DashboardModal
         show={userModalShow.show}
         id={userModalShow.id}
         onHide={() => setUserModalShow({ show: false })}
-      />
+      /> */}
       <thead>
         {list === 'pets' && (
           <tr className="show-pets-list-line-heading">
@@ -84,7 +84,9 @@ function DahsboardList({ list }) {
                 value={{ firstName, lastName, email, phoneNumber }}
                 id={_id}
                 list={list}
-                onModalShow={(show, id) => modalShowHandler(show, id)}
+                setShowUser={setShowUser}
+
+                // onModalShow={(show, id) => modalShowHandler(show, id)}
               />
             ))}
         </tbody>

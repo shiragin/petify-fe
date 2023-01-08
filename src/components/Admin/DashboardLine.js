@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { BsEyeFill } from 'react-icons/bs';
 
-function DashboardLine({ value, id, list, onModalShow }) {
+function DashboardLine({ value, id, list, onModalShow, setShowUser }) {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +17,8 @@ function DashboardLine({ value, id, list, onModalShow }) {
       )}
       {list === 'users' && (
         <td
-          onClick={() => onModalShow(true, id)}
+          onClick={() => setShowUser({ show: true, id })}
+          // onClick={() => onModalShow(true, id)}
           // onClick={() => navigate(`../admin/profile/${id}`)
         >
           <BsEyeFill />

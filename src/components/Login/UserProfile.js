@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { usePetsContext } from '../../context/PetsContext';
 import { useUserContext } from '../../context/UserContext';
 import SignupForm from '../Login/SignupForm';
 import SubmitButton from '../Login/SubmitButton';
+import ConfirmModal from './ConfirmModal';
 
 function UserProfile() {
   const {
@@ -15,14 +17,16 @@ function UserProfile() {
     setLoginModalShow,
   } = useUserContext();
 
+  const [confirmModalShow, setConfirmModalShow] = useState(false);
+
   async function updateUserHandler() {
     if (loggedIn) {
       const update = await updateUser(user._id);
       if (update === true) {
         setConfirmSave(true);
         setUser({ ...user });
+        setConfirmModalShow(true);
       } else {
-        console.log(update);
         await setError({
           show: true,
           message: update.message,
@@ -43,6 +47,10 @@ function UserProfile() {
         type={'update'}
         confirm={confirmSave}
         onProfileEdit={updateUserHandler}
+      />
+      <ConfirmModal
+        show={confirmModalShow}
+        onHide={() => setConfirmModalShow(false)}
       />
     </div>
   );

@@ -86,7 +86,7 @@ function SignupForm() {
         </div>
       </Form.Group>
       <Form.Group className="form-group">
-        <Form.Label className="profile-label">Email Address</Form.Label>
+        <Form.Label className="profile-label">Email address</Form.Label>
         <Form.Control
           className="profile-input"
           type="email"
@@ -110,7 +110,7 @@ function SignupForm() {
       {loginModalShow.show || <UserBio />}
       {loginModalShow.show || (
         <Form.Label className="profile-label">
-          Change Password{' '}
+          Change password{' '}
           <FaChevronCircleUp
             className={changePassword ? 'arrow-click active' : 'arrow-click'}
             onClick={() => {
@@ -122,13 +122,12 @@ function SignupForm() {
       )}
       {changePassword && (
         <Form.Group className="form-group mt-3">
-          <Form.Label className="profile-label">Current Password</Form.Label>
+          <Form.Label className="profile-label">Current password</Form.Label>
           <Form.Control
             className="profile-input"
             type="password"
             required
             placeholder="Enter old password"
-            // value={user?.password}
             onChange={(e) => userFormHandler(e, 'oldPassword')}
           />
         </Form.Group>
@@ -136,13 +135,15 @@ function SignupForm() {
       {(changePassword || loginModalShow.show) && (
         <Form.Group className="form-group split">
           <div>
-            <Form.Label className="profile-label">Password</Form.Label>
+            <Form.Label className="profile-label">
+              {loginModalShow.show ? 'Password' : 'New password'}
+            </Form.Label>
             <Form.Control
               className="profile-input"
               type="password"
               label="Create password"
               required
-              placeholder="Password"
+              placeholder="Enter Password"
               onChange={
                 loginModalShow.show
                   ? (e) => userFormHandler(e, 'password')
@@ -151,7 +152,11 @@ function SignupForm() {
             />
           </div>
           <div>
-            <Form.Label className="profile-label">Confirm password</Form.Label>
+            <Form.Label className="profile-label">
+              {loginModalShow.show
+                ? 'Confirm password'
+                : 'Confirm new password'}
+            </Form.Label>
             <Form.Control
               className="profile-input"
               type="password"

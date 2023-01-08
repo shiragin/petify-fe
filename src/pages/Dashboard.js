@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react';
 import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import DahsboardList from '../components/Admin/DahsboardList';
+import UserDetails from '../components/Admin/UserDetails';
 import '../scss/Dashboard.scss';
 
-function ShowPets() {
+function Dashboard() {
   const [activeKey, setActiveKey] = useState('first');
   const location = useLocation();
 
+  const [showUser, setShowUser] = useState({ show: false, id: '' });
+
+  console.log(setShowUser);
+  console.log(showUser);
+
   useEffect(() => {
-    console.log(location.pathname);
     if (location.pathname === '/admin/show-pets') {
-      console.log('PETS');
       setActiveKey('pets');
     } else if (location.pathname === '/admin/show-users') {
-      console.log('USERS');
       setActiveKey('users');
     } else return;
   }, [location]);
@@ -45,7 +48,11 @@ function ShowPets() {
           <Col sm={9}>
             <Tab.Content>
               <Tab.Pane eventKey="users">
-                <DahsboardList list={'users'} />
+                {showUser.show ? (
+                  <UserDetails id={showUser.id} setShowUser={setShowUser} />
+                ) : (
+                  <DahsboardList list={'users'} setShowUser={setShowUser} />
+                )}
               </Tab.Pane>
               <Tab.Pane eventKey="pets">
                 <DahsboardList list={'pets'} />
@@ -62,4 +69,4 @@ function ShowPets() {
   );
 }
 
-export default ShowPets;
+export default Dashboard;

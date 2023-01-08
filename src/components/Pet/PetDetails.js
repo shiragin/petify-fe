@@ -17,9 +17,6 @@ function PetDetails() {
     dietry,
   } = petPage;
 
-  console.log(dietry);
-  console.log(dietry?.length);
-
   return (
     <div className="petpage-card">
       <h4 className="petpage-card-title">

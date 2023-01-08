@@ -6,8 +6,6 @@ function SubmitButton(props) {
   const { error } = useUserContext();
   const target = useRef(null);
 
-  console.log(error);
-
   return (
     <div className="submit-button">
       <Button

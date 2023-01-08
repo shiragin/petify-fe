@@ -31,12 +31,10 @@ function DashboardModal(props) {
   }
 
   useEffect(() => {
-    console.log('HELLO', props.id);
     if (props.id) getUserData();
   }, [props.show]);
 
   useEffect(() => {
-    console.log('HELLO', props.id);
     if (props.id && viewedUser) getPetsData();
   }, [viewedUser]);
 

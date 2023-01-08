@@ -37,9 +37,7 @@ function LoginForm() {
       setLoginModalShow({ show: false });
       navigate('/');
     } else {
-      console.log(signup);
       setError({ show: true, message: signup });
-      console.log(error);
     }
   }
 
