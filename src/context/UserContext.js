@@ -76,19 +76,6 @@ export default function UserContextProvider({ children }) {
     }
   }
 
-  // async function getCurrentUserById(id) {
-  //   try {
-  //     const res = await axios.get(`http://localhost:8080/users/${id}`);
-  //     if (!res.statusText === 'ok') throw new Error('No such user!');
-  //     const { user } = await res.data.data;
-  //     setUser(user);
-  //     localStorage.setItem('user', JSON.stringify(user));
-  //     return true;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // }
-
   async function getUserProfile(id) {
     try {
       const res = await axios.get(`http://localhost:8080/users/${id}`);
@@ -103,8 +90,9 @@ export default function UserContextProvider({ children }) {
   }
 
   async function updateUser(id) {
+    console.log('USER UPDATE!', user);
     try {
-      const res = await axios.patch(`http://localhost:8080/users/${id}`, user, {
+      const res = await axios.put(`http://localhost:8080/users/${id}`, user, {
         headers: { authorization: `Bearer ${token}` },
       });
       if (res?.data?.ok) {

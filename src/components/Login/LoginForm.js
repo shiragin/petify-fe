@@ -34,6 +34,7 @@ function LoginForm() {
     e.preventDefault();
     const signup = await getUser(loginForm);
     if (loggedIn) {
+      setLoginModalShow({ show: false });
       navigate('/');
     } else {
       await setError({ show: true, message: signup });

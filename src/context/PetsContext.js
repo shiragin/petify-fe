@@ -230,7 +230,6 @@ export default function PetsContextProvider({ children }) {
   }
 
   async function updateOwnedPet(user, pet, petId) {
-    console.log(user, petId);
     const res = await axios.post(
       `http://localhost:8080/pets/${user._id}/adopt`,
       {

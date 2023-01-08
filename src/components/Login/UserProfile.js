@@ -12,6 +12,7 @@ function UserProfile() {
     confirmSave,
     setConfirmSave,
     setError,
+    setLoginModalShow,
   } = useUserContext();
 
   async function updateUserHandler() {
@@ -20,7 +21,6 @@ function UserProfile() {
       if (update) {
         setConfirmSave(true);
         setUser({ ...user });
-        // setUser({ ...user }, { password: '', passwordConfirm: '' });
       } else {
         await setError({
           show: true,
@@ -32,6 +32,7 @@ function UserProfile() {
 
   useEffect(() => {
     setError({ show: false, message: '' });
+    setLoginModalShow({ show: false });
   }, []);
 
   return (

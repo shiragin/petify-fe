@@ -7,12 +7,7 @@ import PetDetails from './PetDetails';
 import LikeButton from './LikeButton';
 import PetButtons from './PetButtons';
 import PetModal from './PetModal';
-import {
-  FaChevronCircleLeft,
-  FaChevronCircleRight,
-  FaEdit,
-} from 'react-icons/fa';
-import { Navigate } from 'react-router-dom';
+import { FaChevronCircleLeft, FaEdit } from 'react-icons/fa';
 
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =

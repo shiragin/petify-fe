@@ -4,7 +4,7 @@ import { Card, Spinner } from 'react-bootstrap';
 import LikeButton from './LikeButton';
 
 function PetCard({ value }) {
-  const { _id, name, type, breed, adoptionStatus, picture } = value;
+  const { _id, name, breed, adoptionStatus, picture } = value;
 
   const [imgLoading, setImgLoading] = useState(true);
 

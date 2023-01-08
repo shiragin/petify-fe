@@ -5,8 +5,7 @@ import PetCard from './PetCard';
 
 function OwnedPets() {
   const { user } = useUserContext();
-  const { getPetPage, getOwnedPets, setOwnedPets, ownedPets } =
-    usePetsContext();
+  const { getOwnedPets, setOwnedPets, ownedPets } = usePetsContext();
 
   async function updateOwnedPets() {
     if (!user.fosteredPets.length && !user.adoptedPets.length) return;
@@ -15,13 +14,13 @@ function OwnedPets() {
     setOwnedPets([...adoptedPets, ...fosteredPets]);
   }
 
-  useEffect(() => {
-    updateOwnedPets();
-  }, []);
-
-  useEffect(() => {
-    updateOwnedPets();
-  }, [user]);
+  useEffect(
+    () => {
+      updateOwnedPets();
+    },
+    // [], NADAV
+    [user]
+  );
 
   return (
     <div className="home-logged-featured-pets-cards">

@@ -41,6 +41,21 @@
       .profile-label {
         font-size: 1.2rem;
         font-weight: 600;
+
+        .arrow-click {
+          margin-left: 0.5rem;
+          height: 2rem;
+          width: 2rem;
+          transition: all 0.2s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+        .active {
+          transform: scaleY(-1);
+        }
       }
 
       .profile-input {

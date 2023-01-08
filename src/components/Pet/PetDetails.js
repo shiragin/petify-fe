@@ -13,7 +13,12 @@ function PetDetails() {
     hypoallergenic,
     adoptionStatus,
     bio,
+    age,
+    dietry,
   } = petPage;
+
+  console.log(dietry);
+  console.log(dietry?.length);
 
   return (
     <div className="petpage-card">
@@ -29,6 +34,14 @@ function PetDetails() {
                 Breed:{' '}
               </span>
               {breed}
+            </li>
+            <li>
+              <span>
+                <FaPaw />
+                Age:{' '}
+              </span>
+              {/* {age > 12 ? `${age / 12} years` : `${age} months`} */}
+              {age} {age > 1 ? ' years' : ' year'}
             </li>
             <li>
               <span>
@@ -61,6 +74,13 @@ function PetDetails() {
                 Hypoallergenic:{' '}
               </span>{' '}
               {hypoallergenic ? 'Yes' : 'No'}
+            </li>
+            <li>
+              <span>
+                <FaPaw />
+                Special Diet:{' '}
+              </span>{' '}
+              {dietry && dietry[0] ? dietry.join(', ') : 'None'}
             </li>
             <li>
               <span>

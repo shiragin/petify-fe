@@ -89,6 +89,18 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
       </Form.Group>
 
       <Form.Group className="form-group">
+        <Form.Label className="pet-label">Pet Age</Form.Label>
+        <Form.Control
+          className="pet-input"
+          type="text"
+          required
+          placeholder="Enter pet age in years"
+          value={newPet?.age}
+          onChange={(e) => newPetChangeHandler(e, 'age')}
+        />
+      </Form.Group>
+
+      <Form.Group className="form-group">
         <Form.Label className="pet-label">Adoption Status</Form.Label>
         <Form.Select
           className="pet-input"

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { FaChevronCircleRight, FaChevronCircleUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import SubmitButton from './SubmitButton';
@@ -16,6 +17,8 @@ function SignupForm() {
     setError,
     setConfirmSave,
   } = useUserContext();
+
+  const [changePassword, setChangePassword] = useState();
 
   const navigate = useNavigate();
 
@@ -36,6 +39,7 @@ function SignupForm() {
     const signup = await createNewUser(user);
     if (loggedIn || signup === true) {
       navigate('/');
+      setLoginModalShow({ show: false });
     } else {
       await setError({ show: true, message: signup });
     }
@@ -104,32 +108,62 @@ function SignupForm() {
         />
       </Form.Group>
       {loginModalShow.show || <UserBio />}
-      <Form.Group className="form-group split">
-        <div>
-          <Form.Label className="profile-label">Password</Form.Label>
+      {loginModalShow.show || (
+        <Form.Label className="profile-label">
+          Change Password{' '}
+          <FaChevronCircleUp
+            className={changePassword ? 'arrow-click active' : 'arrow-click'}
+            onClick={() => {
+              setChangePassword(!changePassword);
+              setUser({ ...user, newPassword: '' });
+            }}
+          />
+        </Form.Label>
+      )}
+      {/* {changePassword && (
+        <Form.Group className="form-group">
+          <Form.Label className="profile-label">Old Password</Form.Label>
           <Form.Control
             className="profile-input"
-            type="password"
-            label="Create password"
+            type="tel"
             required
-            placeholder="Password"
-            // value={user?.password}
+            placeholder="Phone number"
+            value={user?.password}
             onChange={(e) => userFormHandler(e, 'password')}
           />
-        </div>
-        <div>
-          <Form.Label className="profile-label">Confirm password</Form.Label>
-          <Form.Control
-            className="profile-input"
-            type="password"
-            label="Create password"
-            required
-            placeholder="Confirm Password"
-            // value={user?.passwordConfirm}
-            onChange={(e) => userFormHandler(e, 'passwordConfirm')}
-          />
-        </div>
-      </Form.Group>
+        </Form.Group>
+      )} */}
+      {(changePassword || loginModalShow.show) && (
+        <Form.Group className="form-group split">
+          <div>
+            <Form.Label className="profile-label">Password</Form.Label>
+            <Form.Control
+              className="profile-input"
+              type="password"
+              label="Create password"
+              required
+              placeholder="Password"
+              onChange={
+                loginModalShow.show
+                  ? (e) => userFormHandler(e, 'password')
+                  : (e) => userFormHandler(e, 'newPassword')
+              }
+            />
+          </div>
+          <div>
+            <Form.Label className="profile-label">Confirm password</Form.Label>
+            <Form.Control
+              className="profile-input"
+              type="password"
+              label="Create password"
+              required
+              placeholder="Confirm Password"
+              // value={user?.passwordConfirm}
+              onChange={(e) => userFormHandler(e, 'passwordConfirm')}
+            />
+          </div>
+        </Form.Group>
+      )}
       {loginModalShow.show && !loggedIn && (
         <div className="login-footer">
           <SubmitButton
