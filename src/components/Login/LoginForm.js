@@ -33,11 +33,13 @@ function LoginForm() {
   async function loginSubmitHandler(e) {
     e.preventDefault();
     const signup = await getUser(loginForm);
-    if (loggedIn) {
+    if (signup === true) {
       setLoginModalShow({ show: false });
       navigate('/');
     } else {
-      await setError({ show: true, message: signup });
+      console.log(signup);
+      setError({ show: true, message: signup });
+      console.log(error);
     }
   }
 

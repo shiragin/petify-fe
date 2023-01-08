@@ -6,6 +6,8 @@ function SubmitButton(props) {
   const { error } = useUserContext();
   const target = useRef(null);
 
+  console.log(error);
+
   return (
     <div className="submit-button">
       <Button
@@ -26,10 +28,10 @@ function SubmitButton(props) {
         </span>
       </Button>
       {/* {props.confirm && 'Profile saved'} */}
-      <Overlay target={target.current} show={error.show} placement="tops">
+      <Overlay target={target.current} show={error?.show} placement="top">
         {(props) => (
           <Tooltip id="overlay-example" {...props}>
-            {error.message}
+            {error?.message}
           </Tooltip>
         )}
       </Overlay>

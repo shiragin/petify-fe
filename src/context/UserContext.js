@@ -58,7 +58,6 @@ export default function UserContextProvider({ children }) {
         email: user.email,
         password: user.password,
       });
-      console.log(res);
       if (res?.data?.ok) {
         const { user: userData, token, exp } = await res.data.data;
         setToken(token);
@@ -71,7 +70,7 @@ export default function UserContextProvider({ children }) {
         return true;
       }
     } catch (error) {
-      const { message } = error.response.data;
+      const { message } = await error?.response?.data;
       return message;
     }
   }
