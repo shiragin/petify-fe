@@ -115,24 +115,24 @@ function SignupForm() {
             className={changePassword ? 'arrow-click active' : 'arrow-click'}
             onClick={() => {
               setChangePassword(!changePassword);
-              setUser({ ...user, newPassword: '' });
+              setUser({ ...user, newPassword: '', oldPassword: '' });
             }}
           />
         </Form.Label>
       )}
-      {/* {changePassword && (
-        <Form.Group className="form-group">
-          <Form.Label className="profile-label">Old Password</Form.Label>
+      {changePassword && (
+        <Form.Group className="form-group mt-3">
+          <Form.Label className="profile-label">Current Password</Form.Label>
           <Form.Control
             className="profile-input"
-            type="tel"
+            type="password"
             required
-            placeholder="Phone number"
-            value={user?.password}
-            onChange={(e) => userFormHandler(e, 'password')}
+            placeholder="Enter old password"
+            // value={user?.password}
+            onChange={(e) => userFormHandler(e, 'oldPassword')}
           />
         </Form.Group>
-      )} */}
+      )}
       {(changePassword || loginModalShow.show) && (
         <Form.Group className="form-group split">
           <div>

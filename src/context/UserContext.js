@@ -98,11 +98,11 @@ export default function UserContextProvider({ children }) {
       if (res?.data?.ok) {
         const { user: userDetails } = await res.data.data;
         setUser(userDetails);
+        localStorage.setItem('user', JSON.stringify(userDetails));
         return res.data.ok;
       }
     } catch (err) {
-      console.error(err.response.data);
-      return false;
+      return err.response.data;
     }
   }
 

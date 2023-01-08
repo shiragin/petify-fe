@@ -26,7 +26,7 @@ function SubmitButton(props) {
         </span>
       </Button>
       {/* {props.confirm && 'Profile saved'} */}
-      <Overlay target={target.current} show={error.show} placement="bottom">
+      <Overlay target={target.current} show={error.show} placement="tops">
         {(props) => (
           <Tooltip id="overlay-example" {...props}>
             {error.message}

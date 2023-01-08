@@ -18,13 +18,14 @@ function UserProfile() {
   async function updateUserHandler() {
     if (loggedIn) {
       const update = await updateUser(user._id);
-      if (update) {
+      if (update === true) {
         setConfirmSave(true);
         setUser({ ...user });
       } else {
+        console.log(update);
         await setError({
           show: true,
-          message: `Error! Couldn't update profile`,
+          message: update.message,
         });
       }
     }
