@@ -8,19 +8,15 @@ function OwnedPets() {
   const { getOwnedPets, setOwnedPets, ownedPets } = usePetsContext();
 
   async function updateOwnedPets() {
-    if (!user.fosteredPets.length && !user.adoptedPets.length) return;
+    if (!user?.fosteredPets?.length && !user?.adoptedPets?.length) return;
     const { _id } = user;
     const { fosteredPets, adoptedPets } = await getOwnedPets(_id);
     setOwnedPets([...adoptedPets, ...fosteredPets]);
   }
 
-  useEffect(
-    () => {
-      updateOwnedPets();
-    },
-    // [], NADAV
-    [user]
-  );
+  useEffect(() => {
+    updateOwnedPets();
+  }, [user]);
 
   return (
     <div className="home-logged-featured-pets-cards">

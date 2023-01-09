@@ -43,7 +43,7 @@ function NavbarLogged() {
     setLoggedIn(false);
     setError({ show: false, message: '' });
     setLoginForm({});
-    setUser({});
+    setUser(null);
     setSearchType(false);
     setSearchAdvanced({});
   }
@@ -74,7 +74,7 @@ function NavbarLogged() {
       >
         Profile
       </NavLink>
-      {user.isAdmin && <NavbarAdmin />}
+      {user?.isAdmin && <NavbarAdmin />}
       <NavLink to="/" onClick={signOutHandler}>
         Sign Out
       </NavLink>

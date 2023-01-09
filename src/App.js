@@ -9,6 +9,7 @@ import MyPets from './pages/MyPets';
 import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
+import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
 
 function App() {
@@ -23,14 +24,63 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/mypets" element={<MyPets />} />
             <Route path="/pet/:id" element={<Pet />} />
-            <Route path="/admin/add-pet" element={<AddPet />} />
-            <Route path="/admin/show-pets" element={<Dashboard />} />
-            <Route path="/admin/show-users" element={<Dashboard />} />
-            <Route path="/admin/edit-pet/:id" element={<AddPet />} />
-            <Route path="/admin/profile/:id" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/mypets"
+              element={
+                <PrivateRoute>
+                  <MyPets />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/add-pet"
+              element={
+                <PrivateRoute>
+                  <AddPet />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/show-pets"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/show-users"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/edit-pet/:id"
+              element={
+                <PrivateRoute>
+                  <AddPet />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/profile/:id"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </PetsContextProvider>

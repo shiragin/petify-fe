@@ -18,7 +18,7 @@ export default function PetsContextProvider({ children }) {
   const [searchAdvanced, setSearchAdvanced] = useState({});
   const [petModalShow, setPetModalShow] = useState(false);
 
-  const { token, setUser } = useUserContext();
+  const { setUser } = useUserContext();
 
   async function getPets() {
     try {
@@ -82,7 +82,7 @@ export default function PetsContextProvider({ children }) {
   async function getRandomPets(num) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/random`, {
-        headers: { authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (res?.data?.ok) {
         const { pets } = await res.data.data;
@@ -96,7 +96,7 @@ export default function PetsContextProvider({ children }) {
   async function getSavedPets(id) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}/`, {
-        headers: { authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (res?.data?.ok) {
         const { savedPets } = await res.data.data;
@@ -110,7 +110,7 @@ export default function PetsContextProvider({ children }) {
   async function getOwnedPets(id) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
-        headers: { authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (res?.data?.ok) {
         const { fosteredPets, adoptedPets } = await res.data.data;
@@ -124,7 +124,7 @@ export default function PetsContextProvider({ children }) {
   async function getSavedPetsByID(id) {
     try {
       const res = await axios.get(`http://localhost:8080/pets/${id}`, {
-        headers: { authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (res?.data?.ok) {
         const { pet } = await res.data.data;
@@ -148,7 +148,7 @@ export default function PetsContextProvider({ children }) {
         newPetForm.append(key, pet[key]);
       }
       const res = await axios.post(`http://localhost:8080/pets/`, newPetForm, {
-        headers: { authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       if (res?.data?.ok) {
         const { pet: petDetails } = await res.data.data;
@@ -169,9 +169,7 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.patch(
         `http://localhost:8080/pets/${id}`,
         newPetForm,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
+        { withCredentials: true }
       );
       if (res?.data?.ok) {
         const { pet: petDetails } = await res.data.data;
@@ -188,9 +186,7 @@ export default function PetsContextProvider({ children }) {
       const res = await axios.post(
         `http://localhost:8080/pets/${userId}/save`,
         { savedPets },
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
+        { withCredentials: true }
       );
       console.log(res);
       if (res?.data?.ok) {
@@ -208,11 +204,8 @@ export default function PetsContextProvider({ children }) {
     try {
       const res = await axios.delete(
         `http://localhost:8080/pets/${userId}/save`,
+        { withCredentials: true },
         {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-
           data: {
             savedPets,
           },
@@ -238,9 +231,7 @@ export default function PetsContextProvider({ children }) {
         petId,
         pet,
       },
-      {
-        headers: { authorization: `Bearer ${token}` },
-      }
+      { withCredentials: true }
     );
     if (res?.data?.ok) {
       const { user: userData } = res?.data?.data;

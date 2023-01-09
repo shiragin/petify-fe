@@ -17,20 +17,24 @@ export default function UserContextProvider({ children }) {
 
   const [confirmSave, setConfirmSave] = useState();
 
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  // const [token, setToken] = useState(localStorage.getItem('token') || '');
 
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    password: '',
-    passwordConfirm: '',
-    bio: '',
-    savedPets: [],
-    adoptedPets: [],
-    fosteredPets: [],
-  });
+  const [user, setUser] = useState(
+    localStorage.getItem('user') ||
+      //   {
+      //   firstName: '',
+      //   lastName: '',
+      //   email: '',
+      //   phoneNumber: '',
+      //   password: '',
+      //   passwordConfirm: '',
+      //   bio: '',
+      //   savedPets: [],
+      //   adoptedPets: [],
+      //   fosteredPets: [],
+      // }
+      null
+  );
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -54,18 +58,21 @@ export default function UserContextProvider({ children }) {
 
   async function getUser(user) {
     try {
-      const res = await axios.post(`http://localhost:8080/users/login`, {
-        email: user.email,
-        password: user.password,
-      });
+      const res = await axios.post(
+        `http://localhost:8080/users/login`,
+        {
+          email: user.email,
+          password: user.password,
+        },
+        { withCredentials: true }
+      );
       if (res?.data?.ok) {
-        const { user: userData, token, exp } = await res.data.data;
-        setToken(token);
+        const { user: userData, exp } = await res.data.data;
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('token', token);
-        localStorage.setItem('exp', exp);
-        console.log('HELLO', userData, token, exp);
+        // localStorage.setItem('token', token);
+        // localStorage.setItem('exp', exp);
+        console.log('HELLO', userData, exp);
         setLoggedIn(true);
         return true;
       }
@@ -91,9 +98,13 @@ export default function UserContextProvider({ children }) {
   async function updateUser(id) {
     console.log('USER UPDATE!', user);
     try {
-      const res = await axios.put(`http://localhost:8080/users/${id}`, user, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      const res = await axios.put(
+        `http://localhost:8080/users/${id}`,
+        user,
+        // headers: { authorization: `Bearer ${token}` },
+        { withCredentials: true }
+      );
+
       if (res?.data?.ok) {
         const { user: userDetails } = await res.data.data;
         setUser(userDetails);
@@ -126,8 +137,6 @@ export default function UserContextProvider({ children }) {
         setLoggedIn,
         user,
         setUser,
-        token,
-        setToken,
         createNewUser,
         loginForm,
         setLoginForm,

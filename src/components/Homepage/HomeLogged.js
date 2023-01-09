@@ -9,7 +9,7 @@ function HomeLogged() {
   return (
     <div className="home-logged">
       <h1 className="home-logged-welcome">
-        {`Welcome back,\n`} {user.firstName} {user.lastName}!
+        {`Welcome back,\n`} {user?.firstName} {user?.lastName}!
       </h1>
       <FeaturedPets />
       <HomeSavedPets />

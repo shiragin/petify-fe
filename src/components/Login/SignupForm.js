@@ -127,7 +127,7 @@ function SignupForm() {
             className="profile-input"
             type="password"
             required
-            placeholder="Enter old password"
+            placeholder="Enter current password"
             onChange={(e) => userFormHandler(e, 'oldPassword')}
           />
         </Form.Group>
@@ -143,7 +143,7 @@ function SignupForm() {
               type="password"
               label="Create password"
               required
-              placeholder="Enter Password"
+              placeholder="Enter password"
               onChange={
                 loginModalShow.show
                   ? (e) => userFormHandler(e, 'password')
@@ -162,7 +162,7 @@ function SignupForm() {
               type="password"
               label="Create password"
               required
-              placeholder="Confirm Password"
+              placeholder="Confirm password"
               // value={user?.passwordConfirm}
               onChange={(e) => userFormHandler(e, 'passwordConfirm')}
             />

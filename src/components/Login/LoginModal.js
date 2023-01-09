@@ -17,7 +17,7 @@ function LoginModal(props) {
             : 'Log into your account'}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="login">
         {loginModalShow.type === 'signup' ? <SignupForm /> : <LoginForm />}
       </Modal.Body>
     </Modal>
