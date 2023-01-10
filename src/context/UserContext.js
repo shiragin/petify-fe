@@ -17,23 +17,23 @@ export default function UserContextProvider({ children }) {
 
   const [confirmSave, setConfirmSave] = useState();
 
-  // const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
 
   const [user, setUser] = useState(
-    localStorage.getItem('user') ||
-      //   {
-      //   firstName: '',
-      //   lastName: '',
-      //   email: '',
-      //   phoneNumber: '',
-      //   password: '',
-      //   passwordConfirm: '',
-      //   bio: '',
-      //   savedPets: [],
-      //   adoptedPets: [],
-      //   fosteredPets: [],
-      // }
-      null
+    // localStorage.getItem('user') ||
+    //   {
+    //   firstName: '',
+    //   lastName: '',
+    //   email: '',
+    //   phoneNumber: '',
+    //   password: '',
+    //   passwordConfirm: '',
+    //   bio: '',
+    //   savedPets: [],
+    //   adoptedPets: [],
+    //   fosteredPets: [],
+    // }
+    null
   );
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -42,10 +42,16 @@ export default function UserContextProvider({ children }) {
 
   async function createNewUser(user) {
     try {
-      const res = await axios.post(`http://localhost:8080/users/signup`, user);
+      const res = await axios.post(`http://localhost:8080/users/signup`, user, {
+        withCredentials: true,
+      });
       if (res?.data?.ok) {
+        const { userId } = res.data.data;
+        const currentUser = await getUserProfile(userId);
+        setUserId(userId);
+        setUser(currentUser);
+        localStorage.setItem('userId', userId);
         setLoggedIn(true);
-        getUser(user);
         return true;
       } else {
         return false;
@@ -67,12 +73,14 @@ export default function UserContextProvider({ children }) {
         { withCredentials: true }
       );
       if (res?.data?.ok) {
-        const { user: userData, exp } = await res.data.data;
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
+        const { userId, exp } = await res.data.data;
+        const currentUser = await getUserProfile(userId);
+        setUserId(userId);
+        setUser(currentUser);
+        localStorage.setItem('userId', userId);
         // localStorage.setItem('token', token);
         // localStorage.setItem('exp', exp);
-        console.log('HELLO', userData, exp);
+        console.log('HELLO', user, userId, exp);
         setLoggedIn(true);
         return true;
       }
@@ -90,13 +98,12 @@ export default function UserContextProvider({ children }) {
         return userDetails;
       }
     } catch (err) {
-      console.log(error);
+      console.error(error);
       return false;
     }
   }
 
   async function updateUser(id) {
-    console.log('USER UPDATE!', user);
     try {
       const res = await axios.put(
         `http://localhost:8080/users/${id}`,
@@ -121,7 +128,6 @@ export default function UserContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/users`);
       if (!res?.data?.ok) throw new Error('No such user!');
       const { users } = await res.data.data;
-      console.log(users);
       if (res.data.ok) return users;
       return true;
     } catch (err) {
@@ -138,6 +144,8 @@ export default function UserContextProvider({ children }) {
         setLoggedIn,
         user,
         setUser,
+        userId,
+        setUserId,
         createNewUser,
         loginForm,
         setLoginForm,
@@ -148,7 +156,6 @@ export default function UserContextProvider({ children }) {
         getUser,
         confirmSave,
         setConfirmSave,
-        // getUserById,
         getAllUsers,
         getUserProfile,
       }}

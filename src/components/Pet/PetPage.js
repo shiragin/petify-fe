@@ -21,7 +21,7 @@ function PetPage({ id }) {
 
   function verifyPet() {
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
-      console.log('my pet');
+      console.log('dis my pet');
       setMyPet(true);
     }
   }

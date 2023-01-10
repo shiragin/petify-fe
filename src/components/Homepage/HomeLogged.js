@@ -4,7 +4,7 @@ import HomeSavedPets from './HomeSavedPets';
 import FeaturedPets from './FeaturedPets';
 
 function HomeLogged() {
-  const { user, getUser } = useUserContext();
+  const { user } = useUserContext();
 
   return (
     <div className="home-logged">

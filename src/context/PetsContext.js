@@ -188,7 +188,6 @@ export default function PetsContextProvider({ children }) {
         { savedPets },
         { withCredentials: true }
       );
-      console.log(res);
       if (res?.data?.ok) {
         const { user: userData } = res?.data?.data;
         setUser(userData);
@@ -196,7 +195,7 @@ export default function PetsContextProvider({ children }) {
         return true;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -218,7 +217,7 @@ export default function PetsContextProvider({ children }) {
         return true;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -240,29 +239,6 @@ export default function PetsContextProvider({ children }) {
       return true;
     }
   }
-
-  // async function returnOwnedPet(user, pet, petId) {
-  //   console.log(user, petId);
-  //   const res = await axios.post(
-  //     `http://localhost:8080/pets/${user._id}/adopt`,
-  //     {
-  //       adoptedPets: user.adoptedPets,
-  //       fosteredPets: user.fosteredPets,
-  //       petId,
-  //       pet,
-  //     },
-  //     {
-  //       headers: { authorization: `Bearer ${token}` },
-  //     }
-  //   );
-  //   console.log(res);
-  //   if (res?.data?.ok) {
-  //     const { user: userData } = res?.data?.data;
-  //     setUser(userData);
-  //     localStorage.setItem('user', JSON.stringify(userData));
-  //     return true;
-  //   }
-  // }
 
   return (
     <PetsContext.Provider

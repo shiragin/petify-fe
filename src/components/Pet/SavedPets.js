@@ -9,7 +9,7 @@ function SavedPets() {
     usePetsContext();
 
   async function updateSavedPets() {
-    if (!user.SavedPets) return;
+    if (!user?.SavedPets) return;
     const { _id } = user;
     const pets = await getSavedPets(_id);
     setSavedPets(pets);
@@ -21,7 +21,7 @@ function SavedPets() {
 
   useEffect(() => {
     async function fetchData() {
-      if (user.savedPets) {
+      if (user?.savedPets) {
         const pets = [];
         for (const pet of user.savedPets) {
           const data = await getPetPage(pet);
