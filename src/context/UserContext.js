@@ -121,6 +121,7 @@ export default function UserContextProvider({ children }) {
       const res = await axios.get(`http://localhost:8080/users`);
       if (!res?.data?.ok) throw new Error('No such user!');
       const { users } = await res.data.data;
+      console.log(users);
       if (res.data.ok) return users;
       return true;
     } catch (err) {

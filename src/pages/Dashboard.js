@@ -11,9 +11,6 @@ function Dashboard() {
 
   const [showUser, setShowUser] = useState({ show: false, id: '' });
 
-  console.log(setShowUser);
-  console.log(showUser);
-
   useEffect(() => {
     if (location.pathname === '/admin/show-pets') {
       setActiveKey('pets');
