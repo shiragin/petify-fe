@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
+import { useUserContext } from '../../context/UserContext';
 
-function PetForm({ id, newPet, setNewPet, action, setPetError }) {
+function PetForm({
+  id,
+  newPet,
+  setNewPet,
+  action,
+  setPetError,
+  owners,
+  setOwners,
+}) {
   const { getPetPage } = usePetsContext();
+  const { getAllUsers } = useUserContext();
 
   const [newColour, setNewColour] = useState([]);
+  // const [owners, setOwners] = useState([]);
 
   function newPetChangeHandler(e, field) {
     const newField = {};
@@ -61,9 +72,23 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
     [action]
   );
 
+  async function getOwners() {
+    const users = await getAllUsers();
+    setOwners(users);
+  }
+
   useEffect(() => {
     setNewPet({ ...newPet, colour: newColour });
   }, [newColour]);
+
+  useEffect(() => {
+    if (
+      newPet?.adoptionStatus === 'Fostered' ||
+      newPet?.adoptionStatus === 'Adopted'
+    ) {
+      getOwners();
+    }
+  }, [newPet]);
 
   return (
     <Form
@@ -116,11 +141,32 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
           value={newPet?.adoptionStatus}
           onChange={(e) => newPetChangeHandler(e, 'adoptionStatus')}
         >
-          <option value="Adopted">Adopted</option>
+          {action === 'edit' && <option value="Adopted">Adopted</option>}
           <option value="Fostered">Fostered</option>
           <option value="Available">Available</option>
         </Form.Select>
       </Form.Group>
+      {(newPet?.adoptionStatus === 'Fostered' ||
+        newPet?.adoptionStatus === 'Adopted') && (
+        <Form.Group className="form-group">
+          <Form.Label className="pet-label">Owner</Form.Label>
+          <Form.Select
+            className="pet-input"
+            required
+            value={newPet?.owner}
+            onChange={(e) => newPetChangeHandler(e, 'owner')}
+          >
+            <option value="">
+              {`Please choose the user who ${newPet?.adoptionStatus?.toLowerCase()} this pet`}
+            </option>
+            {owners?.map(({ _id, firstName, lastName }) => (
+              <option key={_id} value={_id}>
+                {firstName} {lastName}
+              </option>
+            ))}
+          </Form.Select>
+        </Form.Group>
+      )}
 
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Height </Form.Label>

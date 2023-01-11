@@ -165,22 +165,6 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
-  // async function getSavedPetsByID(id) {
-  //   try {
-  //     const res = await axios.get(`http://localhost:8080/pets/${id}`, {
-  //       withCredentials: true,
-  //     });
-  //     if (res?.data?.ok) {
-  //       const { pet } = await res.data.data;
-  //       return pet.sort((a, b) =>
-  //         a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
   async function addSavedPet(userId, savedPets) {
     try {
       const res = await axios.post(
@@ -191,7 +175,6 @@ export default function PetsContextProvider({ children }) {
       if (res?.data?.ok) {
         const { user: userData } = res?.data?.data;
         setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
         return true;
       }
     } catch (err) {
@@ -214,7 +197,6 @@ export default function PetsContextProvider({ children }) {
       if (res?.data?.ok) {
         const { user: userData } = res?.data?.data;
         setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
         return true;
       }
     } catch (err) {
@@ -223,21 +205,22 @@ export default function PetsContextProvider({ children }) {
   }
 
   async function updateOwnedPet(user, pet, petId) {
-    const res = await axios.post(
-      `http://localhost:8080/pets/${user._id}/adopt`,
-      {
-        adoptedPets: user.adoptedPets,
-        fosteredPets: user.fosteredPets,
-        petId,
-        pet,
-      },
-      { withCredentials: true }
-    );
-    if (res?.data?.ok) {
-      const { user: userData } = res?.data?.data;
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return true;
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/pets/${user._id}/adopt`,
+        {
+          adoptedPets: user.adoptedPets,
+          fosteredPets: user.fosteredPets,
+          petId,
+          pet,
+        },
+        { withCredentials: true }
+      );
+      if (res?.data?.ok) {
+        return true;
+      }
+    } catch (err) {
+      console.error(err);
     }
   }
 

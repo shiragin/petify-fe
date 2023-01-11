@@ -102,12 +102,9 @@ export default function UserContextProvider({ children }) {
 
   async function updateUser(id) {
     try {
-      const res = await axios.put(
-        `http://localhost:8080/users/${id}`,
-        user,
-        // headers: { authorization: `Bearer ${token}` },
-        { withCredentials: true }
-      );
+      const res = await axios.put(`http://localhost:8080/users/${id}`, user, {
+        withCredentials: true,
+      });
 
       if (res?.data?.ok) {
         const { user: userDetails } = await res.data.data;

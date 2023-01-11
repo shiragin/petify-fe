@@ -7,12 +7,12 @@ import PetModal from '../Pet/PetModal';
 
 function PetAddNew({ id }) {
   const {
-    addNewPet,
     petPage,
     setPetPage,
     setPetModalShow,
+    addNewPet,
     petModalShow,
-    updatePet,
+    updateOwnedPet,
   } = usePetsContext();
 
   const [newPet, setNewPet] = useState({
@@ -31,15 +31,52 @@ function PetAddNew({ id }) {
     owner: '',
   });
 
+  const [owners, setOwners] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [petError, setPetError] = useState({ show: false, message: '' });
 
   const navigate = useNavigate();
 
+  function findNewOwner() {
+    if (
+      newPet.adoptionStatus === 'Fostered' ||
+      newPet.adoptionStatus === 'Adopted'
+    ) {
+      if (!newPet.owner) {
+        setPetError({
+          show: true,
+          message: 'You must choose an owner for a fostered or an adopted pet.',
+        });
+      } else {
+        const newOwner = owners.find((owner) => owner._id === newPet.owner);
+        return newOwner;
+      }
+    } else {
+      newPet.owner = '';
+    }
+  }
+
+  async function handleNewOwner(pet, newOwner) {
+    if (
+      pet.adoptionStatus === 'Fostered' &&
+      !newOwner.fosteredPets.includes(pet._id)
+    ) {
+      newOwner.fosteredPets.push(pet._id);
+      await updateOwnedPet(newOwner, pet, pet._id);
+      console.log('New fostered pet added');
+    }
+  }
+
   async function petAddHandler() {
+    console.log('wow');
     setIsLoading(true);
+    const newOwner = findNewOwner();
+    console.log(newPet);
     const res = await addNewPet(newPet);
     if (res.ok === true) {
+      console.log(res);
+      handleNewOwner(res.petDetails, newOwner);
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
@@ -49,6 +86,7 @@ function PetAddNew({ id }) {
   }
 
   async function petEditHandler() {
+    // handleOwner();
     setIsLoading(true);
     const res = await updatePet(newPet._id, newPet);
     if (res.ok === true) {
@@ -68,6 +106,8 @@ function PetAddNew({ id }) {
         setNewPet={setNewPet}
         action={id ? 'edit' : 'create'}
         setPetError={setPetError}
+        owners={owners}
+        setOwners={setOwners}
       />
       <PetSubmit
         isLoading={isLoading}
@@ -75,6 +115,8 @@ function PetAddNew({ id }) {
         onPetEdit={petEditHandler}
         action={id ? 'edit' : 'create'}
         petError={petError}
+        owners={owners}
+        setOwners={setOwners}
       />
       <PetModal
         show={petModalShow}
