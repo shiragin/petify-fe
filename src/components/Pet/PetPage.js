@@ -12,26 +12,34 @@ import { FaChevronCircleLeft, FaEdit } from 'react-icons/fa';
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =
     usePetsContext();
-  const { user } = useUserContext();
+  const { user, getUserProfile } = useUserContext();
 
   const [myPet, setMyPet] = useState(false);
+  const [petOwner, setPetOwner] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  function verifyPet() {
+  async function verifyPet() {
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
       console.log('dis my pet');
       setMyPet(true);
+    } else {
+      if (petPage.owner && user.isAdmin) {
+        const petOwner = await getUserProfile(petPage.owner);
+        setPetOwner(petOwner);
+      }
     }
   }
-
-  useEffect(() => verifyPet()), [];
 
   async function getPetData() {
     const pet = await getPetPage(id);
     setPetPage(pet);
   }
+
+  useEffect(() => {
+    verifyPet();
+  }, [petPage]);
 
   useEffect(
     () => {
@@ -76,7 +84,11 @@ function PetPage({ id }) {
         {petPage?.adoptionStatus !== 'Available' && (
           <div className="unavailable">
             This {petPage?.type?.toLowerCase()} has already been{' '}
-            {petPage?.adoptionStatus?.toLowerCase()} {myPet && 'by you'}{' '}
+            {petPage?.adoptionStatus?.toLowerCase()}
+            {!myPet &&
+              user.isAdmin &&
+              ` by ${petOwner?.firstName} ${petOwner?.lastName}`}{' '}
+            {myPet && 'by you'}{' '}
           </div>
         )}
         <div className="petpage-buttons">

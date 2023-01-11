@@ -183,8 +183,9 @@
   }
 
   &-welcome {
-    height: 200px;
-    width: 30%;
+    min-height: 200px;
+    // height: 250px;
+    width: 40%;
     margin: 3rem 0 3rem 4rem;
     font-family: 'Unbounded', sans-serif;
     line-height: 1.1;
@@ -200,7 +201,7 @@
   }
 
   a {
-    width: 30%;
+    width: 40%;
     text-align: left;
     margin: 3rem 0 3rem 4rem;
 

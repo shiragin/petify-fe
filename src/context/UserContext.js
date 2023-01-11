@@ -75,7 +75,6 @@ export default function UserContextProvider({ children }) {
         setUserId(userId);
         setUser(currentUser);
         localStorage.setItem('userId', userId);
-        // localStorage.setItem('token', token);
         localStorage.setItem('exp', exp);
         console.log('HELLO', user, userId, exp);
         setLoggedIn(true);
