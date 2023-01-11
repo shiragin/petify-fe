@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 
 function HomeHero() {
@@ -5,9 +7,17 @@ function HomeHero() {
 
   return (
     <div className="hero-logged">
-      <h1 className="hero-logged-welcome">
-        {`Welcome back,`} {user?.firstName} {user?.lastName}
-      </h1>
+      <div>
+        <h1 className="hero-logged-welcome">
+          {`Welcome back,\n`}
+          {user?.firstName} {user?.lastName}
+        </h1>
+        <Link to="/search">
+          <Button className="skew-left">
+            <span>Browse our pets</span>
+          </Button>
+        </Link>
+      </div>
       <div className="gradient" />
     </div>
   );

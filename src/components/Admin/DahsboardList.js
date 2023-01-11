@@ -62,7 +62,7 @@ function DahsboardList({ list, setShowUser }) {
         <tbody>
           {pets
             .sort((pet1, pet2) => (pet1.name > pet2.name ? 1 : -1))
-            .map(({ _id, name, type, breed, adoptionStatus, picture }) => (
+            .map(({ _id, name, type, breed, adoptionStatus }) => (
               <DashboardLine
                 key={_id}
                 value={{ name, type, breed, adoptionStatus }}

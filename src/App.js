@@ -11,6 +11,7 @@ import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
+import Footer from './components/Navbar/Footer';
 
 function App() {
   // const { setUser, setLoggedIn } = useUserContext();
@@ -82,6 +83,7 @@ function App() {
               }
             />
           </Routes>
+          {/* <Footer /> */}
         </BrowserRouter>
       </PetsContextProvider>
     </UserContextProvider>

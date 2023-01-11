@@ -90,6 +90,7 @@ function DashboardModal(props) {
                       <div
                         div
                         className="pet-item"
+                        key={pet._id}
                         onClick={() => petClickHandler(pet._id)}
                       >
                         <img src={pet.picture} />

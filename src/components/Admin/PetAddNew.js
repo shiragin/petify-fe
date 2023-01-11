@@ -37,7 +37,6 @@ function PetAddNew({ id }) {
   const navigate = useNavigate();
 
   async function petAddHandler() {
-    console.log(newPet);
     setIsLoading(true);
     const res = await addNewPet(newPet);
     if (res.ok === true) {

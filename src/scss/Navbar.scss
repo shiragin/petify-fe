@@ -74,3 +74,22 @@
     }
   }
 }
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  max-height: 1rem;
+  transform: skewY(-2deg);
+  border-top: 0.29rem $primary-color solid;
+  margin-top: 4rem;
+  min-height: 2rem;
+}
+
+// a {
+//   text-decoration: none;
+//   color: $dark-color;
+//   transform: skewY((1.5deg));
+//   position: relative;
+//   text-align: end;
+//   transform: translateY(2rem);
+// }

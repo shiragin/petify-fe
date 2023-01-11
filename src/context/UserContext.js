@@ -42,11 +42,12 @@ export default function UserContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { userId } = res.data.data;
+        const { userId, exp } = res.data.data;
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
         localStorage.setItem('userId', userId);
+        localStorage.setItem('exp', exp);
         setLoggedIn(true);
         return true;
       } else {
@@ -75,7 +76,7 @@ export default function UserContextProvider({ children }) {
         setUser(currentUser);
         localStorage.setItem('userId', userId);
         // localStorage.setItem('token', token);
-        // localStorage.setItem('exp', exp);
+        localStorage.setItem('exp', exp);
         console.log('HELLO', user, userId, exp);
         setLoggedIn(true);
         return true;
