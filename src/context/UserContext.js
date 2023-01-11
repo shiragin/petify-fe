@@ -19,22 +19,18 @@ export default function UserContextProvider({ children }) {
 
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
 
-  const [user, setUser] = useState(
-    // localStorage.getItem('user') ||
-    //   {
-    //   firstName: '',
-    //   lastName: '',
-    //   email: '',
-    //   phoneNumber: '',
-    //   password: '',
-    //   passwordConfirm: '',
-    //   bio: '',
-    //   savedPets: [],
-    //   adoptedPets: [],
-    //   fosteredPets: [],
-    // }
-    null
-  );
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    passwordConfirm: '',
+    bio: '',
+    savedPets: [],
+    adoptedPets: [],
+    fosteredPets: [],
+  });
 
   const [loggedIn, setLoggedIn] = useState(false);
 

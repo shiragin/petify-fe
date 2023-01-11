@@ -31,7 +31,7 @@ function Navbar() {
       if (!userId) {
         setLoggedIn(false);
       } else {
-        if (!user) setUserDetails();
+        if (!user.email) setUserDetails();
       }
     },
     [],

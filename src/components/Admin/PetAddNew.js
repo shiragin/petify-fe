@@ -12,13 +12,13 @@ function PetAddNew({ id }) {
     setPetPage,
     setPetModalShow,
     petModalShow,
-    getPetPage,
     updatePet,
   } = usePetsContext();
 
   const [newPet, setNewPet] = useState({
     type: 'Cat',
     name: '',
+    age: '',
     adoptionStatus: 'Available',
     height: '',
     weight: '',
@@ -28,6 +28,7 @@ function PetAddNew({ id }) {
     dietary: [],
     breed: '',
     picture: '',
+    owner: '',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,7 @@ function PetAddNew({ id }) {
   const navigate = useNavigate();
 
   async function petAddHandler() {
+    console.log(newPet);
     setIsLoading(true);
     const res = await addNewPet(newPet);
     if (res.ok === true) {
@@ -82,8 +84,8 @@ function PetAddNew({ id }) {
           navigate(`/pet/${petPage._id}`);
         }}
         action={id ? 'edited in' : 'added to'}
-        type={newPet.type}
-        name={newPet.name}
+        type={newPet?.type}
+        name={newPet?.name}
       />
     </div>
   );

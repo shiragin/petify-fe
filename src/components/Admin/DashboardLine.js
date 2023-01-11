@@ -16,11 +16,7 @@ function DashboardLine({ value, id, list, onModalShow, setShowUser }) {
         </td>
       )}
       {list === 'users' && (
-        <td
-          onClick={() => setShowUser({ show: true, id })}
-          // onClick={() => onModalShow(true, id)}
-          // onClick={() => navigate(`../admin/profile/${id}`)
-        >
+        <td onClick={() => setShowUser({ show: true, id })}>
           <BsEyeFill />
         </td>
       )}

@@ -25,7 +25,7 @@ function SearchAdvanced() {
       <Form>
         <Form.Group>
           <Form.Label className="search-advanced-group-label">
-            Adoption status
+            Status
           </Form.Label>
           <Form.Select
             className="search-advanced-group-input"
@@ -59,6 +59,27 @@ function SearchAdvanced() {
             <option value="Big">Big</option>
           </Form.Select>
         </Form.Group>
+
+        <Form.Group>
+          <Form.Label className="search-advanced-group-label">Age</Form.Label>
+
+          <Form.Select
+            className="search-advanced-group-input"
+            defaultValue={''}
+            value={searchAdvanced?.age}
+            onChange={(e) => searchAdvancedHandler(e, 'age')}
+          >
+            <option value="" default>
+              All
+            </option>
+            <option value="Young">Young</option>
+            <option value="Adult" default>
+              Adult
+            </option>
+            <option value="Elderly">Elderly</option>
+          </Form.Select>
+        </Form.Group>
+
         <Form.Group>
           <Form.Label className="search-advanced-group-label">
             Colour
@@ -89,7 +110,6 @@ function SearchAdvanced() {
           />
         </Form.Group>
       </Form>
-      {/* <SearchToggle /> */}
     </div>
   );
 }

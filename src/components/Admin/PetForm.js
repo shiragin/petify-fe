@@ -8,14 +8,12 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
   const [newColour, setNewColour] = useState([]);
 
   function newPetChangeHandler(e, field) {
-    // setPetError({ show: false, message: '' });
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });
   }
 
   function newPetColourHandler({ target: { checked, value } }) {
-    // setPetError({ show: false, message: '' });
     if (checked) {
       setNewColour([...newColour, value]);
     } else {
@@ -31,27 +29,37 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
 
   async function getPetDetails(id) {
     const pet = await getPetPage(id);
-    pet && setNewPet(pet);
-    pet && setNewColour(pet.colour);
+    if (pet) {
+      setNewPet(pet);
+      setNewColour(pet.colour);
+    }
   }
 
-  useEffect(() => {
-    setNewPet({
-      type: 'Cat',
-      name: '',
-      adoptionStatus: 'Available',
-      height: '',
-      weight: '',
-      colour: [],
-      bio: '',
-      hypoallergenic: false,
-      dietary: [],
-      breed: '',
-    });
-    if (action === 'edit') {
-      getPetDetails(id);
-    }
-  }, [action]);
+  useEffect(
+    () => {
+      if (action === 'edit') {
+        getPetDetails(id);
+      } else {
+        setNewPet({
+          type: 'Cat',
+          name: '',
+          age: '',
+          adoptionStatus: 'Available',
+          height: '',
+          weight: '',
+          colour: [],
+          bio: '',
+          hypoallergenic: false,
+          dietary: [],
+          breed: '',
+          picture: '',
+          owner: '',
+        });
+      }
+    },
+    [id],
+    [action]
+  );
 
   useEffect(() => {
     setNewPet({ ...newPet, colour: newColour });
@@ -142,63 +150,67 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
         <div
           key={'colour'}
           className="pet-check"
-          onChange={(e) => newPetColourHandler(e)}
+          // onChange={(e) => newPetColourHandler(e)}
         >
           <div className="pet-check-row">
             <Form.Check
-              checked={newPet?.colour.includes('White')}
+              checked={newPet?.colour?.includes('White')}
               inline
               label="White"
               name="colour"
               type={'checkbox'}
               id={`colour`}
               value="White"
+              onChange={(e) => newPetColourHandler(e)}
             />
             <Form.Check
               inline
-              checked={newPet?.colour.includes('Orange')}
+              checked={newPet?.colour?.includes('Orange')}
               label="Orange"
               type={'checkbox'}
               name="colour"
               id={`colour`}
               value="Orange"
+              onChange={(e) => newPetColourHandler(e)}
             />
             <Form.Check
               inline
-              checked={newPet?.colour.includes('Brown')}
+              checked={newPet?.colour?.includes('Brown')}
               label="Brown"
               type={'checkbox'}
               name="colour"
               id={`colour`}
               value="Brown"
+              onChange={(e) => newPetColourHandler(e)}
             />
           </div>
           <div className="pet-check-row">
             <Form.Check
               inline
-              checked={newPet?.colour.includes('Grey')}
+              checked={newPet?.colour?.includes('Grey')}
               label="Grey"
               type={'checkbox'}
               id={`colour`}
               value="Grey"
+              onChange={(e) => newPetColourHandler(e)}
             />
             <Form.Check
               inline
-              checked={newPet?.colour.includes('Golden')}
+              checked={newPet?.colour?.includes('Golden')}
               label="Golden"
               type={'checkbox'}
-              // name="group1"
-              // type={}
               id={`colour`}
               value="Golden"
+              onChange={(e) => newPetColourHandler(e)}
             />
             <Form.Check
               inline
-              checked={newPet?.colour.includes('Black')}
+              checked={newPet?.colour?.includes('Black')}
               label="Black"
               type={'checkbox'}
               id={`colour`}
               value="Black"
+              onChange={(e) => newPetColourHandler(e)}
             />
           </div>
         </div>
@@ -254,6 +266,7 @@ function PetForm({ id, newPet, setNewPet, action, setPetError }) {
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Pet Image</Form.Label>
         <Form.Control
+          defaultValue={''}
           className="pet-input"
           type="file"
           required

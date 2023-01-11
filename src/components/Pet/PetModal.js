@@ -18,22 +18,22 @@ function PetModal(props) {
               : `Shame on you!`}
           </h2>
         )}
-        {action && <h2>Pet {action.split(' ')[0]}</h2>}
+        {action && <h2>Pet {action?.split(' ')[0]}</h2>}
         {status && (
           <p>
             {status === 'Adopted' || status === 'Fostered'
-              ? `You ${status.toLowerCase()} ${pet}.\n You're going to be so happy together.`
+              ? `You ${status?.toLowerCase()} ${pet}.\n You're going to be so happy together.`
               : `You abandoned ${pet},\n you evil person. Have you no heart?`}
           </p>
         )}
         {action && (
           <p>
-            The {type.toLowerCase()} {name} was successfully {action} Petify
+            The {type?.toLowerCase()} {name} was successfully {action} Petify
           </p>
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props?.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

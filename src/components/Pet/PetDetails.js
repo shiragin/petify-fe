@@ -77,7 +77,7 @@ function PetDetails() {
                 <FaPaw />
                 Special Diet:{' '}
               </span>{' '}
-              {dietry && dietry[0] ? dietry.join(', ') : 'None'}
+              {dietry ? dietry : 'None'}
             </li>
             <li>
               <span>

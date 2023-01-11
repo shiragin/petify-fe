@@ -2,16 +2,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
 import PetAddNew from '../components/Admin/PetAddNew';
 import '../scss/PetForm.scss';
+import { useEffect } from 'react';
 
 function AddPet() {
-  const { user } = useUserContext();
+  const { user, userId } = useUserContext();
   const { id } = useParams();
 
   const navigate = useNavigate();
 
-  if (!user.isAdmin) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (user.email && !user.isAdmin) {
+      console.log('WOWOWOWOW');
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <div className="add-pet main-container">

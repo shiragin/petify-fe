@@ -79,7 +79,7 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
-  async function getRandomPets(num) {
+  async function getRandomPets() {
     try {
       const res = await axios.get(`http://localhost:8080/pets/random`, {
         withCredentials: true,
@@ -90,50 +90,6 @@ export default function PetsContextProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    }
-  }
-
-  async function getSavedPets(id) {
-    try {
-      const res = await axios.get(`http://localhost:8080/pets/user/${id}/`, {
-        withCredentials: true,
-      });
-      if (res?.data?.ok) {
-        const { savedPets } = await res.data.data;
-        return savedPets;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function getOwnedPets(id) {
-    try {
-      const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
-        withCredentials: true,
-      });
-      if (res?.data?.ok) {
-        const { fosteredPets, adoptedPets } = await res.data.data;
-        return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function getSavedPetsByID(id) {
-    try {
-      const res = await axios.get(`http://localhost:8080/pets/${id}`, {
-        withCredentials: true,
-      });
-      if (res?.data?.ok) {
-        const { pet } = await res.data.data;
-        return pet.sort((a, b) =>
-          a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
-        );
-      }
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -181,6 +137,50 @@ export default function PetsContextProvider({ children }) {
     }
   }
 
+  async function getSavedPets(id) {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}/`, {
+        withCredentials: true,
+      });
+      if (res?.data?.ok) {
+        const { savedPets } = await res.data.data;
+        return savedPets;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getOwnedPets(id) {
+    try {
+      const res = await axios.get(`http://localhost:8080/pets/user/${id}`, {
+        withCredentials: true,
+      });
+      if (res?.data?.ok) {
+        const { fosteredPets, adoptedPets } = await res.data.data;
+        return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // async function getSavedPetsByID(id) {
+  //   try {
+  //     const res = await axios.get(`http://localhost:8080/pets/${id}`, {
+  //       withCredentials: true,
+  //     });
+  //     if (res?.data?.ok) {
+  //       const { pet } = await res.data.data;
+  //       return pet.sort((a, b) =>
+  //         a.addedAt > b.addedAt ? 1 : b.addedAt > a.addedAt ? -1 : 0
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
   async function addSavedPet(userId, savedPets) {
     try {
       const res = await axios.post(
@@ -201,10 +201,11 @@ export default function PetsContextProvider({ children }) {
 
   async function deleteSavedPet(userId, savedPets) {
     try {
+      console.log('DATA', userId, savedPets);
       const res = await axios.delete(
         `http://localhost:8080/pets/${userId}/save`,
-        { withCredentials: true },
         {
+          withCredentials: true,
           data: {
             savedPets,
           },
@@ -261,7 +262,7 @@ export default function PetsContextProvider({ children }) {
         savedPets,
         setFeaturedPets,
         featuredPets,
-        getSavedPetsByID,
+        // getSavedPetsByID,
         updatePet,
         petModalShow,
         setPetModalShow,

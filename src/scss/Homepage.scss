@@ -82,16 +82,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  &-welcome {
-    margin: 3rem 0 4rem;
-    font-family: 'Unbounded', sans-serif;
-    line-height: 1.1;
-    font-size: 3.6rem;
-    font-weight: 900;
-    // letter-spacing: 0.1rem;
-    text-align: center;
-    white-space: pre-wrap;
-  }
+
   &-featured-pets {
     width: 100%;
     display: flex;
@@ -159,6 +150,51 @@
         transform: scale(1.2);
       }
     }
+  }
+}
+
+.hero-logged {
+  // background-color: $light-color;
+  width: 100vw;
+  height: 75vh;
+  background: 
+  // linear-gradient(rgb(181, 238, 253, 0), rgb(181, 238, 253, 1)),
+    url('../imgs/cover-logged2.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 0.2rem 0 7rem;
+  color: $dark-color;
+  transform: skewY(-1deg);
+  border-top: 0.29rem solid $primary-color;
+
+  .gradient {
+    width: 100%;
+    height: 150px;
+    // margin-bottom: 10rem;
+    // transform: skewY(1.5deg);
+    background: linear-gradient(rgb(181, 238, 253, 0), rgb(181, 238, 253, 1));
+    // border-bottom: $light-color 1rem solid;
+    margin-bottom: -1px;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: center;
+  }
+  &-welcome {
+    height: 200px;
+    width: 30%;
+    margin: 3rem 4rem 4rem 2rem;
+    font-family: 'Unbounded', sans-serif;
+    line-height: 1.1;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.1rem;
+    text-align: left;
+    align-self: flex-end;
+    justify-self: center;
+    white-space: pre-wrap;
+    transform: skewY(1deg);
   }
 }
 
