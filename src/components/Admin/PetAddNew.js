@@ -11,6 +11,7 @@ function PetAddNew({ id }) {
     setPetPage,
     setPetModalShow,
     addNewPet,
+    updatePet,
     petModalShow,
     updateOwnedPet,
   } = usePetsContext();

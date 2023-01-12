@@ -11,19 +11,37 @@ function HomeHero() {
 
   return (
     <Carousel variant="dark" className="hero-logged">
-      <Carousel.Item>
+      <Carousel.Item interval={100000}>
         <img src={Hero1} alt="First slide" className="w-100" />
         <Carousel.Caption>
-          <div>
+          <div className="caption-box">
             <h1 className="hero-logged-welcome">
-              {user?.lastLogin ? `Welcome back,\n` : `Welcome,\n`}
-              {user?.firstName} {user?.lastName}
+              {user?.lastLogin ? `Welcome\nback,\n` : `Welcome,\n`}
+              {user?.firstName}
+              {`\n`}
+              {user?.lastName}
             </h1>
-            <Link to="/search">
+            {/* <Link to="/search">
               <Button className="skew-left">
                 <span>Browse our pets</span>
               </Button>
-            </Link>
+            </Link> */}
+          </div>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          src={featuredPets[2]?.picture}
+          alt="Second slide"
+          className="w-100 secondary"
+        />
+        <Carousel.Caption interval={100000} className="secondary">
+          <div className="caption-box secondary">
+            <h1 className="hero-logged-welcome">{`New on Petify!`}</h1>
+            <div className="hero-logged-welcome-text">
+              Looking for a loving family! Could {featuredPets[2]?.name} be the
+              perfect {featuredPets[2]?.type?.toLowerCase()} for you?
+            </div>
           </div>
         </Carousel.Caption>
       </Carousel.Item>
@@ -31,38 +49,22 @@ function HomeHero() {
         <img
           src={featuredPets[0]?.picture}
           alt="Second slide"
-          className="w-100"
+          className="w-100 secondary"
         />
-        <Carousel.Caption>
-          <div className="secondary">
-            <h1 className="hero-logged-welcome">{`Have a look at\nour featured pets`}</h1>
-            <Link to={`/pet/${featuredPets[0]?._id}`}>
-              <Button className="skew-left">
-                <span>Meet {featuredPets[0]?.name}</span>
-              </Button>
-            </Link>
+        <Carousel.Caption interval={100000} className="secondary">
+          <div className="caption-box secondary">
+            <h1 className="hero-logged-welcome">
+              {`Meet\n${featuredPets[0]?.name}`}
+            </h1>
+            <div className="hero-logged-welcome-text">
+              This {featuredPets[0]?.type?.toLowerCase()} and many other
+              adorable pets are waiting for their forever home
+            </div>
           </div>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
   );
-
-  // {
-  /* <div>
-        <h1 className="hero-logged-welcome">
-          {user?.lastLogin ? `Welcome back,\n` : `Welcome,\n`}
-          {user?.firstName} {user?.lastName}
-        </h1>
-        <Link to="/search">
-          <Button className="skew-left">
-            <span>Browse our pets</span>
-          </Button>
-        </Link>
-      </div>
-      <div className="gradient" /> */
-  // }
-  // </div>
-  // );
 }
 
 export default HomeHero;
