@@ -9,6 +9,7 @@ import MyPets from './pages/MyPets';
 import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
 import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
 import Footer from './components/Navbar/Footer';
@@ -82,6 +83,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           {/* <Footer /> */}
         </BrowserRouter>

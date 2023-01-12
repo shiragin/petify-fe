@@ -14,9 +14,7 @@ export default function UserContextProvider({ children }) {
   });
 
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-
   const [confirmSave, setConfirmSave] = useState();
-
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
 
   const [user, setUser] = useState({
@@ -33,7 +31,6 @@ export default function UserContextProvider({ children }) {
   });
 
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [error, setError] = useState({ show: false, message: '' });
 
   async function createNewUser(user) {
@@ -108,7 +105,6 @@ export default function UserContextProvider({ children }) {
       if (res?.data?.ok) {
         const { user: userDetails } = await res.data.data;
         setUser(userDetails);
-        localStorage.setItem('user', JSON.stringify(userDetails));
         return res.data.ok;
       }
     } catch (err) {

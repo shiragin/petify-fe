@@ -6,7 +6,7 @@ import '../scss/MyPets.scss';
 function MyPets() {
   return (
     <div className="main-container mypets">
-      <h4 className="mypets-title">My Pets</h4>
+      <h4 className="profile-title">My Pets</h4>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={3}>

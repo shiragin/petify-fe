@@ -157,7 +157,7 @@ function PetForm({
             onChange={(e) => newPetChangeHandler(e, 'owner')}
           >
             <option value="">
-              {`Please choose the user who ${newPet?.adoptionStatus?.toLowerCase()} this pet`}
+              {`Please select which user ${newPet?.adoptionStatus?.toLowerCase()} this pet`}
             </option>
             {owners?.map(({ _id, firstName, lastName }) => (
               <option key={_id} value={_id}>
@@ -193,11 +193,7 @@ function PetForm({
 
       <Form.Group className="form-group">
         <Form.Label className="pet-label">Colour</Form.Label>
-        <div
-          key={'colour'}
-          className="pet-check"
-          // onChange={(e) => newPetColourHandler(e)}
-        >
+        <div key={'colour'} className="pet-check">
           <div className="pet-check-row">
             <Form.Check
               checked={newPet?.colour?.includes('White')}

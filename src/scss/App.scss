@@ -51,6 +51,10 @@ body {
       background-color: $primary-color;
       transform: skew(-20deg) scale(1.05);
     }
+    &:active {
+      background-color: $primary-color;
+      transform: skew(20deg) scale(0.95);
+    }
   }
   &-skew-right {
     transform: skew(20deg);
@@ -61,6 +65,11 @@ body {
     &:hover {
       background-color: $primary-color;
       transform: skew(20deg) scale(1.05);
+    }
+
+    &:active {
+      background-color: $primary-color;
+      transform: skew(20deg) scale(0.95);
     }
   }
 }

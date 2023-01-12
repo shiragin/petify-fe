@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
+import { usePetsContext } from '../../context/PetsContext';
 import NavbarAdmin from './NavbarAdmin';
 
 function NavbarLogged() {
@@ -11,9 +12,9 @@ function NavbarLogged() {
     setError,
     setLoginModalShow,
     setLoginForm,
-    setSearchType,
-    setSearchAdvanced,
   } = useUserContext();
+
+  const { setSearchType, setSearchAdvanced } = usePetsContext;
 
   useEffect(() => {
     const tokenExpirationTime = getTokenExpirationTime();

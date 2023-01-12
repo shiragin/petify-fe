@@ -11,15 +11,6 @@ function Navbar() {
   const { loggedIn, setLoggedIn, setUser, user, userId, getUserProfile } =
     useUserContext();
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem('user');
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     setUser(foundUser);
-  //     setLoggedIn(true);
-  //   }
-  // }, []);
-
   async function setUserDetails() {
     setLoggedIn(true);
     const currentUser = await getUserProfile(userId);
@@ -28,6 +19,8 @@ function Navbar() {
 
   useEffect(
     () => {
+      console.log(user);
+
       if (!userId) {
         setLoggedIn(false);
       } else {

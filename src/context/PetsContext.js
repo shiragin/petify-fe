@@ -245,7 +245,6 @@ export default function PetsContextProvider({ children }) {
         savedPets,
         setFeaturedPets,
         featuredPets,
-        // getSavedPetsByID,
         updatePet,
         petModalShow,
         setPetModalShow,
@@ -256,7 +255,6 @@ export default function PetsContextProvider({ children }) {
         addSavedPet,
         deleteSavedPet,
         updateOwnedPet,
-        // returnOwnedPet,
       }}
     >
       {children}
