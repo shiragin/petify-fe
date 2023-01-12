@@ -11,14 +11,16 @@ function PetForm({
   setPetError,
   owners,
   setOwners,
+  prevOwner,
+  setPrevOwner,
 }) {
   const { getPetPage } = usePetsContext();
   const { getAllUsers } = useUserContext();
 
   const [newColour, setNewColour] = useState([]);
-  // const [owners, setOwners] = useState([]);
 
   function newPetChangeHandler(e, field) {
+    // console.log(prevOwner);
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });
@@ -43,6 +45,14 @@ function PetForm({
     if (pet) {
       setNewPet(pet);
       setNewColour(pet.colour);
+      if (pet.owner) {
+        console.log('ho');
+        const owners = await getOwners();
+        const prevOwner = owners.find((owner) => owner._id === pet.owner);
+        console.log(prevOwner);
+        setPrevOwner(prevOwner);
+        setOwners(owners);
+      }
     }
   }
 
@@ -75,6 +85,7 @@ function PetForm({
   async function getOwners() {
     const users = await getAllUsers();
     setOwners(users);
+    return users;
   }
 
   useEffect(() => {

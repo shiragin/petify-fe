@@ -18,7 +18,7 @@ export default function PetsContextProvider({ children }) {
   const [searchAdvanced, setSearchAdvanced] = useState({});
   const [petModalShow, setPetModalShow] = useState(false);
 
-  const { setUser } = useUserContext();
+  const { setUser, userId } = useUserContext();
 
   async function getPets() {
     try {
@@ -184,7 +184,6 @@ export default function PetsContextProvider({ children }) {
 
   async function deleteSavedPet(userId, savedPets) {
     try {
-      console.log('DATA', userId, savedPets);
       const res = await axios.delete(
         `http://localhost:8080/pets/${userId}/save`,
         {
@@ -217,6 +216,7 @@ export default function PetsContextProvider({ children }) {
         { withCredentials: true }
       );
       if (res?.data?.ok) {
+        if (user._id === userId) setUser(res.data.data.user);
         return true;
       }
     } catch (err) {

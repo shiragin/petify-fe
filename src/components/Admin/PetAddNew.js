@@ -33,6 +33,7 @@ function PetAddNew({ id }) {
   });
 
   const [owners, setOwners] = useState([]);
+  const [prevOwner, setPrevOwner] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
   const [petError, setPetError] = useState({ show: false, message: '' });
@@ -55,6 +56,7 @@ function PetAddNew({ id }) {
       }
     } else {
       newPet.owner = '';
+      return false;
     }
   }
 
@@ -64,20 +66,33 @@ function PetAddNew({ id }) {
       !newOwner.fosteredPets.includes(pet._id)
     ) {
       newOwner.fosteredPets.push(pet._id);
-      await updateOwnedPet(newOwner, pet, pet._id);
-      console.log('New fostered pet added');
     }
+    if (
+      pet.adoptionStatus === 'Adopted' &&
+      !newOwner.adoptedPets.includes(pet._id)
+    ) {
+      newOwner.adoptedPets.push(pet._id);
+    }
+    await updateOwnedPet(newOwner, pet, pet._id);
+    console.log('New fostered pet added');
+  }
+
+  async function removePrevOwner() {
+    prevOwner.fosteredPets = prevOwner.fosteredPets.filter(
+      (pet) => pet !== newPet._id
+    );
+    prevOwner.adoptedPets = prevOwner.adoptedPets.filter(
+      (pet) => pet !== newPet._id
+    );
+    await updateOwnedPet(prevOwner, newPet, newPet._id);
   }
 
   async function petAddHandler() {
-    console.log('wow');
     setIsLoading(true);
     const newOwner = findNewOwner();
-    console.log(newPet);
     const res = await addNewPet(newPet);
     if (res.ok === true) {
-      console.log(res);
-      handleNewOwner(res.petDetails, newOwner);
+      if (newOwner) handleNewOwner(res.petDetails, newOwner);
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
@@ -87,10 +102,12 @@ function PetAddNew({ id }) {
   }
 
   async function petEditHandler() {
-    // handleOwner();
-    setIsLoading(true);
+    if (prevOwner) removePrevOwner();
+    const newOwner = findNewOwner();
     const res = await updatePet(newPet._id, newPet);
     if (res.ok === true) {
+      console.log(res);
+      if (newOwner) handleNewOwner(res.petDetails, newOwner);
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
@@ -109,6 +126,8 @@ function PetAddNew({ id }) {
         setPetError={setPetError}
         owners={owners}
         setOwners={setOwners}
+        prevOwner={prevOwner}
+        setPrevOwner={setPrevOwner}
       />
       <PetSubmit
         isLoading={isLoading}

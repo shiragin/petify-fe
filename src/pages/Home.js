@@ -6,7 +6,6 @@ import HomeHero from '../components/Homepage/HomeHero';
 
 function Home() {
   const { loggedIn } = useUserContext();
-  console.log(loggedIn);
 
   return (
     <div>

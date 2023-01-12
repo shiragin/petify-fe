@@ -12,7 +12,6 @@ function AddPet() {
 
   useEffect(() => {
     if (user.email && !user.isAdmin) {
-      console.log('WOWOWOWOW');
       navigate('/');
     }
   }, [user]);
