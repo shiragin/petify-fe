@@ -1,23 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Tab, Col, Row, Nav } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import OwnedPets from '../components/Pet/OwnedPets';
 import SavedPets from '../components/Pet/SavedPets';
 import '../scss/MyPets.scss';
 
 function MyPets() {
+  const [activeKey, setActiveKey] = useState('owned');
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/mypets/owned') {
+      setActiveKey('owned');
+    } else if (location.pathname === '/mypets/saved') {
+      setActiveKey('saved');
+    } else return;
+  }, [location]);
+
   return (
     <div className="main-container mypets">
       <h4 className="profile-title">My Pets</h4>
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="left-tabs-example" activeKey={activeKey}>
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
-              <Nav.Item>
-                <Nav.Link eventKey="first">
+              <Nav.Item onClick={() => setActiveKey('owned')}>
+                <Nav.Link eventKey="owned">
                   <span className="text">Owned Pets</span>
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="second">
+              <Nav.Item onClick={() => setActiveKey('saved')}>
+                <Nav.Link eventKey="saved">
                   <span>Saved Pets</span>
                 </Nav.Link>
               </Nav.Item>
@@ -25,10 +38,10 @@ function MyPets() {
           </Col>
           <Col sm={9}>
             <Tab.Content>
-              <Tab.Pane eventKey="first">
+              <Tab.Pane eventKey="owned">
                 <OwnedPets />
               </Tab.Pane>
-              <Tab.Pane eventKey="second">
+              <Tab.Pane eventKey="saved">
                 <SavedPets />
               </Tab.Pane>
             </Tab.Content>

@@ -1,13 +1,46 @@
+import { useEffect, useState } from 'react';
 import { Button, Carousel } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 import Hero1 from '../../imgs/cover-logged2.jpg';
-import Hero2 from '../../imgs/cover-logged.jpg';
+import { Link } from 'react-router-dom';
 
 function HomeHero() {
-  const { featuredPets, getRandomPets } = usePetsContext();
-  const { user } = useUserContext();
+  const { featuredPets, savedPets } = usePetsContext();
+  const { user, loggedIn } = useUserContext();
+
+  console.log(user);
+
+  const [newPet, setNewPet] = useState({});
+  const [featuredPet, setFeaturedPet] = useState({});
+  const [wishedPet, setWishedpet] = useState({});
+
+  function getWishedPet() {
+    const num = Math.floor(Math.random() * savedPets.length - 1) + 1;
+    setWishedpet(savedPets[num]);
+  }
+
+  useEffect(() => {
+    let num1, num2;
+    // while (num1 === num2) {
+    num1 = Math.floor(Math.random() * featuredPets.length - 1) + 1;
+    num2 = Math.floor(Math.random() * featuredPets.length - 1) + 1;
+    // }
+    setFeaturedPet(featuredPets[num1]);
+    setNewPet(featuredPets[num2]);
+  }, [featuredPets]);
+
+  useEffect(() => {
+    getWishedPet();
+  }, [savedPets]);
+
+  useEffect(() => {
+    if (
+      wishedPet &&
+      (featuredPet._id === wishedPet._id || newPet._id === wishedPet._id)
+    )
+      getWishedPet();
+  }, [wishedPet]);
 
   return (
     <Carousel variant="dark" className="hero-logged">
@@ -21,17 +54,12 @@ function HomeHero() {
               {`\n`}
               {user?.lastName}
             </h1>
-            {/* <Link to="/search">
-              <Button className="skew-left">
-                <span>Browse our pets</span>
-              </Button>
-            </Link> */}
           </div>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src={featuredPets[2]?.picture}
+          src={featuredPet?.picture}
           alt="Second slide"
           className="w-100 secondary"
         />
@@ -39,30 +67,64 @@ function HomeHero() {
           <div className="caption-box secondary">
             <h1 className="hero-logged-welcome">{`New on Petify!`}</h1>
             <div className="hero-logged-welcome-text">
-              Looking for a loving family! Could {featuredPets[2]?.name} be the
-              perfect {featuredPets[2]?.type?.toLowerCase()} for you?
+              Looking for a loving family! Could {featuredPet?.name} be the
+              perfect {featuredPet?.type?.toLowerCase()} for you?
             </div>
+            <Link to={`/pet/${featuredPet?._id}`}>
+              <Button className="hero-button">
+                <span>See more</span>
+              </Button>
+            </Link>
           </div>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          src={featuredPets[0]?.picture}
+          src={newPet?.picture}
           alt="Second slide"
           className="w-100 secondary"
         />
-        <Carousel.Caption interval={100000} className="secondary">
-          <div className="caption-box secondary">
-            <h1 className="hero-logged-welcome">
-              {`Meet\n${featuredPets[0]?.name}`}
-            </h1>
+        <Carousel.Caption interval={100000} className="secondary left">
+          <div className="caption-box secondary left">
+            <h1 className="hero-logged-welcome">{`Meet\n${newPet?.name}`}</h1>
             <div className="hero-logged-welcome-text">
-              This {featuredPets[0]?.type?.toLowerCase()} and many other
-              adorable pets are waiting for their forever home
+              This {newPet?.type?.toLowerCase()} and many other adorable pets
+              are waiting for their forever home
             </div>
+            <Link to={`/pet/${newPet?._id}`}>
+              <Button className="hero-button">
+                <span>See more</span>
+              </Button>
+            </Link>
           </div>
         </Carousel.Caption>
       </Carousel.Item>
+      {savedPets?.length && wishedPet?.adoptionStatus !== 'Adopted' && (
+        <Carousel.Item>
+          <img
+            src={wishedPet?.picture}
+            alt="Second slide"
+            className="w-100 secondary"
+          />
+          <Carousel.Caption interval={100000} className="secondary">
+            <div className="caption-box secondary">
+              <h1 className="hero-logged-welcome">
+                {`What about\n${wishedPet?.name}?`}
+              </h1>
+              <div className="hero-logged-welcome-text">
+                You previously added this {wishedPet?.type?.toLowerCase()} to
+                your wishlist. No better time to adopt {wishedPet?.name} than
+                right now!
+              </div>
+              <Link to={`/pet/${wishedPet?._id}`}>
+                <Button className="hero-button">
+                  <span>See more</span>
+                </Button>
+              </Link>
+            </div>
+          </Carousel.Caption>
+        </Carousel.Item>
+      )}
     </Carousel>
   );
 }

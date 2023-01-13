@@ -10,7 +10,7 @@ function HomeSavedPets() {
       </div>
       <div className="container">
         <SavedPets />
-        <Link to={'/mypets'} className="chevron">
+        <Link to={'/mypets/saved'} className="chevron">
           <FaChevronCircleRight />
         </Link>
       </div>

@@ -6,7 +6,7 @@ import UserDetails from '../components/Admin/UserDetails';
 import '../scss/Dashboard.scss';
 
 function Dashboard() {
-  const [activeKey, setActiveKey] = useState('first');
+  const [activeKey, setActiveKey] = useState('users');
   const location = useLocation();
 
   const [showUser, setShowUser] = useState({ show: false, id: '' });
@@ -22,11 +22,7 @@ function Dashboard() {
   return (
     <div className="main-container mypets">
       <h4 className="profile-title">Dashboard</h4>
-      <Tab.Container
-        id="left-tabs-example"
-        // defaultActiveKey={activeKey}
-        activeKey={activeKey}
-      >
+      <Tab.Container id="left-tabs-example" activeKey={activeKey}>
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
@@ -59,10 +55,6 @@ function Dashboard() {
         </Row>
       </Tab.Container>
     </div>
-    // <div className="main-container show-pets">
-    //   <h1 className="profile-title">All Pets List</h1>
-    //   <PetList />
-    // </div>
   );
 }
 

@@ -44,6 +44,22 @@ function App() {
               }
             />
             <Route
+              path="/mypets/owned"
+              element={
+                <PrivateRoute>
+                  <MyPets />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/mypets/saved"
+              element={
+                <PrivateRoute>
+                  <MyPets />
+                </PrivateRoute>
+              }
+            />
+            <Route
               path="/admin/add-pet"
               element={
                 <PrivateRoute>
