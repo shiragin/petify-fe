@@ -9,6 +9,7 @@ import MyPets from './pages/MyPets';
 import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
+import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/pet/:id" element={<Pet />} />
+            <Route path="/contact" element={<Contact />} />
             <Route
               path="/profile"
               element={

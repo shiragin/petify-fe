@@ -33,9 +33,11 @@ export default function UserContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState({ show: false, message: '' });
 
+  const baseURL = 'http://localhost:8080';
+
   async function createNewUser(user) {
     try {
-      const res = await axios.post(`http://localhost:8080/users/signup`, user, {
+      const res = await axios.post(`${baseURL}/users/signup`, user, {
         withCredentials: true,
       });
       if (res?.data?.ok) {
@@ -60,7 +62,7 @@ export default function UserContextProvider({ children }) {
   async function getUser(user) {
     try {
       const res = await axios.post(
-        `http://localhost:8080/users/login`,
+        `${baseURL}/users/login`,
         {
           email: user.email,
           password: user.password,
@@ -86,7 +88,7 @@ export default function UserContextProvider({ children }) {
 
   async function getUserProfile(id) {
     try {
-      const res = await axios.get(`http://localhost:8080/users/${id}`);
+      const res = await axios.get(`${baseURL}/users/${id}`);
       if (res?.data?.ok) {
         const { user: userDetails } = await res.data.data;
         return userDetails;
@@ -99,7 +101,7 @@ export default function UserContextProvider({ children }) {
 
   async function updateUser(id) {
     try {
-      const res = await axios.put(`http://localhost:8080/users/${id}`, user, {
+      const res = await axios.put(`${baseURL}/users/${id}`, user, {
         withCredentials: true,
       });
 
@@ -115,13 +117,29 @@ export default function UserContextProvider({ children }) {
 
   async function getAllUsers() {
     try {
-      const res = await axios.get(`http://localhost:8080/users`);
+      const res = await axios.get(`${baseURL}/users`);
       if (!res?.data?.ok) throw new Error('No such user!');
       const { users } = await res.data.data;
       if (res.data.ok) return users;
       return true;
     } catch (err) {
       return false;
+    }
+  }
+
+  async function createNewQuery(query) {
+    try {
+      console.log('CONTEXT', query);
+      const res = await axios.post(`${baseURL}/queries`, query, {
+        withCredentials: true,
+      });
+      if (res?.data?.ok) {
+        const { query: newQuery } = await res?.data;
+        return newQuery;
+      }
+    } catch (err) {
+      const { message } = await err?.response?.data;
+      return { ok: false, error: message };
     }
   }
 
@@ -148,6 +166,7 @@ export default function UserContextProvider({ children }) {
         setConfirmSave,
         getAllUsers,
         getUserProfile,
+        createNewQuery,
       }}
     >
       {children}

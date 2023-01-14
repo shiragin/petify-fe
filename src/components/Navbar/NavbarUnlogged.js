@@ -7,6 +7,7 @@ function NavbarUnlogged() {
   return (
     <div className="navbar-links-right">
       <NavLink to="/search">Search</NavLink>
+      <NavLink to="/contact">Contact Us</NavLink>
       <NavLink
         onClick={() => {
           setLoginModalShow({ show: true, type: 'login' });

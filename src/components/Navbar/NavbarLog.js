@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 import NavbarAdmin from './NavbarAdmin';
+import { NavDropdown } from 'react-bootstrap';
 
 function NavbarLogged() {
   const {
@@ -64,18 +65,30 @@ function NavbarLogged() {
       >
         My Pets
       </NavLink>
-      <NavLink
+      {user?.isAdmin && <NavbarAdmin />}
+      <NavDropdown title="Settings" id="basic-nav-dropdown">
+        <NavDropdown.Item as={NavLink} to="/profile">
+          Edit Profile
+        </NavDropdown.Item>
+        <NavDropdown.Item as={NavLink} to="/contact">
+          Contact Us
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item as={NavLink} to="" onClick={signOutHandler}>
+          Sign Out
+        </NavDropdown.Item>
+      </NavDropdown>
+      {/* <NavLink
         to="/profile"
         style={({ isActive }) => ({
           color: isActive ? '#f9404f' : '#003a4d',
         })}
       >
         Profile
-      </NavLink>
-      {user?.isAdmin && <NavbarAdmin />}
-      <NavLink to="/" onClick={signOutHandler}>
+      </NavLink> */}
+      {/* <NavLink to="/" onClick={signOutHandler}>
         Sign Out
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 }

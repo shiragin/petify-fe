@@ -5,7 +5,7 @@ import '../scss/PetForm.scss';
 import { useEffect } from 'react';
 
 function AddPet() {
-  const { user, userId } = useUserContext();
+  const { user } = useUserContext();
   const { id } = useParams();
 
   const navigate = useNavigate();

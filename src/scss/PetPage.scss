@@ -171,16 +171,25 @@
     // text-align: center;
     font-size: 1.4rem;
     font-weight: 400;
-    margin: 1rem 0 0.4rem;
-  }
+    margin: 1rem 0 3rem;
 
-  .unavailable-foster {
-    font-weight: 200;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    white-space: pre-wrap;
-    text-align: left;
-    // padding: 0 5rem;
+    &-message {
+      margin-bottom: 0.5rem;
+    }
+
+    &-foster {
+      font-weight: 300;
+      font-size: 1.1rem;
+      line-height: 1.29;
+      white-space: pre-wrap;
+      text-align: left;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: 500;
+      }
+    }
   }
 
   &-buttons {

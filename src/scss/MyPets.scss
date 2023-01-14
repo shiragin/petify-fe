@@ -58,7 +58,7 @@
     margin: 1.2rem 0 1.2rem 2rem;
 
     .card {
-      width: 29%;
+      width: 45%;
       margin-bottom: 1rem;
     }
 
@@ -78,9 +78,9 @@
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1200px) {
   .mypets .home-logged-featured-pets-cards .card {
-    width: 40%;
+    width: 45%;
   }
 }
 

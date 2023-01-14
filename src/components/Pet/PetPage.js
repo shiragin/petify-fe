@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 import { useUserContext } from '../../context/UserContext';
@@ -83,7 +83,7 @@ function PetPage({ id }) {
         {petPage && <PetDetails petPage={petPage} />}
         {petPage?.adoptionStatus !== 'Available' && (
           <div className="unavailable">
-            <div>
+            <div className="unavailable-message">
               This {petPage?.type?.toLowerCase()} has already been{' '}
               {petPage?.adoptionStatus?.toLowerCase()}
               {!myPet &&
@@ -93,7 +93,10 @@ function PetPage({ id }) {
             </div>
             {!myPet && petPage?.adoptionStatus === 'Fostered' && (
               <div className="unavailable-foster">
-                {`Foster families have priority in adoption, but we're always happy to hear from potential adopters.\nIf you've got your heart set on ${petPage?.name}, don't hesitate to contact us!`}
+                Foster families have priority in adoption, but we're always
+                happy to hear from potential adopters. If you've got your heart
+                set on {petPage?.name}, don't hesitate to
+                <Link to="/contact"> contact us</Link>.
               </div>
             )}
           </div>
