@@ -74,7 +74,7 @@ function NavbarLogged() {
           Contact Us
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item as={NavLink} to="" onClick={signOutHandler}>
+        <NavDropdown.Item as={NavLink} to="/signout" onClick={signOutHandler}>
           Sign Out
         </NavDropdown.Item>
       </NavDropdown>

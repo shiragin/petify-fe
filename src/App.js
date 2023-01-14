@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound';
 import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
 import Footer from './components/Navbar/Footer';
+import AdminQueries from './components/Admin/AdminQueries';
 
 function App() {
   // const { setUser, setLoggedIn } = useUserContext();
@@ -79,6 +80,14 @@ function App() {
             />
             <Route
               path="/admin/show-users"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/show-queries"
               element={
                 <PrivateRoute>
                   <Dashboard />

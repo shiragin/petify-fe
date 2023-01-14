@@ -86,6 +86,7 @@
         width: 100%;
 
         &:active,
+        &:focus,
         &:focus-visible {
           background-color: $primary-color;
           box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
@@ -119,6 +120,12 @@
   }
 }
 
-.contact-form {
+.pet-form {
   width: 70%;
+
+  .btn:focus-visible {
+    background-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
+    transform: scale(1.05) skew(-20deg);
+  }
 }

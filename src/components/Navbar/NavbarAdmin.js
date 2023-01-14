@@ -14,6 +14,9 @@ function NavbarAdmin() {
       <NavDropdown.Item as={NavLink} to="/admin/show-pets">
         Show All Pets
       </NavDropdown.Item>
+      <NavDropdown.Item as={NavLink} to="/admin/show-queries">
+        Show User Queries
+      </NavDropdown.Item>
     </NavDropdown>
   );
 }

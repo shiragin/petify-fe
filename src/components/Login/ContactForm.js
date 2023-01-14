@@ -25,7 +25,7 @@ function ContactForm() {
     name: `${user?.firstName} ${user?.lastName}` || '',
     email: user?.email || '',
     userId: userId || '',
-    topic: 'adoption',
+    topic: 'Adoption',
     message: '',
   });
 
@@ -43,8 +43,9 @@ function ContactForm() {
     e.preventDefault();
     const newQuery = await createNewQuery(query);
     console.log(newQuery);
-    if (!newQuery.ok) setError({ show: true, message: newQuery.error });
-    setModalShow(true);
+    if (!newQuery.ok) {
+      setError({ show: true, message: newQuery.error });
+    } else setModalShow(true);
   }
 
   useEffect(() => {
@@ -102,12 +103,12 @@ function ContactForm() {
           value={query?.topic}
           onChange={(e) => queryChangeHandler(e)}
         >
-          <option value="adoption">Adoption & fostering a pet</option>
-          <option value="returning">
+          <option value="Adoption">Adoption & fostering a pet</option>
+          <option value="Returning">
             Returning an adopted or fostered pet
           </option>
-          <option value="technical">Technical issues on the website</option>
-          <option value="general">Something else</option>
+          <option value="Technical">Technical issues on the website</option>
+          <option value="General">Something else</option>
         </Form.Select>
       </Form.Group>
 

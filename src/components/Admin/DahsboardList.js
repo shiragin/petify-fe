@@ -3,13 +3,10 @@ import { Table } from 'react-bootstrap';
 import { usePetsContext } from '../../context/PetsContext';
 import { useUserContext } from '../../context/UserContext';
 import DashboardLine from './DashboardLine';
-import DashboardModal from './DashboardModal';
 
 function DahsboardList({ list, setShowUser }) {
   const { getPets, pets } = usePetsContext();
   const { getAllUsers } = useUserContext();
-
-  const [userModalShow, setUserModalShow] = useState({ show: false, id: '' });
 
   const [users, setUsers] = useState([]);
 
@@ -26,17 +23,8 @@ function DahsboardList({ list, setShowUser }) {
     }
   }, []);
 
-  function modalShowHandler(show, id) {
-    setUserModalShow({ show: true, id: id });
-  }
-
   return (
     <Table borderless hover className="show-pets-list">
-      {/* <DashboardModal
-        show={userModalShow.show}
-        id={userModalShow.id}
-        onHide={() => setUserModalShow({ show: false })}
-      /> */}
       <thead>
         {list === 'pets' && (
           <tr className="show-pets-list-line-heading">
@@ -85,8 +73,6 @@ function DahsboardList({ list, setShowUser }) {
                 id={_id}
                 list={list}
                 setShowUser={setShowUser}
-
-                // onModalShow={(show, id) => modalShowHandler(show, id)}
               />
             ))}
         </tbody>

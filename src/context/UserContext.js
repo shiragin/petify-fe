@@ -121,9 +121,19 @@ export default function UserContextProvider({ children }) {
       if (!res?.data?.ok) throw new Error('No such user!');
       const { users } = await res.data.data;
       if (res.data.ok) return users;
-      return true;
     } catch (err) {
       return false;
+    }
+  }
+
+  async function getAllQueries() {
+    try {
+      const res = await axios.get(`${baseURL}/queries`);
+      if (!res?.data?.ok) throw new Error('No queries!');
+      const { queries } = await res.data;
+      if (res.data.ok) return queries;
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -135,7 +145,7 @@ export default function UserContextProvider({ children }) {
       });
       if (res?.data?.ok) {
         const { query: newQuery } = await res?.data;
-        return newQuery;
+        return { ok: true, query: newQuery };
       }
     } catch (err) {
       const { message } = await err?.response?.data;
@@ -167,6 +177,7 @@ export default function UserContextProvider({ children }) {
         getAllUsers,
         getUserProfile,
         createNewQuery,
+        getAllQueries,
       }}
     >
       {children}

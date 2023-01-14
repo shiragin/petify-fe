@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import AdminQueries from '../components/Admin/AdminQueries';
 import DahsboardList from '../components/Admin/DahsboardList';
 import UserDetails from '../components/Admin/UserDetails';
 import '../scss/Dashboard.scss';
@@ -16,6 +17,8 @@ function Dashboard() {
       setActiveKey('pets');
     } else if (location.pathname === '/admin/show-users') {
       setActiveKey('users');
+    } else if (location.pathname === '/admin/show-queries') {
+      setActiveKey('queries');
     } else return;
   }, [location]);
 
@@ -28,12 +31,17 @@ function Dashboard() {
             <Nav variant="pills" className="flex-column">
               <Nav.Item onClick={() => setActiveKey('users')}>
                 <Nav.Link eventKey="users">
-                  <span className="text">Show Users</span>
+                  <span className="text">Users</span>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item onClick={() => setActiveKey('pets')}>
                 <Nav.Link eventKey="pets">
-                  <span>Show Pets</span>
+                  <span>Pets</span>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item onClick={() => setActiveKey('queries')}>
+                <Nav.Link eventKey="queries">
+                  <span>Queries</span>
                 </Nav.Link>
               </Nav.Item>
             </Nav>
@@ -49,6 +57,9 @@ function Dashboard() {
               </Tab.Pane>
               <Tab.Pane eventKey="pets">
                 <DahsboardList list={'pets'} />
+              </Tab.Pane>
+              <Tab.Pane eventKey="queries">
+                <AdminQueries />
               </Tab.Pane>
             </Tab.Content>
           </Col>
