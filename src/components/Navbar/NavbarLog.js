@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
@@ -29,10 +29,7 @@ function NavbarLogged() {
     }
   }, []);
 
-  // return isExpired;
-
   function getTokenExpirationTime() {
-    // Get the expiration time of the token from the client-side storage
     const expirationTime = localStorage.getItem('exp');
     return expirationTime ? Number(expirationTime) : null;
   }

@@ -43,6 +43,7 @@ export default function UserContextProvider({ children }) {
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
+        console.log(userId, exp);
         localStorage.setItem('userId', userId);
         localStorage.setItem('exp', exp);
         setLoggedIn(true);
@@ -73,7 +74,7 @@ export default function UserContextProvider({ children }) {
         setUser(currentUser);
         localStorage.setItem('userId', userId);
         localStorage.setItem('exp', exp);
-        console.log('HELLO', user, userId, exp);
+        console.log('HELLO', user.email, userId, exp);
         setLoggedIn(true);
         return true;
       }

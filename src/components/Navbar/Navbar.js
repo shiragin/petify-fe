@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
-import { usePetsContext } from '../../context/PetsContext';
 import NavbarUnlogged from './NavbarUnlogged';
-import NavbarLogged from './NavbarLogged';
 import { FaPaw } from 'react-icons/fa';
 import '../../scss/Navbar.scss';
+import NavbarLog from './NavbarLog';
 
 function Navbar() {
   const { loggedIn, setLoggedIn, setUser, user, userId, getUserProfile } =
@@ -19,8 +18,6 @@ function Navbar() {
 
   useEffect(
     () => {
-      console.log(user);
-
       if (!userId) {
         setLoggedIn(false);
       } else {
@@ -40,7 +37,7 @@ function Navbar() {
             <FaPaw /> <span>Pet</span>ify
           </div>
         </NavLink>
-        {loggedIn ? <NavbarLogged /> : <NavbarUnlogged />}
+        {loggedIn ? <NavbarLog /> : <NavbarUnlogged />}
         <Outlet />
       </div>
     </div>

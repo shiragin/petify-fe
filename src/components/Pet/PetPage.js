@@ -83,12 +83,19 @@ function PetPage({ id }) {
         {petPage && <PetDetails petPage={petPage} />}
         {petPage?.adoptionStatus !== 'Available' && (
           <div className="unavailable">
-            This {petPage?.type?.toLowerCase()} has already been{' '}
-            {petPage?.adoptionStatus?.toLowerCase()}
-            {!myPet &&
-              user.isAdmin &&
-              ` by ${petOwner?.firstName} ${petOwner?.lastName}`}{' '}
-            {myPet && 'by you'}{' '}
+            <div>
+              This {petPage?.type?.toLowerCase()} has already been{' '}
+              {petPage?.adoptionStatus?.toLowerCase()}
+              {!myPet &&
+                user.isAdmin &&
+                ` by ${petOwner?.firstName} ${petOwner?.lastName}`}{' '}
+              {myPet && 'by you'}{' '}
+            </div>
+            {!myPet && petPage?.adoptionStatus === 'Fostered' && (
+              <div className="unavailable-foster">
+                {`Foster families have priority in adoption, but we're always happy to hear from potential adopters.\nIf you've got your heart set on ${petPage?.name}, don't hesitate to contact us!`}
+              </div>
+            )}
           </div>
         )}
         <div className="petpage-buttons">

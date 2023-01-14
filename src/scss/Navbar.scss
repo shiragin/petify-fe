@@ -93,3 +93,29 @@
 //   text-align: end;
 //   transform: translateY(2rem);
 // }
+
+@media (max-width: 1000px) {
+  .navbar {
+    &-links {
+      font-size: 1.1rem;
+      &-logo {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    &-links {
+      font-size: 1.1rem;
+      gap: 2rem;
+      &-logo {
+        font-size: 1.4rem;
+      }
+      &-right {
+        gap: 2rem;
+      }
+    }
+  }
+}
