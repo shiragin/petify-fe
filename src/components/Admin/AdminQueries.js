@@ -9,12 +9,13 @@ import {
 import { useUserContext } from '../../context/UserContext';
 import DashboardLine from './DashboardLine';
 
-function AdminQueries() {
+function AdminQueries({ setShowQuery }) {
   const { getAllQueries } = useUserContext();
   const [queries, setQueries] = useState([]);
 
   async function getQueries() {
     const allQueries = await getAllQueries();
+    console.log(allQueries);
     if (allQueries) setQueries(allQueries);
   }
 
@@ -44,6 +45,7 @@ function AdminQueries() {
                 id={_id}
                 replied={replied}
                 list={'queries'}
+                setShowQuery={setShowQuery}
               />
             );
           })}

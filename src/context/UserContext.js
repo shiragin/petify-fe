@@ -137,10 +137,36 @@ export default function UserContextProvider({ children }) {
     }
   }
 
+  async function getQuery(id) {
+    try {
+      const res = await axios.get(`${baseURL}/queries/${id}`);
+      if (!res?.data?.ok) throw new Error('No query by this ID!');
+      const { queries } = await res.data;
+      if (res.data.ok) return queries;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function createNewQuery(query) {
     try {
       console.log('CONTEXT', query);
       const res = await axios.post(`${baseURL}/queries`, query, {
+        withCredentials: true,
+      });
+      if (res?.data?.ok) {
+        const { query: newQuery } = await res?.data;
+        return { ok: true, query: newQuery };
+      }
+    } catch (err) {
+      const { message } = await err?.response?.data;
+      return { ok: false, error: message };
+    }
+  }
+
+  async function updateQuery(id, update) {
+    try {
+      const res = await axios.patch(`${baseURL}/queries/${id}/reply`, update, {
         withCredentials: true,
       });
       if (res?.data?.ok) {
@@ -178,6 +204,8 @@ export default function UserContextProvider({ children }) {
         getUserProfile,
         createNewQuery,
         getAllQueries,
+        getQuery,
+        updateQuery,
       }}
     >
       {children}

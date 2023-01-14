@@ -49,18 +49,18 @@ function UserDetails({ id, setShowUser }) {
       <h2 className="user-title">{`${viewedUser?.firstName} ${viewedUser?.lastName}`}</h2>
       <div className="user-details">
         <div>
-          <span>Email</span> {viewedUser?.email}
+          <span className="title">Email</span> {viewedUser?.email}
         </div>
         <div>
-          <span>Phone</span> {viewedUser?.phoneNumber}
+          <span className="title">Phone</span> {viewedUser?.phoneNumber}
         </div>
 
         <div>
-          <span>User Bio</span> {viewedUser?.bio}
+          <span className="title">User Bio</span> {viewedUser?.bio}
         </div>
         <div className="pet-list">
           <div>
-            <span>Adopted Pets</span>{' '}
+            <span className="title">Adopted Pets</span>{' '}
           </div>
           <div className="pet-items">
             {adoptedPets.length
@@ -81,7 +81,7 @@ function UserDetails({ id, setShowUser }) {
         </div>
         <div className="pet-list">
           <div>
-            <span>Fostered Pets</span>{' '}
+            <span className="title">Fostered Pets</span>{' '}
           </div>
           <div className="pet-items">
             {fosteredPets.length

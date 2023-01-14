@@ -3,7 +3,14 @@ import { FaEdit } from 'react-icons/fa';
 import { BsEyeFill } from 'react-icons/bs';
 import { ImCross, ImCheckmark } from 'react-icons/im';
 
-function DashboardLine({ value, id, list, replied, setShowUser }) {
+function DashboardLine({
+  value,
+  id,
+  list,
+  replied,
+  setShowUser,
+  setShowQuery,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -14,14 +21,14 @@ function DashboardLine({ value, id, list, replied, setShowUser }) {
       {list === 'queries' && (
         <td>
           {replied ? (
-            <ImCheckmark className="sm" />
+            <ImCheckmark className="md" />
           ) : (
             <ImCross className="sm" />
           )}
         </td>
       )}
       {list === 'queries' && (
-        <td onClick={() => navigate(`../admin/show-queries/${id}`)}>
+        <td onClick={() => setShowQuery({ show: true, id })}>
           <BsEyeFill className="lg" />
         </td>
       )}

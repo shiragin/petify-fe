@@ -10,11 +10,10 @@ import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
+import ShowQuery from './components/Admin/ShowQuery';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/Login/PrivateRoute';
 import './scss/App.scss';
-import Footer from './components/Navbar/Footer';
-import AdminQueries from './components/Admin/AdminQueries';
 
 function App() {
   // const { setUser, setLoggedIn } = useUserContext();
@@ -94,6 +93,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+
             <Route
               path="/admin/edit-pet/:id"
               element={
@@ -107,6 +107,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/show-queries/:id"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
                 </PrivateRoute>
               }
             />

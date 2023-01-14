@@ -74,21 +74,8 @@ function NavbarLogged() {
           Contact Us
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item as={NavLink} to="/signout" onClick={signOutHandler}>
-          Sign Out
-        </NavDropdown.Item>
+        <NavDropdown.Item onClick={signOutHandler}>Sign Out</NavDropdown.Item>
       </NavDropdown>
-      {/* <NavLink
-        to="/profile"
-        style={({ isActive }) => ({
-          color: isActive ? '#f9404f' : '#003a4d',
-        })}
-      >
-        Profile
-      </NavLink> */}
-      {/* <NavLink to="/" onClick={signOutHandler}>
-        Sign Out
-      </NavLink> */}
     </div>
   );
 }

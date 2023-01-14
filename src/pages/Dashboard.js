@@ -3,6 +3,7 @@ import { Tab, Col, Row, Nav } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import AdminQueries from '../components/Admin/AdminQueries';
 import DahsboardList from '../components/Admin/DahsboardList';
+import ShowQuery from '../components/Admin/ShowQuery';
 import UserDetails from '../components/Admin/UserDetails';
 import '../scss/Dashboard.scss';
 
@@ -11,6 +12,11 @@ function Dashboard() {
   const location = useLocation();
 
   const [showUser, setShowUser] = useState({ show: false, id: '' });
+
+  const [showQuery, setShowQuery] = useState({
+    show: false,
+    id: '',
+  });
 
   useEffect(() => {
     if (location.pathname === '/admin/show-pets') {
@@ -59,7 +65,11 @@ function Dashboard() {
                 <DahsboardList list={'pets'} />
               </Tab.Pane>
               <Tab.Pane eventKey="queries">
-                <AdminQueries />
+                {showQuery.show ? (
+                  <ShowQuery id={showQuery.id} setShowQuery={setShowQuery} />
+                ) : (
+                  <AdminQueries setShowQuery={setShowQuery} />
+                )}
               </Tab.Pane>
             </Tab.Content>
           </Col>
