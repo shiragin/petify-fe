@@ -1,5 +1,4 @@
-import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
-import { GiLobArrow } from 'react-icons/gi';
+import { FaChevronCircleUp } from 'react-icons/fa';
 import { usePetsContext } from '../../context/PetsContext';
 
 function SearchToggle() {

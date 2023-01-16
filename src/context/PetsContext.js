@@ -26,7 +26,7 @@ export default function PetsContextProvider({ children }) {
     try {
       const res = await axios.get(`${baseURL}/pets`);
       if (res?.data?.ok) {
-        const { pets } = await res.data.data;
+        const { pets } = await res.data;
         setPets(pets);
       }
     } catch (err) {
@@ -38,7 +38,7 @@ export default function PetsContextProvider({ children }) {
     try {
       const res = await axios.get(`${baseURL}/pets?type=${type}`);
       if (res?.data?.ok) {
-        const { pets } = await res.data.data;
+        const { pets } = await res.data;
         setPets(pets);
       }
     } catch (err) {
@@ -48,20 +48,17 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetsAdvanced(search) {
     const params = Object.keys(search);
-
     let filteredParams = {};
-
     params.map((param) => {
       if (search[param])
         filteredParams = { ...filteredParams, [param]: search[param] };
     });
-
     try {
       const res = await axios.get(`${baseURL}/pets`, {
         params: filteredParams,
       });
       if (res?.data?.ok) {
-        const { pets } = await res.data.data;
+        const { pets } = await res.data;
         setPets(pets);
       }
     } catch (err) {
@@ -73,7 +70,7 @@ export default function PetsContextProvider({ children }) {
     try {
       const res = await axios.get(`${baseURL}/pets/${id}`);
       if (res?.data?.ok) {
-        const { pet } = await res.data.data;
+        const { pet } = await res.data;
         return pet[0];
       }
     } catch (err) {
@@ -87,7 +84,7 @@ export default function PetsContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { pets } = await res.data.data;
+        const { pets } = await res.data;
         setFeaturedPets(pets);
       }
     } catch (err) {
@@ -109,7 +106,7 @@ export default function PetsContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { pet: petDetails } = await res.data.data;
+        const { pet: petDetails } = await res.data;
         return { ok: true, petDetails };
       }
     } catch (err) {
@@ -128,7 +125,7 @@ export default function PetsContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { pet: petDetails } = await res.data.data;
+        const { pet: petDetails } = await res.data;
         return { ok: true, petDetails };
       }
     } catch (err) {
@@ -143,7 +140,7 @@ export default function PetsContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { savedPets } = await res.data.data;
+        const { savedPets } = await res.data;
         return savedPets;
       }
     } catch (error) {
@@ -157,7 +154,7 @@ export default function PetsContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { fosteredPets, adoptedPets } = await res.data.data;
+        const { fosteredPets, adoptedPets } = await res.data;
         return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
       }
     } catch (error) {
@@ -173,7 +170,7 @@ export default function PetsContextProvider({ children }) {
         { withCredentials: true }
       );
       if (res?.data?.ok) {
-        const { user: userData } = res?.data?.data;
+        const { user: userData } = res?.data;
         setUser(userData);
         return true;
       }
@@ -191,7 +188,7 @@ export default function PetsContextProvider({ children }) {
         },
       });
       if (res?.data?.ok) {
-        const { user: userData } = res?.data?.data;
+        const { user: userData } = res?.data;
         setUser(userData);
         return true;
       }
@@ -213,7 +210,7 @@ export default function PetsContextProvider({ children }) {
         { withCredentials: true }
       );
       if (res?.data?.ok) {
-        if (user._id === userId) setUser(res.data.data.user);
+        if (user._id === userId) setUser(res.data.user);
         return true;
       }
     } catch (err) {

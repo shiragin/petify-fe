@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Button, Overlay, Tooltip } from 'react-bootstrap';
+import { Button, Overlay, Spinner, Tooltip } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
 
 function SubmitButton(props) {
@@ -24,6 +24,7 @@ function SubmitButton(props) {
             ? 'Profile saved'
             : 'Save Profile'}
         </span>
+        <span>{props.isLoading && <Spinner className="mx-3" size="sm" />}</span>
       </Button>
       {/* {props.confirm && 'Profile saved'} */}
       <Overlay target={target.current} show={error?.show} placement="top">

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import UserContextProvider, { useUserContext } from './context/UserContext';
+import UserContextProvider from './context/UserContext';
 import PetsContextProvider from './context/PetsContext';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
@@ -10,9 +10,9 @@ import Pet from './pages/Pet';
 import AddPet from './pages/AddPet';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
-import ShowQuery from './components/Admin/ShowQuery';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/Login/PrivateRoute';
+import AdminRoute from './components/Admin/AdminRoute';
 import './scss/App.scss';
 
 function App() {
@@ -65,7 +65,9 @@ function App() {
               path="/admin/add-pet"
               element={
                 <PrivateRoute>
-                  <AddPet />
+                  <AdminRoute>
+                    <AddPet />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -73,7 +75,9 @@ function App() {
               path="/admin/show-pets"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <AdminRoute>
+                    <Dashboard />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -81,7 +85,9 @@ function App() {
               path="/admin/show-users"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <AdminRoute>
+                    <Dashboard />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -89,7 +95,9 @@ function App() {
               path="/admin/show-queries"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <AdminRoute>
+                    <Dashboard />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -98,7 +106,9 @@ function App() {
               path="/admin/edit-pet/:id"
               element={
                 <PrivateRoute>
-                  <AddPet />
+                  <AdminRoute>
+                    <AddPet />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -106,7 +116,9 @@ function App() {
               path="/admin/profile/:id"
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <AdminRoute>
+                    <Profile />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
@@ -114,13 +126,14 @@ function App() {
               path="/admin/show-queries/:id"
               element={
                 <PrivateRoute>
-                  <Dashboard />
+                  <AdminRoute>
+                    <Dashboard />
+                  </AdminRoute>
                 </PrivateRoute>
               }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* <Footer /> */}
         </BrowserRouter>
       </PetsContextProvider>
     </UserContextProvider>

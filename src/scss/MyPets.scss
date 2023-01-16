@@ -58,7 +58,8 @@
     margin: 1.2rem 0 1.2rem 2rem;
 
     .card {
-      width: 45%;
+      // width: min(200px);
+      width: 250px;
       margin-bottom: 1rem;
     }
 
@@ -78,14 +79,14 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .mypets .home-logged-featured-pets-cards .card {
-    width: 45%;
-  }
-}
+// @media (max-width: 1200px) {
+//   .mypets .home-logged-featured-pets-cards .card {
+//     // width: 40%;
+//   }
+// }
 
-@media (max-width: 900px) {
-  .mypets .home-logged-featured-pets-cards .card {
-    width: 45%;
-  }
-}
+// @media (max-width: 900px) {
+//   .mypets .home-logged-featured-pets-cards .card {
+//     // width: 40%;
+//   }
+// }

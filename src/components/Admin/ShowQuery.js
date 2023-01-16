@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { useUserContext } from '../../context/UserContext';
 import { FaChevronCircleLeft } from 'react-icons/fa';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function ShowQuery({ id, setShowQuery }) {
   const { getQuery, updateQuery } = useUserContext();
 
   const [query, setQuery] = useState({});
   const [reply, setReply] = useState('');
+
+  const navigate = useNavigate();
 
   async function getCurrentQuery(id) {
     const currentQuery = await getQuery(id);
@@ -16,7 +19,6 @@ function ShowQuery({ id, setShowQuery }) {
 
   async function replyClickHandler() {
     const newQuery = await updateQuery(id, { reply });
-    console.log(newQuery);
     setQuery(newQuery.query);
   }
 
@@ -62,12 +64,10 @@ function ShowQuery({ id, setShowQuery }) {
           <span className="title">Message</span>
           <div className="message">{query?.message}</div>
         </div>
-        {/* {query?.replied && ( */}
         <div>
           <span className="title">Our Reply</span>
           <div className="message">{query?.reply}</div>
         </div>
-        {/* )} */}
         {!query.replied && (
           <Form.Control
             as="textarea"

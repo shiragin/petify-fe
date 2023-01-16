@@ -153,9 +153,7 @@ function SignupForm() {
           </div>
           <div>
             <Form.Label className="profile-label">
-              {loginModalShow.show
-                ? 'Confirm password'
-                : 'Confirm new password'}
+              {loginModalShow.show ? 'Confirm' : 'Confirm new password'}
             </Form.Label>
             <Form.Control
               className="profile-input"

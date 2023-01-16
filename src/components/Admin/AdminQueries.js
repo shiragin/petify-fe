@@ -1,11 +1,5 @@
-import { Fragment, useEffect, useState } from 'react';
-import {
-  Accordion,
-  AccordionCollapse,
-  Card,
-  Collapse,
-  Table,
-} from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
 import DashboardLine from './DashboardLine';
 
@@ -36,7 +30,13 @@ function AdminQueries({ setShowQuery }) {
       </thead>
       <tbody>
         {queries
-          .sort((q1, q2) => (q1.createdAt > q2.createdAt ? -1 : 1))
+          .sort((q1, q2) =>
+            !q1.replied && q2.replied
+              ? -1
+              : q1.replied && !q2.replied
+              ? 1
+              : new Date(q2.createdAt) - new Date(q1.createdAt)
+          )
           .map(({ _id, name, email, topic, replied }) => {
             return (
               <DashboardLine

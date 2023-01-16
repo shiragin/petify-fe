@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 import NavbarAdmin from './NavbarAdmin';
@@ -15,7 +15,9 @@ function NavbarLogged() {
     setLoginForm,
   } = useUserContext();
 
-  const { setSearchType, setSearchAdvanced } = usePetsContext;
+  const { setSearchType, setSearchAdvanced } = usePetsContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const tokenExpirationTime = getTokenExpirationTime();
@@ -37,19 +39,21 @@ function NavbarLogged() {
 
   function signOutHandler() {
     console.log('SIGNING OUT');
+    setSearchType(false);
     setLoginModalShow({});
+    navigate('/');
     localStorage.clear();
     setLoggedIn(false);
     setError({ show: false, message: '' });
     setLoginForm({});
     setUser(null);
-    setSearchType(false);
     setSearchAdvanced({});
   }
 
   return (
     <div className="navbar-links-right">
       <NavLink
+        className="full"
         to="/search"
         style={({ isActive }) => ({
           color: isActive ? '#f9404f' : '#003a4d',
@@ -58,6 +62,7 @@ function NavbarLogged() {
         Search
       </NavLink>
       <NavLink
+        className="full"
         to="/mypets"
         style={({ isActive }) => ({
           color: isActive ? '#f9404f' : '#003a4d',
@@ -65,7 +70,15 @@ function NavbarLogged() {
       >
         My Pets
       </NavLink>
-      {user?.isAdmin && <NavbarAdmin />}
+      <NavDropdown className="mobile" title="Explore" id="basic-nav-dropdown">
+        <NavDropdown.Item as={NavLink} to="/search">
+          Search
+        </NavDropdown.Item>
+        <NavDropdown.Item as={NavLink} to="/mypets">
+          My Pets
+        </NavDropdown.Item>
+      </NavDropdown>
+
       <NavDropdown title="Settings" id="basic-nav-dropdown">
         <NavDropdown.Item as={NavLink} to="/profile">
           Edit Profile
@@ -76,6 +89,7 @@ function NavbarLogged() {
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={signOutHandler}>Sign Out</NavDropdown.Item>
       </NavDropdown>
+      {user?.isAdmin && <NavbarAdmin />}
     </div>
   );
 }

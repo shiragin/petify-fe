@@ -54,9 +54,15 @@
           display: inline-block;
           transform: skew(20deg);
         }
-        &:hover {
+        &:hover,
+        &:focus,
+        &:focus-visible {
           background-color: $primary-color;
           transform: skew(-20deg) scale(1.05);
+        }
+        &:active {
+          background-color: $primary-color;
+          transform: skew(-20deg) scale(0.95);
         }
       }
       &.skew-right {
@@ -65,9 +71,16 @@
           display: inline-block;
           transform: skew(-20deg);
         }
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus-visible {
           background-color: $primary-color;
           transform: skew(20deg) scale(1.05);
+        }
+        &:active {
+          background-color: $primary-color;
+          transform: skew(-20deg) scale(0.95);
         }
       }
     }
@@ -201,7 +214,7 @@
 
   img.secondary {
     height: 100vh;
-    top: -40%;
+    top: -30%;
   }
 
   .carousel-caption {
@@ -233,9 +246,8 @@
 
     .caption-box {
       // flex: 1;
-      width: 30%;
-      // width: 30%;
-      width: auto initial;
+      width: 20vw;
+      // width: min(30%, 400px);
       display: flex;
       align-items: flex-start;
       background-color: rgba(249, 64, 79, 0.8);
@@ -245,9 +257,11 @@
       border-radius: 0.375rem;
 
       h1 {
+        // overflow-wrap: break-word;
         align-self: flex-start;
-        font-size: 2.1rem;
+        font-size: 2rem;
         margin: 0 0 1rem 0;
+        text-shadow: none;
       }
 
       // .hero-logged-welcome-text {
@@ -261,10 +275,14 @@
         color: #fff;
         transition: all 0.2s ease-in-out;
 
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus,
+        &:focus-visible {
           background-color: #fff;
           color: $primary-color;
           transform: scale(1.1);
+          box-shadow: 0 0 0 0.2rem rgba(249, 64, 79, 0.45);
         }
         &:active {
           transform: scale(0.95);
@@ -292,7 +310,7 @@
     text-align: left;
     white-space: pre-wrap;
     transform: skewY(1deg);
-    text-shadow: #fff;
+    text-shadow: 1rem 1rem 2rem #fff;
 
     &-text {
       font-size: 1.2rem;
@@ -356,6 +374,16 @@
 // @media (max-width: )
 
 @media (max-width: 1100px) {
+  .hero {
+    .hero-content {
+      .hero-title {
+        font-size: 4rem;
+      }
+      button {
+        font-size: 1rem;
+      }
+    }
+  }
   .home-logged {
     .home-logged-featured-pets-cards {
       .card:nth-child(n + 4) {
@@ -374,12 +402,25 @@
     }
     img.secondary {
       height: 100vh;
-      top: -30%;
+      top: -40%;
     }
   }
 }
 
 @media (max-width: 900px) {
+  .hero {
+    .hero-content {
+      .hero-title {
+        font-size: 3rem;
+      }
+      .hero-text {
+        font-size: 1.2rem;
+      }
+      button {
+        font-size: 0.8rem;
+      }
+    }
+  }
   .hero-logged {
     .carousel-item::before,
     .carousel-item::after {
@@ -391,10 +432,11 @@
     }
     img.secondary {
       height: 100vh;
-      top: -10%;
+      top: -15%;
     }
 
     .caption-box {
+      width: 30vw;
       h1 {
         font-size: 2.5rem;
       }
@@ -425,6 +467,126 @@
   .home-logged .home-logged-featured-pets-cards {
     .card:nth-child(n + 3) {
       display: none;
+    }
+  }
+  .hero-logged {
+    .carousel-item::before,
+    .carousel-item::after {
+      height: 40%;
+    }
+    img {
+      height: 100vh;
+      top: 0%;
+    }
+    img.secondary {
+      height: 100vh;
+      top: -20%;
+    }
+
+    .caption-box {
+      width: 30vw;
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    .carousel-caption.secondary {
+      .caption-box {
+        width: 27vw;
+        padding: 1rem 1.5rem;
+        h1 {
+          font-size: 1.6rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .hero-logged-welcome-text {
+          font-size: 1.2rem;
+        }
+
+        .btn {
+          margin-top: 0.8rem;
+          padding: 0.2rem 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .home-logged .home-logged-featured-pets-cards {
+    .card {
+      width: 200px;
+    }
+    .card:nth-child(n + 2) {
+      display: none;
+    }
+  }
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    .hero-img {
+      width: 70vw;
+      margin: 1rem 0 2rem;
+    }
+    .hero-content {
+      width: 90%;
+      text-align: center;
+      .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .hero-text {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        font-size: 1rem;
+      }
+    }
+  }
+  .hero-logged {
+    img {
+      height: 100vh;
+      top: -20%;
+    }
+    img.secondary {
+      height: 100vh;
+      top: -40%;
+    }
+
+    .carousel-caption {
+      flex-direction: column;
+
+      .caption-box {
+        width: 100%;
+        h1 {
+          color: #fff;
+          font-size: 2rem;
+          text-shadow: none;
+        }
+      }
+    }
+
+    .carousel-caption.secondary {
+      flex-direction: column;
+      justify-content: flex-end;
+      .caption-box {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        h1 {
+          font-size: 1.6rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .hero-logged-welcome-text {
+          font-size: 1.2rem;
+        }
+
+        .btn {
+          margin-top: 0.8rem;
+          padding: 0.2rem 0.8rem;
+        }
+      }
     }
   }
 }

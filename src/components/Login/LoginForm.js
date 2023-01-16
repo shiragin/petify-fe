@@ -3,7 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
 import SubmitButton from './SubmitButton';
 import Cat from '../../imgs/undraw_cat.svg';
+import Corgi from '../../imgs/corgi.png';
 import Dog from '../../imgs/undraw_dog.svg';
+import { useState } from 'react';
 
 function LoginForm() {
   const {
@@ -21,6 +23,8 @@ function LoginForm() {
     setLoginModalShow({ show: true, type: 'signup' });
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   function loginChangeHandler(e, field) {
@@ -31,6 +35,7 @@ function LoginForm() {
   }
 
   async function loginSubmitHandler(e) {
+    setIsLoading(true);
     e.preventDefault();
     const signup = await getUser(loginForm);
     if (signup === true) {
@@ -39,6 +44,7 @@ function LoginForm() {
     } else {
       setError({ show: true, message: signup });
     }
+    setIsLoading(false);
   }
 
   return (
@@ -70,9 +76,9 @@ function LoginForm() {
           onChange={(e) => loginChangeHandler(e, 'password')}
         />
       </Form.Group>
-      <SubmitButton type={loginModalShow.type} />
+      <SubmitButton type={loginModalShow.type} isLoading={isLoading} />
       <div className="login-footer">
-        <img src={Cat} />
+        <img src={Corgi} />
         Haven't got an account yet?{' '}
         <a href="#" onClick={clickHandler}>
           Create an account

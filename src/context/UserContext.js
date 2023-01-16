@@ -41,7 +41,7 @@ export default function UserContextProvider({ children }) {
         withCredentials: true,
       });
       if (res?.data?.ok) {
-        const { userId, exp } = res.data.data;
+        const { userId, exp } = res.data;
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
@@ -70,7 +70,7 @@ export default function UserContextProvider({ children }) {
         { withCredentials: true }
       );
       if (res?.data?.ok) {
-        const { userId, exp } = await res.data.data;
+        const { userId, exp } = await res?.data;
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
@@ -90,7 +90,7 @@ export default function UserContextProvider({ children }) {
     try {
       const res = await axios.get(`${baseURL}/users/${id}`);
       if (res?.data?.ok) {
-        const { user: userDetails } = await res.data.data;
+        const { user: userDetails } = await res?.data;
         return userDetails;
       }
     } catch (err) {
@@ -106,7 +106,7 @@ export default function UserContextProvider({ children }) {
       });
 
       if (res?.data?.ok) {
-        const { user: userDetails } = await res.data.data;
+        const { user: userDetails } = await res?.data;
         setUser(userDetails);
         return res.data.ok;
       }
@@ -119,7 +119,7 @@ export default function UserContextProvider({ children }) {
     try {
       const res = await axios.get(`${baseURL}/users`);
       if (!res?.data?.ok) throw new Error('No such user!');
-      const { users } = await res.data.data;
+      const { users } = await res.data;
       if (res.data.ok) return users;
     } catch (err) {
       return false;
@@ -137,12 +137,27 @@ export default function UserContextProvider({ children }) {
     }
   }
 
+  async function getQueriesbyUserId(userId) {
+    try {
+      const res = await axios.get(`${baseURL}/queries/users/${userId}`);
+      if (!res?.data?.ok) throw new Error('No query by this ID!');
+      else {
+        const { queries } = await res?.data;
+        return queries;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function getQuery(id) {
     try {
       const res = await axios.get(`${baseURL}/queries/${id}`);
       if (!res?.data?.ok) throw new Error('No query by this ID!');
-      const { queries } = await res.data;
-      if (res.data.ok) return queries;
+      else {
+        const { queries } = await res?.data;
+        return queries;
+      }
     } catch (err) {
       console.log(err);
     }
@@ -204,6 +219,7 @@ export default function UserContextProvider({ children }) {
         getUserProfile,
         createNewQuery,
         getAllQueries,
+        getQueriesbyUserId,
         getQuery,
         updateQuery,
       }}

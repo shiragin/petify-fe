@@ -34,7 +34,8 @@ function PetPage({ id }) {
 
   async function getPetData() {
     const pet = await getPetPage(id);
-    setPetPage(pet);
+    if (pet) setPetPage(pet);
+    else navigate('/not-found');
   }
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function PetPage({ id }) {
       setPetPage({});
       getPetData();
     },
-    [],
+    [id],
     [user]
   );
 

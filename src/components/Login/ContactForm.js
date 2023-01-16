@@ -9,6 +9,7 @@ function ContactForm() {
     user,
     setUser,
     userId,
+    loggedIn,
     getUserProfile,
     createNewQuery,
     error,
@@ -21,13 +22,7 @@ function ContactForm() {
 
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState({
-    name: `${user?.firstName} ${user?.lastName}` || '',
-    email: user?.email || '',
-    userId: userId || '',
-    topic: 'Adoption',
-    message: '',
-  });
+  const [query, setQuery] = useState({});
 
   async function getUserData() {
     const user = await getUserProfile();
@@ -53,14 +48,31 @@ function ContactForm() {
       ...query,
       name: `${user?.firstName} ${user?.lastName}`,
       email: user?.email,
+      topic: 'Adoption',
+      userId: user?._id,
     });
   }, [user]);
 
-  useEffect(() => {
-    if (userId && !user) {
-      getUserData();
-    }
-  }, []);
+  useEffect(
+    () => {
+      console.log(userId);
+      if (userId && !user) {
+        getUserData();
+      } else if (!userId && !loggedIn) {
+        setQuery({
+          name: '',
+          email: '',
+          userId: '',
+          topic: 'Adoption',
+          message: '',
+        });
+      }
+    },
+    [],
+    [user]
+  );
+
+  console.log(query);
 
   return (
     <Form

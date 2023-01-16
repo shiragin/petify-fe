@@ -85,7 +85,7 @@ function HomeHero() {
         />
         <Carousel.Caption className="secondary left">
           <div className="caption-box secondary left">
-            <h1 className="hero-logged-welcome">{`Where is my family?`}</h1>
+            <h1 className="hero-logged-welcome">{`Where\nis my\nfamily?`}</h1>
             <div className="hero-logged-welcome-text">
               {newPet?.name} and many other adorable{' '}
               {newPet?.type?.toLowerCase()}s are waiting for their forever home
@@ -107,9 +107,7 @@ function HomeHero() {
           />
           <Carousel.Caption className="secondary">
             <div className="caption-box secondary">
-              <h1 className="hero-logged-welcome">
-                {`What about\n${wishedPet?.name}?`}
-              </h1>
+              <h1 className="hero-logged-welcome">{`What about me?`}</h1>
               <div className="hero-logged-welcome-text">
                 You previously added this {wishedPet?.type?.toLowerCase()} to
                 your wishlist. No better time to adopt {wishedPet?.name} than
