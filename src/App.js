@@ -113,11 +113,11 @@ function App() {
               }
             />
             <Route
-              path="/admin/profile/:id"
+              path="/admin/show-users/:id"
               element={
                 <PrivateRoute>
                   <AdminRoute>
-                    <Profile />
+                    <Dashboard />
                   </AdminRoute>
                 </PrivateRoute>
               }

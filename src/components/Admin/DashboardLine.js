@@ -38,7 +38,12 @@ function DashboardLine({
         </td>
       )}
       {list === 'users' && (
-        <td onClick={() => setShowUser({ show: true, id })}>
+        <td
+          onClick={() => {
+            setShowUser({ show: true, id });
+            navigate(`/admin/show-users/${id}`);
+          }}
+        >
           <BsEyeFill />
         </td>
       )}

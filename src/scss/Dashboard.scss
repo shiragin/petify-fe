@@ -153,9 +153,11 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .nav-pills {
     flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
     gap: 2rem;
     .nav-item {
       font-size: 1rem !important;

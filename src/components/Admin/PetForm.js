@@ -233,8 +233,8 @@ function PetForm({
               value="Brown"
               onChange={(e) => newPetColourHandler(e)}
             />
-          </div>
-          <div className="pet-check-row">
+            {/* </div>
+          <div className="pet-check-row"> */}
             <Form.Check
               inline
               checked={newPet?.colour?.includes('Grey')}

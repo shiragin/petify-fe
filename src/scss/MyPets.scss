@@ -49,9 +49,16 @@
     }
   }
 
+  .tab-content {
+    .tab-pane {
+      width: 100% !important;
+    }
+  }
+
   .home-logged-featured-pets-cards {
     display: flex;
     justify-content: flex-start;
+    // justify-content: center;
     width: 100%;
     flex-wrap: wrap;
     gap: 1.2rem;
@@ -78,13 +85,15 @@
   }
 }
 
-// @media (max-width: 1200px) {
-//   .mypets .home-logged-featured-pets-cards .card {
-//     // width: 40%;
-//   }
-// }
+@media (max-width: 1200px) {
+  .tab-content {
+    .tab-pane {
+      width: 100% !important;
+    }
+  }
+}
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .nav-pills {
     flex-direction: column !important;
   }
@@ -94,7 +103,7 @@
     justify-content: center;
   }
   .mypets .home-logged-featured-pets-cards {
-    margin: 0;
+    justify-content: center;
   }
   // .card {
   //   width: 80%;

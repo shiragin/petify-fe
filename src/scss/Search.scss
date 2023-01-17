@@ -8,7 +8,7 @@
   align-items: center;
 
   &-container {
-    width: 80%;
+    width: 100%;
   }
 
   input {
@@ -25,7 +25,6 @@
 
   .search-simple {
     width: 100%;
-    // text-align: center;
     margin: 3rem 0 2rem;
 
     &-title {
@@ -37,6 +36,7 @@
       margin: 2rem 0 1rem;
       display: flex;
       gap: 4rem;
+
       // transform: rotate(-3deg);
 
       button {
