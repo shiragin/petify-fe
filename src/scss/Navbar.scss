@@ -124,14 +124,30 @@
 @media (max-width: 460px) {
   .navbar {
     width: 92vw;
-    height: auto;
+    height: 3rem;
     &-links {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
       font-size: 0.9rem;
       .full {
         display: none;
       }
       .mobile {
         display: unset;
+        svg {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+        .dropdown-toggle::after {
+          display: none;
+        }
+      }
+      .mobile:nth-child(2) {
+        margin-right: 3rem;
+      }
+      .desktop {
+        display: none;
       }
       &-logo {
         font-size: 1.2rem;
@@ -140,7 +156,7 @@
         }
       }
       &-right {
-        gap: 1rem;
+        gap: 2rem;
       }
     }
   }

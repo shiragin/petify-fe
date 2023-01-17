@@ -453,6 +453,10 @@
       width: 100%;
       padding: 1rem 0;
 
+      &-title {
+        font-size: 3rem;
+      }
+
       &-details {
         flex-direction: column;
         width: 95%;

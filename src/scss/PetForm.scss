@@ -3,7 +3,13 @@
 .pet-form {
   color: $dark-color;
   &-container {
+    position: relative;
     width: 80%;
+    .petpage-back {
+      position: absolute;
+      top: -5.5%;
+      left: -12%;
+    }
     form {
       width: 100%;
     }
@@ -104,15 +110,24 @@
   }
 }
 @media (max-width: 500px) {
-  .form-group {
-    .pet-check {
-      .pet-check-row {
-        width: 100%;
-        .form-check {
-          margin-right: 1rem;
-          font-size: 1rem;
-          input {
-            width: 1rem;
+  .pet-form-container {
+    .petpage-back {
+      height: 2rem;
+      width: 2rem;
+      position: absolute;
+      top: -4%;
+      left: -20%;
+    }
+    .form-group {
+      .pet-check {
+        .pet-check-row {
+          width: 100%;
+          .form-check {
+            margin-right: 1rem;
+            font-size: 1rem;
+            input {
+              width: 1rem;
+            }
           }
         }
       }

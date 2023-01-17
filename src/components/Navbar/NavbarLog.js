@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { GiSittingDog } from 'react-icons/gi';
+import { RiAdminFill, RiSettings5Fill } from 'react-icons/ri';
 import { useUserContext } from '../../context/UserContext';
 import { usePetsContext } from '../../context/PetsContext';
 import NavbarAdmin from './NavbarAdmin';
@@ -18,6 +20,17 @@ function NavbarLogged() {
   const { setSearchType, setSearchAdvanced } = usePetsContext();
 
   const navigate = useNavigate();
+
+  const petMenu = (
+    <span>
+      <GiSittingDog />
+    </span>
+  );
+  const userMenu = (
+    <span>
+      <RiSettings5Fill />
+    </span>
+  );
 
   useEffect(() => {
     const tokenExpirationTime = getTokenExpirationTime();
@@ -70,7 +83,8 @@ function NavbarLogged() {
       >
         My Pets
       </NavLink>
-      <NavDropdown className="mobile" title="Explore" id="basic-nav-dropdown">
+
+      <NavDropdown className="mobile" title={petMenu} id="basic-nav-dropdown">
         <NavDropdown.Item as={NavLink} to="/search">
           Search
         </NavDropdown.Item>
@@ -79,7 +93,18 @@ function NavbarLogged() {
         </NavDropdown.Item>
       </NavDropdown>
 
-      <NavDropdown title="Settings" id="basic-nav-dropdown">
+      <NavDropdown className="mobile" title={userMenu} id="basic-nav-dropdown">
+        <NavDropdown.Item as={NavLink} to="/profile">
+          Edit Profile
+        </NavDropdown.Item>
+        <NavDropdown.Item as={NavLink} to="/contact">
+          Contact Us
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item onClick={signOutHandler}>Sign Out</NavDropdown.Item>
+      </NavDropdown>
+
+      <NavDropdown title="Settings" id="basic-nav-dropdown" className="desktop">
         <NavDropdown.Item as={NavLink} to="/profile">
           Edit Profile
         </NavDropdown.Item>

@@ -4,6 +4,7 @@ import { usePetsContext } from '../../context/PetsContext';
 import PetForm from './PetForm';
 import PetSubmit from './PetSubmit';
 import PetModal from '../Pet/PetModal';
+import { FaChevronCircleLeft } from 'react-icons/fa';
 
 function PetAddNew({ id }) {
   const {
@@ -118,6 +119,10 @@ function PetAddNew({ id }) {
 
   return (
     <div className="pet-form-container">
+      <FaChevronCircleLeft
+        className="petpage-back"
+        onClick={() => navigate(-1)}
+      />
       <PetForm
         id={id}
         newPet={newPet}

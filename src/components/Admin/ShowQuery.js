@@ -66,7 +66,7 @@ function ShowQuery({ id, setShowQuery }) {
         </div>
         <div>
           <span className="title">Our Reply</span>
-          <div className="message">{query?.reply}</div>
+          {query.replied && <div className="message">{query?.reply}</div>}
         </div>
         {!query.replied && (
           <Form.Control

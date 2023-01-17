@@ -64,6 +64,7 @@
 .tab-content {
   .tab-pane {
     width: 80%;
+    margin-bottom: 2rem;
 
     .user-page {
       position: relative;
@@ -74,7 +75,7 @@
         position: absolute;
         height: 2rem;
         width: 2rem;
-        top: 2.3%;
+        top: 1.2%;
         left: -15%;
       }
 
@@ -108,9 +109,13 @@
           background-color: $primary-color;
         }
 
+        textarea {
+          margin: 0;
+        }
+
         .message {
           font-size: 1.2rem;
-          margin-top: 1rem;
+          margin: 1rem 0 0;
           white-space: pre-wrap;
         }
 
@@ -181,12 +186,13 @@
     }
   }
   .tab-content {
-    width: 100%;
+    width: 95%;
     .active {
       width: 100%;
       .user-page {
         margin: 0 4rem;
         .userpage-back {
+          top: 1%;
           left: -20%;
         }
       }
