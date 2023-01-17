@@ -152,3 +152,100 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .nav-pills {
+    flex-direction: row !important;
+    gap: 2rem;
+    .nav-item {
+      font-size: 1rem !important;
+      min-width: 4rem;
+      a {
+        min-width: 2rem;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+
+        span {
+          text-align: center;
+          padding: 0;
+        }
+      }
+    }
+    .nav-item.active {
+      min-width: 4rem;
+    }
+  }
+  .tab-content {
+    width: 100%;
+    .active {
+      width: 100%;
+      .user-page {
+        margin: 0 4rem;
+        .userpage-back {
+          left: -20%;
+        }
+      }
+    }
+  }
+  .show-pets-list.pets {
+    .show-pets-list-line-heading {
+      th:nth-child(0),
+      th:nth-child(2),
+      th:nth-child(3) {
+        display: none;
+      }
+    }
+    .show-pets-list-line {
+      td:nth-child(0),
+      td:nth-child(2),
+      td:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+  .show-pets-list.users {
+    .show-pets-list-line-heading {
+      th:nth-child(1),
+      th:nth-child(2),
+      th:nth-child(4) {
+        display: none;
+      }
+    }
+    .show-pets-list-line {
+      td:nth-child(1),
+      td:nth-child(2),
+      td:nth-child(4) {
+        display: none;
+      }
+    }
+  }
+  .show-pets-list.queries {
+    .show-pets-list-line-heading {
+      // th:nth-child(1),
+      th:nth-child(2) {
+        display: none;
+      }
+    }
+    .show-pets-list-line {
+      vertical-align: middle;
+      // td:nth-child(1),
+      svg.sm {
+        top: 36%;
+      }
+
+      svg.md {
+        top: 33%;
+      }
+
+      svg.lg {
+        top: 30%;
+      }
+      td:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}

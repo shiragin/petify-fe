@@ -310,7 +310,10 @@
     text-align: left;
     white-space: pre-wrap;
     transform: skewY(1deg);
-    text-shadow: 1rem 1rem 2rem #fff;
+
+    .main {
+      filter: drop-shadow(0 0 2rem #fff);
+    }
 
     &-text {
       font-size: 1.2rem;
@@ -556,13 +559,14 @@
 
     .carousel-caption {
       flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 2rem;
 
       .caption-box {
         width: 100%;
         h1 {
-          color: #fff;
-          font-size: 2rem;
-          text-shadow: none;
+          // color: #fff;
+          font-size: 1.8rem;
         }
       }
     }

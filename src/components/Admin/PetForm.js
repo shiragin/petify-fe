@@ -20,7 +20,6 @@ function PetForm({
   const [newColour, setNewColour] = useState([]);
 
   function newPetChangeHandler(e, field) {
-    // console.log(prevOwner);
     const newField = {};
     newField[field] = e.target.value;
     setNewPet({ ...newPet, ...newField });

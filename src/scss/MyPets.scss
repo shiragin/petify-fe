@@ -58,7 +58,6 @@
     margin: 1.2rem 0 1.2rem 2rem;
 
     .card {
-      // width: min(200px);
       width: 250px;
       margin-bottom: 1rem;
     }
@@ -85,8 +84,19 @@
 //   }
 // }
 
-// @media (max-width: 900px) {
-//   .mypets .home-logged-featured-pets-cards .card {
-//     // width: 40%;
-//   }
-// }
+@media (max-width: 500px) {
+  .nav-pills {
+    flex-direction: column !important;
+  }
+  .tab-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mypets .home-logged-featured-pets-cards {
+    margin: 0;
+  }
+  // .card {
+  //   width: 80%;
+  // }
+}

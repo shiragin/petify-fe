@@ -92,12 +92,17 @@
   .search-advanced {
     width: 100%;
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     margin: 2rem 0 2rem;
 
     form {
       display: flex;
-      gap: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      div {
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     &-group-label {
@@ -107,6 +112,7 @@
 
     input,
     select {
+      width: auto;
       background-color: $light-color;
       border: 0.1rem solid $dark-color;
       font-size: 1.2rem;
@@ -151,6 +157,87 @@
       button {
         font-size: 1.4rem;
         padding: 0.6rem 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .search-container {
+      width: 90%;
+      .search-simple {
+        margin: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        .search-simple-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 1.4rem;
+          button {
+            font-size: 1em;
+            padding: 0.2rem 0.2rem;
+            height: auto;
+            min-width: 3rem;
+            span {
+              padding: 0.2rem 0.2rem;
+            }
+          }
+
+          &-more {
+            svg {
+              height: 2rem;
+              width: 2rem;
+            }
+          }
+        }
+      }
+      .search-advanced {
+        form {
+          // width: 95%;
+          gap: 1.2rem;
+          margin-bottom: 1rem;
+          display: flex;
+          justify-content: space-between;
+          // padding: 0 10rem 0 0;
+
+          div {
+            // gap: 2rem;
+
+            .form-label,
+            .form-select,
+            .form-conrol {
+              font-size: 1rem;
+              min-width: 7rem;
+            }
+            .form-select {
+              padding: 0.5rem 1rem;
+            }
+          }
+        }
+      }
+    }
+    .search-results-list {
+      margin-top: 1rem;
+      justify-content: center;
+      .card {
+        width: 250px;
+        // height: 300px;
+
+        // .card-content {
+        //   height: 70px;
+        //   .card-title {
+        //     font-size: 1.1rem;
+        //   }
+        //   .card-body {
+        //     font-size: 0.8rem;
+        //     line-height: 1;
+        //   }
+        // }
       }
     }
   }

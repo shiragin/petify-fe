@@ -3,7 +3,10 @@
 .pet-form {
   color: $dark-color;
   &-container {
-    width: 70%;
+    width: 80%;
+    form {
+      width: 100%;
+    }
     .form-group {
       margin-bottom: 2rem;
 

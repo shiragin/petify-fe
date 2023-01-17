@@ -260,7 +260,7 @@
     height: 4rem;
     border-radius: 50%;
     position: absolute;
-    top: 18%;
+    top: 14%;
     right: 4%;
     z-index: 999;
     cursor: pointer;
@@ -281,8 +281,8 @@
     }
   }
   .edit {
-    top: 30%;
-    left: 3%;
+    top: 22%;
+    right: 4%;
 
     svg {
       height: 2.7rem;
@@ -358,7 +358,6 @@
 
 .modal-content {
   min-height: 100px;
-  // height: 500px;
 
   .modal-body {
     h2 {
@@ -401,8 +400,85 @@
   }
 }
 
-@media (max-width: 800px) {
-  .card {
-    width: 40%;
+@media (max-width: 900px) {
+  .petpage-main-card {
+    width: 100%;
+    .petpage-card {
+      width: 100%;
+      padding: 1rem 0;
+
+      &-details {
+        width: 95%;
+        gap: 2rem;
+
+        ul {
+          li {
+            font-size: 1.2rem;
+          }
+        }
+      }
+      &-bio {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .main-container.petpage {
+    .liked,
+    .edit {
+      height: 3rem;
+      width: 3rem;
+      top: 4%;
+      right: 20%;
+
+      svg {
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+    .edit {
+      top: 8%;
+      right: 5%;
+    }
+    .liked svg {
+      top: 20%;
+      left: 18%;
+    }
+  }
+  .petpage-main-card {
+    width: 100%;
+    .petpage-card {
+      width: 100%;
+      padding: 1rem 0;
+
+      &-details {
+        flex-direction: column;
+        width: 95%;
+        gap: 0;
+
+        ul {
+          margin-bottom: 0;
+          li {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      &-bio {
+        width: 90%;
+      }
+    }
+    .petpage-buttons {
+      gap: 1rem;
+      .petpage-button {
+        margin: 2rem 1.5rem 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 1.2;
+      }
+    }
   }
 }

@@ -53,7 +53,7 @@ body {
     }
     &:active {
       background-color: $primary-color;
-      transform: skew(20deg) scale(0.95);
+      transform: skew(-20deg) scale(0.95);
     }
   }
   &-skew-right {

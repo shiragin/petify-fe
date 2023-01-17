@@ -24,7 +24,13 @@ function DahsboardList({ list, setShowUser }) {
   }, []);
 
   return (
-    <Table borderless hover className="show-pets-list">
+    <Table
+      borderless
+      hover
+      className={
+        list === 'pets' ? 'show-pets-list pets' : 'show-pets-list users'
+      }
+    >
       <thead>
         {list === 'pets' && (
           <tr className="show-pets-list-line-heading">

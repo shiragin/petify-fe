@@ -18,13 +18,13 @@ function AdminQueries({ setShowQuery }) {
   }, []);
 
   return (
-    <Table borderless hover className="show-pets-list">
+    <Table borderless hover className="show-pets-list queries">
       <thead>
         <tr className="show-pets-list-line-heading">
           <th>Name</th>
           <th>Email</th>
           <th>Subject</th>
-          <th>Replied?</th>
+          <th>Replied</th>
           <th>View</th>
         </tr>
       </thead>
