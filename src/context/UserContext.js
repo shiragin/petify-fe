@@ -45,7 +45,7 @@ export default function UserContextProvider({ children }) {
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
-        console.log(userId, exp);
+        console.log('Hello', userId, exp);
         localStorage.setItem('userId', userId);
         localStorage.setItem('exp', exp);
         setLoggedIn(true);
@@ -137,7 +137,7 @@ export default function UserContextProvider({ children }) {
       const { queries } = await res.data;
       if (res.data.ok) return queries;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -152,7 +152,7 @@ export default function UserContextProvider({ children }) {
         return queries;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -167,13 +167,12 @@ export default function UserContextProvider({ children }) {
         return queries;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
   async function createNewQuery(query) {
     try {
-      console.log('CONTEXT', query);
       const res = await axios.post(`${baseURL}/queries`, query, {
         withCredentials: true,
       });

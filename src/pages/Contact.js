@@ -23,7 +23,7 @@ function Contact() {
   // }, [location]);
 
   return (
-    <div className="main-container mypets">
+    <div className="main-container contact profile mypets">
       <h1 className="profile-title">Contact</h1>
       <Tab.Container id="left-tabs-example" activeKey={activeKey}>
         <Row>

@@ -10,8 +10,7 @@ function LikeButton({ id }) {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    if (!userId) return;
-    // if (userId
+    if (!user) return;
     if (user?.savedPets?.includes(id)) {
       setLiked(true);
     } else {
@@ -20,7 +19,6 @@ function LikeButton({ id }) {
   }, [user]);
 
   function likeClickHandler(e) {
-    if (!userId) return;
     if (!user?.email) {
       return setLoginModalShow({ show: true, type: 'login' });
     } else {

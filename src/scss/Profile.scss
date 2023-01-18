@@ -184,7 +184,27 @@
   display: flex;
 }
 
-@media (max-width: 600px) {
+.main-container.contact {
+  width: 100vw;
+  .col-sm-9 {
+    display: flex;
+    width: 75%;
+    justify-content: center;
+    // width: 80%;
+    .tab-content {
+      width: 100%;
+    }
+  }
+  .nav-item {
+    padding: 0.5rem 0.7rem;
+    .nav-link.active {
+      // padding: 0.5rem 0.7rem;
+      min-width: 5rem;
+    }
+  }
+}
+
+@media (max-width: 620px) {
   .profile.main-container {
     .profile-form {
       width: 80%;
@@ -198,7 +218,7 @@
     margin: 2rem;
   }
   .nav-pills {
-    flex-direction: column !important;
+    flex-direction: row !important;
     gap: 1rem !important;
     .nav-item {
       font-size: 1rem !important;
@@ -206,9 +226,8 @@
       .nav-link {
         padding: 0.5rem 1rem;
       }
-      .active {
+      .nav-link.active {
         min-width: 2rem !important;
-        // padding: 0.5rem 1rem;
       }
 
       .tab-pane {

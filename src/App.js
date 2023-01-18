@@ -16,9 +16,6 @@ import AdminRoute from './components/Admin/AdminRoute';
 import './scss/App.scss';
 
 function App() {
-  // const { setUser, setLoggedIn } = useUserContext();
-  // localStorage.clear();
-
   return (
     <UserContextProvider>
       <PetsContextProvider>
@@ -28,7 +25,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/pet/:id" element={<Pet />} />
-            <Route path="/contact" element={<Contact />} />
             <Route
               path="/profile"
               element={
@@ -42,6 +38,22 @@ function App() {
               element={
                 <PrivateRoute>
                   <MyPets />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PrivateRoute>
+                  <Contact />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/myqueries"
+              element={
+                <PrivateRoute>
+                  <Contact />
                 </PrivateRoute>
               }
             />

@@ -93,7 +93,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
   .nav-pills {
     flex-direction: column !important;
   }
@@ -105,7 +105,4 @@
   .mypets .home-logged-featured-pets-cards {
     justify-content: center;
   }
-  // .card {
-  //   width: 80%;
-  // }
 }

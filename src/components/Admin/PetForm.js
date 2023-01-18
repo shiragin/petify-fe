@@ -44,9 +44,9 @@ function PetForm({
     if (pet) {
       setNewPet(pet);
       setNewColour(pet.colour);
-      if (pet.owner) {
+      if (pet?.owner) {
         const owners = await getOwners();
-        const prevOwner = owners.find((owner) => owner._id === pet.owner);
+        const prevOwner = owners?.find((owner) => owner._id === pet.owner);
         setPrevOwner(prevOwner);
         setOwners(owners);
       }

@@ -12,7 +12,8 @@ import { FaChevronCircleLeft, FaEdit } from 'react-icons/fa';
 function PetPage({ id }) {
   const { getPetPage, setPetPage, petPage, petModalShow, setPetModalShow } =
     usePetsContext();
-  const { user, getUserProfile } = useUserContext();
+  const { user, userId, getUserProfile, loggedIn, setLoginModalShow } =
+    useUserContext();
 
   const [myPet, setMyPet] = useState(false);
   const [petOwner, setPetOwner] = useState(false);
@@ -25,7 +26,7 @@ function PetPage({ id }) {
       console.log('dis my pet');
       setMyPet(true);
     } else {
-      if (petPage.owner && user.isAdmin) {
+      if (petPage?.owner) {
         const petOwner = await getUserProfile(petPage.owner);
         setPetOwner(petOwner);
       }
@@ -38,6 +39,15 @@ function PetPage({ id }) {
     else navigate('/not-found');
   }
 
+  function contactClickHandler() {
+    if (!user?.email || !loggedIn)
+      setLoginModalShow({ show: true, type: 'login' });
+    else {
+      console.log('hi');
+      navigate('/contact');
+    }
+  }
+
   useEffect(() => {
     verifyPet();
   }, [petPage]);
@@ -48,12 +58,16 @@ function PetPage({ id }) {
       getPetData();
     },
     [id],
-    [user]
+    [userId]
   );
 
-  useEffect(() => {
-    getPetData();
-  }, [petModalShow]);
+  useEffect(
+    () => {
+      getPetData();
+    },
+    [petModalShow],
+    [userId]
+  );
 
   return (
     <div className="main-container petpage">
@@ -63,7 +77,7 @@ function PetPage({ id }) {
       />
       {imgLoading || <LikeButton id={id} />}
       {imgLoading ||
-        (user.isAdmin && (
+        (user?.isAdmin && (
           <div className="edit">
             <FaEdit onClick={() => navigate(`../admin/edit-pet/${id}`)} />
           </div>
@@ -73,11 +87,11 @@ function PetPage({ id }) {
         <img
           src={petPage.picture}
           className={imgLoading ? 'petpage-image hide' : 'petpage-image'}
-          onLoad={() =>
-            setTimeout(() => {
-              setImgLoading(false);
-            }, 500)
-          }
+          onLoad={() => {
+            setImgLoading(false);
+            getPetPage(id);
+            verifyPet();
+          }}
         />
       </div>
       <div className="petpage-main-card">
@@ -88,7 +102,7 @@ function PetPage({ id }) {
               This {petPage?.type?.toLowerCase()} has already been{' '}
               {petPage?.adoptionStatus?.toLowerCase()}
               {!myPet &&
-                user.isAdmin &&
+                user?.isAdmin &&
                 ` by ${petOwner?.firstName} ${petOwner?.lastName}`}{' '}
               {myPet && 'by you'}{' '}
             </div>
@@ -97,7 +111,7 @@ function PetPage({ id }) {
                 Foster families have priority in adoption, but we're always
                 happy to hear from potential adopters. If you've got your heart
                 set on {petPage?.name}, don't hesitate to
-                <Link to="/contact"> contact us</Link>.
+                <span onClick={contactClickHandler}> contact us</span>.
               </div>
             )}
           </div>

@@ -37,7 +37,6 @@ function ContactForm() {
   async function querySubmitHandler(e) {
     e.preventDefault();
     const newQuery = await createNewQuery(query);
-    console.log(newQuery);
     if (!newQuery.ok) {
       setError({ show: true, message: newQuery.error });
     } else setModalShow(true);
@@ -55,7 +54,6 @@ function ContactForm() {
 
   useEffect(
     () => {
-      console.log(userId);
       if (userId && !user) {
         getUserData();
       } else if (!userId && !loggedIn) {
@@ -71,8 +69,6 @@ function ContactForm() {
     [],
     [user]
   );
-
-  console.log(query);
 
   return (
     <Form

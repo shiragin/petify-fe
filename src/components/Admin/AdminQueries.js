@@ -9,7 +9,6 @@ function AdminQueries({ setShowQuery }) {
 
   async function getQueries() {
     const allQueries = await getAllQueries();
-    console.log(allQueries);
     if (allQueries) setQueries(allQueries);
   }
 

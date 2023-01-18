@@ -93,7 +93,7 @@ function PetAddNew({ id }) {
     const newOwner = findNewOwner();
     const res = await addNewPet(newPet);
     if (res.ok === true) {
-      if (newOwner) handleNewOwner(res.petDetails, newOwner);
+      if (newOwner?._id) handleNewOwner(res.petDetails, newOwner);
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {
@@ -103,12 +103,12 @@ function PetAddNew({ id }) {
   }
 
   async function petEditHandler() {
-    if (prevOwner) removePrevOwner();
+    setIsLoading(true);
+    if (prevOwner?._id) removePrevOwner();
     const newOwner = findNewOwner();
     const res = await updatePet(newPet._id, newPet);
     if (res.ok === true) {
-      console.log(res);
-      if (newOwner) handleNewOwner(res.petDetails, newOwner);
+      if (newOwner?._id) handleNewOwner(res.petDetails, newOwner);
       setPetPage(res.petDetails);
       setPetModalShow(true);
     } else {

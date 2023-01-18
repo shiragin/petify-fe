@@ -184,10 +184,11 @@
       white-space: pre-wrap;
       text-align: left;
 
-      a {
+      span {
         color: $primary-color;
         text-decoration: none;
         font-weight: 500;
+        cursor: pointer;
       }
     }
   }
@@ -424,7 +425,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .main-container.petpage {
     .liked,
     .edit {

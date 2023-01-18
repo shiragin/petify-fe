@@ -22,15 +22,9 @@ function Dashboard() {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(location.pathname);
-    // console.log(id);
-    // if (typeof id === 'string') {
-    //   setActiveKey('users');
-    //   navigate(`/admin/show-users/${id}`);
     if (location.pathname === '/admin/show-pets') {
       setActiveKey('pets');
     } else if (location.pathname.indexOf('/admin/show-users') > -1) {
-      console.log('HIII');
       setActiveKey('users');
     } else if (location.pathname === '/admin/show-queries') {
       setActiveKey('queries');

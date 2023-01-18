@@ -37,7 +37,6 @@ function PetDetails() {
                 <FaPaw />
                 Age:{' '}
               </span>
-              {/* {age > 12 ? `${age / 12} years` : `${age} months`} */}
               {age} {age > 1 ? ' years' : ' year'}
             </li>
             <li>

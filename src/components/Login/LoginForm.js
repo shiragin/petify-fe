@@ -40,7 +40,7 @@ function LoginForm() {
     const signup = await getUser(loginForm);
     if (signup === true) {
       setLoginModalShow({ show: false });
-      navigate('/');
+      // navigate('/');
     } else {
       setError({ show: true, message: signup });
     }
