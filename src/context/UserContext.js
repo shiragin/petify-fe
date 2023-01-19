@@ -33,6 +33,7 @@ export default function UserContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState({ show: false, message: '' });
 
+  // Global
   const baseURL = 'http://localhost:8080';
 
   async function createNewUser(user) {

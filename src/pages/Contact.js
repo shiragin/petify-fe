@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
@@ -12,15 +12,16 @@ function Contact() {
   const [activeKey, setActiveKey] = useState('contact');
   const location = useLocation();
 
+  const [modalShow, setModalShow] = useState(false);
   const { userId } = useUserContext();
 
-  // useEffect(() => {
-  //   if (location.pathname === '/mypets/owned') {
-  //     setActiveKey('owned');
-  //   } else if (location.pathname === '/mypets/saved') {
-  //     setActiveKey('saved');
-  //   } else return;
-  // }, [location]);
+  useEffect(() => {
+    if (location.pathname === '/contact') {
+      setActiveKey('contact');
+    } else if (location.pathname === '/myqueries') {
+      setActiveKey('queries');
+    } else return;
+  }, [location]);
 
   return (
     <div className="main-container contact profile mypets">
@@ -44,10 +45,17 @@ function Contact() {
           <Col sm={9}>
             <Tab.Content>
               <Tab.Pane eventKey="contact">
-                <ContactForm />
+                <ContactForm
+                  modalShow={modalShow}
+                  setModalShow={setModalShow}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="queries">
-                <ContactQueries id={userId} />
+                <ContactQueries
+                  id={userId}
+                  modalShow={modalShow}
+                  setModalShow={setModalShow}
+                />
               </Tab.Pane>
             </Tab.Content>
           </Col>

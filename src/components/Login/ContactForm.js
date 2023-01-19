@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import ContactModal from './ContactModal';
 
-function ContactForm() {
+function ContactForm({ modalShow, setModalShow }) {
   const {
     user,
     setUser,
@@ -17,8 +17,6 @@ function ContactForm() {
   } = useUserContext();
 
   const target = useRef(null);
-
-  const [modalShow, setModalShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -156,7 +154,7 @@ function ContactForm() {
         query={query}
         onHide={() => {
           setModalShow(false);
-          navigate('/');
+          navigate('/myqueries');
         }}
       />
     </Form>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
 
-function ContactQueries() {
+function ContactQueries({ modalShow }) {
   const { userId, getQueriesbyUserId } = useUserContext();
   const [myQueries, setMyQueries] = useState([]);
 
@@ -14,7 +14,7 @@ function ContactQueries() {
   useEffect(() => {
     if (userId) getMyQueries();
     else setMyQueries([]);
-  }, []);
+  }, [modalShow]);
 
   return (
     <Accordion defaultActiveKey={['0']}>
