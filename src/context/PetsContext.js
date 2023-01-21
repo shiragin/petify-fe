@@ -22,7 +22,9 @@ export default function PetsContextProvider({ children }) {
 
   async function getPets() {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`, {
+        withCredentials: true,
+      });
       if (res?.data?.ok) {
         const { pets } = await res.data;
         setPets(pets);
