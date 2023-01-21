@@ -33,20 +33,20 @@ export default function UserContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState({ show: false, message: '' });
 
-  // Global
-  const baseURL = 'http://localhost:8080';
-
   async function createNewUser(user) {
     try {
-      const res = await axios.post(`${baseURL}/users/signup`, user, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/users/signup`,
+        user,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { userId, exp } = res.data;
         const currentUser = await getUserProfile(userId);
         setUserId(userId);
         setUser(currentUser);
-        console.log('Hello', userId, exp);
         localStorage.setItem('userId', userId);
         localStorage.setItem('exp', exp);
         setLoggedIn(true);
@@ -63,7 +63,7 @@ export default function UserContextProvider({ children }) {
   async function getUser(user) {
     try {
       const res = await axios.post(
-        `${baseURL}/users/login`,
+        `${process.env.REACT_APP_SERVER_URL}/users/login`,
         {
           email: user.email,
           password: user.password,
@@ -77,7 +77,6 @@ export default function UserContextProvider({ children }) {
         setUser(currentUser);
         localStorage.setItem('userId', userId);
         localStorage.setItem('exp', exp);
-        console.log('HELLO', user.email, userId, exp);
         setLoggedIn(true);
         return true;
       }
@@ -89,7 +88,9 @@ export default function UserContextProvider({ children }) {
 
   async function getUserProfile(id) {
     try {
-      const res = await axios.get(`${baseURL}/users/${id}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`
+      );
       if (res?.data?.ok) {
         const { user: userDetails } = await res?.data;
         return userDetails;
@@ -102,9 +103,13 @@ export default function UserContextProvider({ children }) {
 
   async function updateUser(id) {
     try {
-      const res = await axios.put(`${baseURL}/users/${id}`, user, {
-        withCredentials: true,
-      });
+      const res = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+        user,
+        {
+          withCredentials: true,
+        }
+      );
 
       if (res?.data?.ok) {
         const { user: userDetails } = await res?.data;
@@ -118,7 +123,7 @@ export default function UserContextProvider({ children }) {
 
   async function getAllUsers() {
     try {
-      const res = await axios.get(`${baseURL}/users`, {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
         withCredentials: true,
       });
       if (!res?.data?.ok) throw new Error('No such user!');
@@ -131,9 +136,12 @@ export default function UserContextProvider({ children }) {
 
   async function getAllQueries() {
     try {
-      const res = await axios.get(`${baseURL}/queries`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/queries`,
+        {
+          withCredentials: true,
+        }
+      );
       if (!res?.data?.ok) throw new Error('No queries!');
       const { queries } = await res.data;
       if (res.data.ok) return queries;
@@ -144,9 +152,12 @@ export default function UserContextProvider({ children }) {
 
   async function getQueriesbyUserId(userId) {
     try {
-      const res = await axios.get(`${baseURL}/queries/users/${userId}`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/queries/users/${userId}`,
+        {
+          withCredentials: true,
+        }
+      );
       if (!res?.data?.ok) throw new Error('No query by this ID!');
       else {
         const { queries } = await res?.data;
@@ -159,9 +170,12 @@ export default function UserContextProvider({ children }) {
 
   async function getQuery(id) {
     try {
-      const res = await axios.get(`${baseURL}/queries/${id}`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/queries/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       if (!res?.data?.ok) throw new Error('No query by this ID!');
       else {
         const { queries } = await res?.data;
@@ -174,9 +188,13 @@ export default function UserContextProvider({ children }) {
 
   async function createNewQuery(query) {
     try {
-      const res = await axios.post(`${baseURL}/queries`, query, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/queries`,
+        query,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { query: newQuery } = await res?.data;
         return { ok: true, query: newQuery };
@@ -189,9 +207,13 @@ export default function UserContextProvider({ children }) {
 
   async function updateQuery(id, update) {
     try {
-      const res = await axios.patch(`${baseURL}/queries/${id}/reply`, update, {
-        withCredentials: true,
-      });
+      const res = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}/queries/${id}/reply`,
+        update,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { query: newQuery } = await res?.data;
         return { ok: true, query: newQuery };

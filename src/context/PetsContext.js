@@ -20,11 +20,9 @@ export default function PetsContextProvider({ children }) {
 
   const { setUser, userId } = useUserContext();
 
-  const baseURL = 'http://localhost:8080';
-
   async function getPets() {
     try {
-      const res = await axios.get(`${baseURL}/pets`);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`);
       if (res?.data?.ok) {
         const { pets } = await res.data;
         setPets(pets);
@@ -36,7 +34,9 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetsByType(type) {
     try {
-      const res = await axios.get(`${baseURL}/pets?type=${type}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/pets?type=${type}`
+      );
       if (res?.data?.ok) {
         const { pets } = await res.data;
         setPets(pets);
@@ -54,7 +54,7 @@ export default function PetsContextProvider({ children }) {
         filteredParams = { ...filteredParams, [param]: search[param] };
     });
     try {
-      const res = await axios.get(`${baseURL}/pets`, {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`, {
         params: filteredParams,
       });
       if (res?.data?.ok) {
@@ -68,7 +68,9 @@ export default function PetsContextProvider({ children }) {
 
   async function getPetPage(id) {
     try {
-      const res = await axios.get(`${baseURL}/pets/${id}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/pets/${id}`
+      );
       if (res?.data?.ok) {
         const { pet } = await res.data;
         return pet[0];
@@ -80,9 +82,12 @@ export default function PetsContextProvider({ children }) {
 
   async function getRandomPets() {
     try {
-      const res = await axios.get(`${baseURL}/pets/random`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/pets/random`,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { pets } = await res.data;
         setFeaturedPets(pets);
@@ -102,9 +107,13 @@ export default function PetsContextProvider({ children }) {
       for (const key in pet) {
         newPetForm.append(key, pet[key]);
       }
-      const res = await axios.post(`${baseURL}/pets/`, newPetForm, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/pets/`,
+        newPetForm,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { pet: petDetails } = await res.data;
         return { ok: true, petDetails };
@@ -121,9 +130,13 @@ export default function PetsContextProvider({ children }) {
       for (const key in pet) {
         newPetForm.append(key, pet[key]);
       }
-      const res = await axios.patch(`${baseURL}/pets/${id}`, newPetForm, {
-        withCredentials: true,
-      });
+      const res = await axios.patch(
+        `${process.env.REACT_APP_SERVER_URL}/pets/${id}`,
+        newPetForm,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { pet: petDetails } = await res.data;
         return { ok: true, petDetails };
@@ -136,9 +149,12 @@ export default function PetsContextProvider({ children }) {
 
   async function getSavedPets(id) {
     try {
-      const res = await axios.get(`${baseURL}/pets/user/${id}/`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/pets/user/${id}/`,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { savedPets } = await res.data;
         return savedPets;
@@ -150,9 +166,12 @@ export default function PetsContextProvider({ children }) {
 
   async function getOwnedPets(id) {
     try {
-      const res = await axios.get(`${baseURL}/pets/user/${id}`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/pets/user/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       if (res?.data?.ok) {
         const { fosteredPets, adoptedPets } = await res.data;
         return { fosteredPets: fosteredPets, adoptedPets: adoptedPets };
@@ -165,7 +184,7 @@ export default function PetsContextProvider({ children }) {
   async function addSavedPet(userId, savedPets) {
     try {
       const res = await axios.post(
-        `${baseURL}/pets/${userId}/save`,
+        `${process.env.REACT_APP_SERVER_URL}/pets/${userId}/save`,
         { savedPets },
         { withCredentials: true }
       );
@@ -181,12 +200,15 @@ export default function PetsContextProvider({ children }) {
 
   async function deleteSavedPet(userId, savedPets) {
     try {
-      const res = await axios.delete(`${baseURL}/pets/${userId}/save`, {
-        withCredentials: true,
-        data: {
-          savedPets,
-        },
-      });
+      const res = await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/pets/${userId}/save`,
+        {
+          withCredentials: true,
+          data: {
+            savedPets,
+          },
+        }
+      );
       if (res?.data?.ok) {
         const { user: userData } = res?.data;
         setUser(userData);
@@ -200,7 +222,7 @@ export default function PetsContextProvider({ children }) {
   async function updateOwnedPet(user, pet, petId) {
     try {
       const res = await axios.post(
-        `${baseURL}/pets/${user._id}/adopt`,
+        `${process.env.REACT_APP_SERVER_URL}/pets/${user._id}/adopt`,
         {
           adoptedPets: user.adoptedPets,
           fosteredPets: user.fosteredPets,

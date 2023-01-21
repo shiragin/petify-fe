@@ -32,16 +32,12 @@ function LikeButton({ id }) {
     if (!liked) {
       if (!user?.savedPets?.includes(id)) {
         user.savedPets.push(id);
-        console.log('SAVED', user.savedPets);
         const update = await addSavedPet(user._id, user.savedPets);
-        update && console.log('pet added to saved');
       }
     } else {
       if (user?.savedPets?.includes(id)) {
         user.savedPets = user.savedPets.filter((el) => el !== id);
-        console.log('DELETED', user.savedPets);
         const update = await deleteSavedPet(user._id, user.savedPets);
-        update && console.log('pet deleted from saved');
       }
     }
   }

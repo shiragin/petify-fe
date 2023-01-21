@@ -75,7 +75,6 @@ function PetAddNew({ id }) {
       newOwner.adoptedPets.push(pet._id);
     }
     await updateOwnedPet(newOwner, pet, pet._id);
-    console.log('New fostered pet added');
   }
 
   async function removePrevOwner() {

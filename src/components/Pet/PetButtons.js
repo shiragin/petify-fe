@@ -51,7 +51,6 @@ function PetButtons({ type, id, pet }) {
     if (!user) return;
     if (!user?.adoptedPets.includes(id)) {
       user.adoptedPets.push(id);
-      console.log('pet added');
     }
     if (user?.fosteredPets.includes(id)) {
       user.fosteredPets = user.fosteredPets.filter((pet) => pet !== id);
@@ -60,8 +59,7 @@ function PetButtons({ type, id, pet }) {
     pet.adoptionStatus = 'Adopted';
     pet.owner = user._id;
     const update = await updateOwnedPet(user, pet, id);
-    update && console.log(`Pet adopted by ${user.firstName}`);
-    setPetModalShow(true);
+    update && setPetModalShow(true);
   }
 
   async function fosterPet() {
@@ -73,8 +71,7 @@ function PetButtons({ type, id, pet }) {
     pet.adoptionStatus = 'Fostered';
     pet.owner = user._id;
     const update = await updateOwnedPet(user, pet, id);
-    update && console.log(`Pet fostered by ${user.firstName}`);
-    setPetModalShow(true);
+    update && setPetModalShow(true);
   }
 
   async function returnPet() {
@@ -89,8 +86,7 @@ function PetButtons({ type, id, pet }) {
     pet.adoptionStatus = 'Available';
     pet.owner = '';
     const update = await updateOwnedPet(user, pet, id);
-    update && console.log(`Pet returned by evil nasty ${user.firstName}`);
-    setPetModalShow(true);
+    update && setPetModalShow(true);
   }
 
   return (

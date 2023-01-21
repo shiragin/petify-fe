@@ -37,7 +37,6 @@ function NavbarLogged() {
     if (tokenExpirationTime) {
       const timeoutId = setInterval(() => {
         if (Date.now() > tokenExpirationTime) {
-          console.log('EXPIRED!');
           clearInterval(timeoutId);
           signOutHandler();
         }
@@ -51,7 +50,6 @@ function NavbarLogged() {
   }
 
   function signOutHandler() {
-    console.log('SIGNING OUT');
     setSearchType(false);
     setLoginModalShow({});
     navigate('/');

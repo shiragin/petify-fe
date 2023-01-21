@@ -23,7 +23,6 @@ function PetPage({ id }) {
 
   async function verifyPet() {
     if (user?.fosteredPets?.includes(id) || user?.adoptedPets?.includes(id)) {
-      console.log('dis my pet');
       setMyPet(true);
     } else {
       if (petPage?.owner) {
@@ -43,7 +42,6 @@ function PetPage({ id }) {
     if (!user?.email || !loggedIn)
       setLoginModalShow({ show: true, type: 'login' });
     else {
-      console.log('hi');
       navigate('/contact');
     }
   }
