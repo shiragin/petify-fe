@@ -38,7 +38,7 @@ function SavedPets() {
 
   return (
     <div className="home-logged-featured-pets-cards">
-      {savedPets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
+      {savedPets?.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
         <PetCard
           key={_id}
           value={{ _id, name, type, breed, adoptionStatus, picture }}

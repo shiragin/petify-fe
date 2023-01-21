@@ -21,12 +21,14 @@ function OwnedPets() {
   return (
     <div className="home-logged-featured-pets-cards">
       {ownedPets &&
-        ownedPets.map(({ _id, name, type, breed, adoptionStatus, picture }) => (
-          <PetCard
-            key={_id}
-            value={{ _id, name, type, breed, adoptionStatus, picture }}
-          />
-        ))}
+        ownedPets?.map(
+          ({ _id, name, type, breed, adoptionStatus, picture }) => (
+            <PetCard
+              key={_id}
+              value={{ _id, name, type, breed, adoptionStatus, picture }}
+            />
+          )
+        )}
       {!ownedPets.length && (
         <h4>
           {`You currently have no pets.\nBrowse our `}

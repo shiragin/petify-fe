@@ -19,7 +19,7 @@ function ContactQueries({ modalShow }) {
   return (
     <Accordion defaultActiveKey={['0']}>
       {myQueries
-        .sort((q1, q2) =>
+        ?.sort((q1, q2) =>
           !q1.replied && q2.replied
             ? -1
             : q1.replied && !q2.replied
